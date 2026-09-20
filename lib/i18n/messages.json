@@ -1,0 +1,2086 @@
+{
+  "Accueil": {
+    "ar": "الرئيسية",
+    "en": "Home"
+  },
+  "Restaurants": {
+    "ar": "المطاعم",
+    "en": "Restaurants"
+  },
+  "Boissons": {
+    "ar": "المشروبات",
+    "en": "Drinks"
+  },
+  "Poissons": {
+    "ar": "الأسماك",
+    "en": "Fish"
+  },
+  "Fruits et légumes": {
+    "ar": "الفواكه والخضروات",
+    "en": "Fruit and vegetables"
+  },
+  "Poulet": {
+    "ar": "الدجاج",
+    "en": "Chicken"
+  },
+  "Fruits secs": {
+    "ar": "الفواكه الجافة والمكسرات",
+    "en": "Dried fruit and nuts"
+  },
+  "Commandes": {
+    "ar": "الطلبات",
+    "en": "Orders"
+  },
+  "Compte": {
+    "ar": "الحساب",
+    "en": "Account"
+  },
+  "Mon compte": {
+    "ar": "حسابي",
+    "en": "My account"
+  },
+  "Mon panier": {
+    "ar": "سلتي",
+    "en": "My cart"
+  },
+  "Mon profil": {
+    "ar": "ملفي الشخصي",
+    "en": "My profile"
+  },
+  "Mes commandes": {
+    "ar": "طلباتي",
+    "en": "My orders"
+  },
+  "Connexion": {
+    "ar": "تسجيل الدخول",
+    "en": "Sign in"
+  },
+  "Inscription": {
+    "ar": "إنشاء حساب",
+    "en": "Sign up"
+  },
+  "Connexion / Inscription": {
+    "ar": "دخول / إنشاء حساب",
+    "en": "Sign in / Sign up"
+  },
+  "Se connecter": {
+    "ar": "تسجيل الدخول",
+    "en": "Sign in"
+  },
+  "Se déconnecter": {
+    "ar": "تسجيل الخروج",
+    "en": "Sign out"
+  },
+  "Déconnexion": {
+    "ar": "تسجيل الخروج",
+    "en": "Sign out"
+  },
+  "Créer mon compte": {
+    "ar": "إنشاء حسابي",
+    "en": "Create my account"
+  },
+  "Créer un compte": {
+    "ar": "إنشاء حساب",
+    "en": "Create an account"
+  },
+  "Continuer avec Google": {
+    "ar": "المتابعة باستخدام Google",
+    "en": "Continue with Google"
+  },
+  "Continuer avec Facebook": {
+    "ar": "المتابعة باستخدام Facebook",
+    "en": "Continue with Facebook"
+  },
+  "Continuer en visiteur": {
+    "ar": "المتابعة كزائر",
+    "en": "Continue as guest"
+  },
+  "Adresse email": {
+    "ar": "البريد الإلكتروني",
+    "en": "Email address"
+  },
+  "Email": {
+    "ar": "البريد الإلكتروني",
+    "en": "Email"
+  },
+  "Mot de passe": {
+    "ar": "كلمة المرور",
+    "en": "Password"
+  },
+  "Mot de passe oublié ?": {
+    "ar": "نسيت كلمة المرور؟",
+    "en": "Forgot password?"
+  },
+  "Nom complet": {
+    "ar": "الاسم الكامل",
+    "en": "Full name"
+  },
+  "Nom": {
+    "ar": "الاسم",
+    "en": "Name"
+  },
+  "Votre nom": {
+    "ar": "اسمك",
+    "en": "Your name"
+  },
+  "Votre numéro tunisien": {
+    "ar": "رقم هاتفك التونسي",
+    "en": "Your Tunisian phone number"
+  },
+  "Téléphone": {
+    "ar": "الهاتف",
+    "en": "Phone"
+  },
+  "Téléphone :": {
+    "ar": "الهاتف:",
+    "en": "Phone:"
+  },
+  "Téléphone tunisien": {
+    "ar": "رقم هاتف تونسي",
+    "en": "Tunisian phone number"
+  },
+  "Livraison à Monastir": {
+    "ar": "التوصيل إلى المنستير",
+    "en": "Delivery to Monastir"
+  },
+  "Monastir": {
+    "ar": "المنستير",
+    "en": "Monastir"
+  },
+  "Livraison à": {
+    "ar": "التوصيل إلى",
+    "en": "Delivery to"
+  },
+  "Livraison": {
+    "ar": "التوصيل",
+    "en": "Delivery"
+  },
+  "Livraisons": {
+    "ar": "التوصيلات",
+    "en": "Deliveries"
+  },
+  "Vos envies, à votre porte.": {
+    "ar": "كل ما تحب، إلى بابك.",
+    "en": "Your favourites, delivered."
+  },
+  "Heureux de vous revoir.": {
+    "ar": "سعداء بعودتك.",
+    "en": "Welcome back."
+  },
+  "Bienvenue chez vous.": {
+    "ar": "أهلاً بك معنا.",
+    "en": "Make yourself at home."
+  },
+  "Un nouveau départ.": {
+    "ar": "بداية جديدة.",
+    "en": "A fresh start."
+  },
+  "Vérifiez votre email.": {
+    "ar": "تحقق من بريدك الإلكتروني.",
+    "en": "Check your email."
+  },
+  "Créez votre compte pour commander à Monastir.": {
+    "ar": "أنشئ حسابك للطلب في المنستير.",
+    "en": "Create your account to order in Monastir."
+  },
+  "Recevez un lien pour choisir un nouveau mot de passe.": {
+    "ar": "سنرسل رابطاً لاختيار كلمة مرور جديدة.",
+    "en": "Get a link to choose a new password."
+  },
+  "Retrouvez vos commandes et vos bonnes adresses.": {
+    "ar": "تابع طلباتك واكتشف متاجرك المفضلة.",
+    "en": "Find your orders and favourite places."
+  },
+  "Revenir à la connexion": {
+    "ar": "العودة لتسجيل الدخول",
+    "en": "Back to sign in"
+  },
+  "Retour à la connexion": {
+    "ar": "العودة لتسجيل الدخول",
+    "en": "Back to sign in"
+  },
+  "Veuillez patienter…": {
+    "ar": "يرجى الانتظار…",
+    "en": "Please wait…"
+  },
+  "Envoyer le lien": {
+    "ar": "إرسال الرابط",
+    "en": "Send link"
+  },
+  "8 caractères minimum": {
+    "ar": "8 أحرف على الأقل",
+    "en": "At least 8 characters"
+  },
+  "Afficher le mot de passe": {
+    "ar": "إظهار كلمة المرور",
+    "en": "Show password"
+  },
+  "Masquer le mot de passe": {
+    "ar": "إخفاء كلمة المرور",
+    "en": "Hide password"
+  },
+  "Explorez librement. Connectez-vous uniquement pour confirmer votre commande.": {
+    "ar": "تصفح بحرية. سجّل الدخول فقط لتأكيد طلبك.",
+    "en": "Browse freely. Sign in only to confirm your order."
+  },
+  "Indiquez une adresse email valide.": {
+    "ar": "أدخل بريداً إلكترونياً صالحاً.",
+    "en": "Enter a valid email address."
+  },
+  "Le mot de passe doit contenir au moins 8 caractères.": {
+    "ar": "يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل.",
+    "en": "Password must contain at least 8 characters."
+  },
+  "Indiquez votre nom complet.": {
+    "ar": "أدخل اسمك الكامل.",
+    "en": "Enter your full name."
+  },
+  "Connexion impossible. Réessayez.": {
+    "ar": "تعذّر الاتصال. حاول مجدداً.",
+    "en": "Unable to connect. Try again."
+  },
+  "Connexion impossible": {
+    "ar": "تعذّر الاتصال",
+    "en": "Unable to connect"
+  },
+  "Si cette adresse possède un compte, un lien de réinitialisation sera envoyé.": {
+    "ar": "إذا كان البريد مرتبطاً بحساب فسيتم إرسال رابط إعادة التعيين.",
+    "en": "If this email has an account, a reset link will be sent."
+  },
+  "Le lien de vérification a été envoyé. Pensez à vérifier les courriers indésirables.": {
+    "ar": "تم إرسال رابط التحقق. تفقّد البريد غير المرغوب فيه أيضاً.",
+    "en": "Verification link sent. Check your spam folder too."
+  },
+  "Rayon, restaurant, produit…": {
+    "ar": "قسم، مطعم، منتج…",
+    "en": "Department, restaurant, product…"
+  },
+  "Restaurants à découvrir": {
+    "ar": "مطاعم تستحق التجربة",
+    "en": "Restaurants to discover"
+  },
+  "Voir tous les restaurants": {
+    "ar": "عرض جميع المطاعم",
+    "en": "See all restaurants"
+  },
+  "Rechercher un restaurant": {
+    "ar": "ابحث عن مطعم",
+    "en": "Search restaurants"
+  },
+  "Rechercher un restaurant ou un produit": {
+    "ar": "ابحث عن مطعم أو منتج",
+    "en": "Search restaurants or products"
+  },
+  "Un restaurant, un produit…": {
+    "ar": "مطعم، منتج…",
+    "en": "A restaurant, a product…"
+  },
+  "Tout le menu": {
+    "ar": "كل القائمة",
+    "en": "Full menu"
+  },
+  "Menu complet": {
+    "ar": "القائمة كاملة",
+    "en": "Full menu"
+  },
+  "Tout voir": {
+    "ar": "عرض الكل",
+    "en": "See all"
+  },
+  "Ajouter": {
+    "ar": "إضافة",
+    "en": "Add"
+  },
+  "Ajouter au panier": {
+    "ar": "أضف إلى السلة",
+    "en": "Add to cart"
+  },
+  "Quantité": {
+    "ar": "الكمية",
+    "en": "Quantity"
+  },
+  "Épuisé": {
+    "ar": "نفد المخزون",
+    "en": "Sold out"
+  },
+  "Indisponible": {
+    "ar": "غير متوفر",
+    "en": "Unavailable"
+  },
+  "Votre panier": {
+    "ar": "سلتك",
+    "en": "Your cart"
+  },
+  "Panier": {
+    "ar": "السلة",
+    "en": "Cart"
+  },
+  "Votre panier est vide": {
+    "ar": "سلتك فارغة",
+    "en": "Your cart is empty"
+  },
+  "Découvrir les rayons": {
+    "ar": "اكتشف الأقسام",
+    "en": "Explore departments"
+  },
+  "Parcourez les rayons et ajoutez vos produits préférés.": {
+    "ar": "تصفح الأقسام وأضف منتجاتك المفضلة.",
+    "en": "Browse departments and add your favourites."
+  },
+  "Sous-total": {
+    "ar": "المجموع الفرعي",
+    "en": "Subtotal"
+  },
+  "Frais de livraison": {
+    "ar": "رسوم التوصيل",
+    "en": "Delivery fee"
+  },
+  "Total": {
+    "ar": "المجموع",
+    "en": "Total"
+  },
+  "À confirmer": {
+    "ar": "بانتظار التأكيد",
+    "en": "To be confirmed"
+  },
+  "Connexion requise pour valider la commande": {
+    "ar": "سجّل الدخول لتأكيد الطلب",
+    "en": "Sign in to confirm your order"
+  },
+  "Votre livraison": {
+    "ar": "توصيل طلبك",
+    "en": "Your delivery"
+  },
+  "Monastir · Paiement à la livraison": {
+    "ar": "المنستير · الدفع عند الاستلام",
+    "en": "Monastir · Cash on delivery"
+  },
+  "Adresse précise à Monastir": {
+    "ar": "عنوان دقيق في المنستير",
+    "en": "Full address in Monastir"
+  },
+  "Instructions (facultatif)": {
+    "ar": "تعليمات (اختياري)",
+    "en": "Instructions (optional)"
+  },
+  "Les prix et stocks seront vérifiés par le serveur.": {
+    "ar": "سيتم التحقق من الأسعار والمخزون قبل تأكيد الطلب.",
+    "en": "Prices and stock will be checked before confirmation."
+  },
+  "Confirmer et commander": {
+    "ar": "تأكيد وإرسال الطلب",
+    "en": "Confirm and place order"
+  },
+  "Envoi…": {
+    "ar": "جارٍ الإرسال…",
+    "en": "Sending…"
+  },
+  "Aucune commande pour le moment.": {
+    "ar": "لا توجد طلبات حالياً.",
+    "en": "No orders yet."
+  },
+  "Actualisation impossible.": {
+    "ar": "تعذّر التحديث.",
+    "en": "Unable to refresh."
+  },
+  "En attente": {
+    "ar": "قيد الانتظار",
+    "en": "Pending"
+  },
+  "Confirmée": {
+    "ar": "مؤكد",
+    "en": "Confirmed"
+  },
+  "En préparation": {
+    "ar": "قيد التحضير",
+    "en": "Preparing"
+  },
+  "Prête": {
+    "ar": "جاهز",
+    "en": "Ready"
+  },
+  "Livreur attribué": {
+    "ar": "تم تعيين الموصّل",
+    "en": "Driver assigned"
+  },
+  "Livreur assigné": {
+    "ar": "تم تعيين الموصّل",
+    "en": "Driver assigned"
+  },
+  "Récupérée": {
+    "ar": "تم الاستلام",
+    "en": "Picked up"
+  },
+  "En livraison": {
+    "ar": "في الطريق",
+    "en": "On the way"
+  },
+  "Livrée": {
+    "ar": "تم التوصيل",
+    "en": "Delivered"
+  },
+  "Annulée": {
+    "ar": "ملغى",
+    "en": "Cancelled"
+  },
+  "Informations personnelles": {
+    "ar": "المعلومات الشخصية",
+    "en": "Personal information"
+  },
+  "Mes adresses": {
+    "ar": "عناويني",
+    "en": "My addresses"
+  },
+  "Historique des commandes": {
+    "ar": "سجل الطلبات",
+    "en": "Order history"
+  },
+  "Notifications": {
+    "ar": "الإشعارات",
+    "en": "Notifications"
+  },
+  "Enregistrer": {
+    "ar": "حفظ",
+    "en": "Save"
+  },
+  "Fermer": {
+    "ar": "إغلاق",
+    "en": "Close"
+  },
+  "Profil enregistré.": {
+    "ar": "تم حفظ الملف الشخصي.",
+    "en": "Profile saved."
+  },
+  "Aucun produit trouvé": {
+    "ar": "لم يتم العثور على منتجات",
+    "en": "No products found"
+  },
+  "Essayez un autre mot-clé.": {
+    "ar": "جرّب كلمة بحث أخرى.",
+    "en": "Try another keyword."
+  },
+  "Réessayer": {
+    "ar": "إعادة المحاولة",
+    "en": "Retry"
+  },
+  "Impossible de joindre le serveur. Vérifiez votre connexion et réessayez.": {
+    "ar": "تعذّر الاتصال بالخادم. تحقق من الاتصال وحاول مجدداً.",
+    "en": "Unable to reach the server. Check your connection and try again."
+  },
+  "Bienvenue chez Hadhri Delivery": {
+    "ar": "مرحباً بك في حضري دليفري",
+    "en": "Welcome to Hadhri Delivery"
+  },
+  "Se connecter / Créer un compte": {
+    "ar": "دخول / إنشاء حساب",
+    "en": "Sign in / Create account"
+  },
+  "Vous pouvez continuer à parcourir librement les produits sans compte.": {
+    "ar": "يمكنك مواصلة تصفح المنتجات دون حساب.",
+    "en": "You can keep browsing products without an account."
+  },
+  "Connectez-vous pour retrouver vos adresses, suivre vos commandes et commander plus vite.": {
+    "ar": "سجّل الدخول لمتابعة طلباتك والطلب بسهولة.",
+    "en": "Sign in to track your orders and order faster."
+  },
+  "Nos rayons": {
+    "ar": "أقسامنا",
+    "en": "Our departments"
+  },
+  "Nos restaurants": {
+    "ar": "مطاعمنا",
+    "en": "Our restaurants"
+  },
+  "De quoi avez-vous envie ?": {
+    "ar": "ماذا تشتهي اليوم؟",
+    "en": "What are you craving?"
+  },
+  "À chaque envie,": {
+    "ar": "لكل رغبة،",
+    "en": "For every craving,"
+  },
+  "sa bonne adresse.": {
+    "ar": "عنوانها المناسب.",
+    "en": "a favourite place."
+  },
+  "Vos envies à Monastir, livrées chez vous.": {
+    "ar": "كل ما تحب في المنستير، يصلك إلى بيتك.",
+    "en": "Your Monastir favourites, delivered."
+  },
+  "À DÉCOUVRIR": {
+    "ar": "اكتشف",
+    "en": "DISCOVER"
+  },
+  "Les articles arrivent bientôt": {
+    "ar": "المنتجات ستتوفر قريباً",
+    "en": "Products coming soon"
+  },
+  "Aucun produit disponible pour le moment.": {
+    "ar": "لا توجد منتجات متوفرة حالياً.",
+    "en": "No products available yet."
+  },
+  "Aucun résultat": {
+    "ar": "لا توجد نتائج",
+    "en": "No results"
+  },
+  "Effacer la recherche": {
+    "ar": "مسح البحث",
+    "en": "Clear search"
+  },
+  "Choisir un rayon": {
+    "ar": "اختر قسماً",
+    "en": "Choose a department"
+  },
+  "Tous les commerces": {
+    "ar": "جميع المتاجر",
+    "en": "All stores"
+  },
+  "Retour aux commerces": {
+    "ar": "العودة إلى المتاجر",
+    "en": "Back to stores"
+  },
+  "La carte": {
+    "ar": "قائمة الطعام",
+    "en": "Menu"
+  },
+  "Choisissez vos produits et composez votre panier.": {
+    "ar": "اختر منتجاتك وأضفها إلى السلة.",
+    "en": "Choose products and build your cart."
+  },
+  "Suggestion de présentation": {
+    "ar": "صورة توضيحية",
+    "en": "Illustration"
+  },
+  "Réduire la quantité": {
+    "ar": "تقليل الكمية",
+    "en": "Decrease quantity"
+  },
+  "Augmenter la quantité": {
+    "ar": "زيادة الكمية",
+    "en": "Increase quantity"
+  },
+  "Continuer mes achats": {
+    "ar": "مواصلة التسوق",
+    "en": "Continue shopping"
+  },
+  "Vider le panier": {
+    "ar": "إفراغ السلة",
+    "en": "Empty cart"
+  },
+  "Voir mon panier": {
+    "ar": "عرض سلتي",
+    "en": "View my cart"
+  },
+  "Ajoutez quelque chose de bon.": {
+    "ar": "أضف شيئاً تحبه.",
+    "en": "Add something delicious."
+  },
+  "Votre panier vous attend ici.": {
+    "ar": "سلتك بانتظارك هنا.",
+    "en": "Your cart is waiting here."
+  },
+  "Votre panier vous attend. Le catalogue reste accessible sans compte.": {
+    "ar": "سلتك بانتظارك. تصفح المنتجات دون حساب.",
+    "en": "Your cart is waiting. Browse without an account."
+  },
+  "Votre commande": {
+    "ar": "طلبك",
+    "en": "Your order"
+  },
+  "Confirmer ma commande": {
+    "ar": "تأكيد طلبي",
+    "en": "Confirm my order"
+  },
+  "Total à payer": {
+    "ar": "المبلغ المطلوب",
+    "en": "Total to pay"
+  },
+  "Total à payer à la livraison": {
+    "ar": "المبلغ عند الاستلام",
+    "en": "Total due on delivery"
+  },
+  "Total général ·": {
+    "ar": "المجموع الكلي ·",
+    "en": "Grand total ·"
+  },
+  "Chaque commerce est livré séparément à la même adresse.": {
+    "ar": "يتم توصيل طلب كل متجر بشكل منفصل إلى نفس العنوان.",
+    "en": "Each store delivers separately to the same address."
+  },
+  "Où vous livrer ?": {
+    "ar": "أين نوصل طلبك؟",
+    "en": "Where should we deliver?"
+  },
+  "Indiquez les coordonnées du destinataire.": {
+    "ar": "أدخل بيانات المستلم.",
+    "en": "Enter recipient details."
+  },
+  "Adresse complète": {
+    "ar": "العنوان الكامل",
+    "en": "Full address"
+  },
+  "Instructions pour le livreur (facultatif)": {
+    "ar": "تعليمات للموصّل (اختياري)",
+    "en": "Driver instructions (optional)"
+  },
+  "Étage, code de porte…": {
+    "ar": "الطابق، رمز الباب…",
+    "en": "Floor, entry code…"
+  },
+  "Espèces à la livraison": {
+    "ar": "نقداً عند الاستلام",
+    "en": "Cash on delivery"
+  },
+  "Paiement en espèces à la livraison": {
+    "ar": "الدفع نقداً عند الاستلام",
+    "en": "Cash on delivery"
+  },
+  "Paiement en espèces": {
+    "ar": "الدفع نقداً",
+    "en": "Cash payment"
+  },
+  "À la réception de votre commande": {
+    "ar": "عند استلام طلبك",
+    "en": "When you receive your order"
+  },
+  "MERCI POUR VOTRE COMMANDE": {
+    "ar": "شكراً لطلبك",
+    "en": "THANK YOU FOR YOUR ORDER"
+  },
+  "C’est dans la boîte !": {
+    "ar": "تم استلام طلبك!",
+    "en": "Order received!"
+  },
+  "Votre commande est enregistrée. Retrouvez son état dans Mes commandes.": {
+    "ar": "تم تسجيل طلبك. تابع حالته في طلباتي.",
+    "en": "Your order is saved. Track it in My orders."
+  },
+  "Suivre ma commande": {
+    "ar": "تتبع طلبي",
+    "en": "Track my order"
+  },
+  "Continuer à découvrir": {
+    "ar": "واصل الاكتشاف",
+    "en": "Keep exploring"
+  },
+  "Les commandes associées à votre compte.": {
+    "ar": "الطلبات المرتبطة بحسابك.",
+    "en": "Orders linked to your account."
+  },
+  "Pas encore de commande": {
+    "ar": "لا توجد طلبات بعد",
+    "en": "No orders yet"
+  },
+  "Retrouvez vos commandes": {
+    "ar": "تابع طلباتك",
+    "en": "Find your orders"
+  },
+  "Découvrir les commerces": {
+    "ar": "اكتشف المتاجر",
+    "en": "Explore stores"
+  },
+  "Instructions :": {
+    "ar": "التعليمات:",
+    "en": "Instructions:"
+  },
+  "Votre livreur :": {
+    "ar": "الموصّل:",
+    "en": "Your driver:"
+  },
+  "Vous êtes déconnecté.": {
+    "ar": "تم تسجيل خروجك.",
+    "en": "You are signed out."
+  },
+  "Produit supprimé": {
+    "ar": "منتج محذوف",
+    "en": "Product removed"
+  },
+  "Stockage local indisponible.": {
+    "ar": "التخزين المحلي غير متاح.",
+    "en": "Local storage unavailable."
+  },
+  "Le panier ne pourra pas être conservé après rechargement.": {
+    "ar": "لن يتم حفظ السلة بعد إعادة التحميل.",
+    "en": "Your cart cannot be saved after reloading."
+  },
+  "Fermer le message": {
+    "ar": "إغلاق الرسالة",
+    "en": "Close message"
+  },
+  "Bienvenue chez Hadhri": {
+    "ar": "مرحباً بك في حضري",
+    "en": "Welcome to Hadhri"
+  },
+  "Heureux de vous retrouver": {
+    "ar": "سعداء بعودتك",
+    "en": "Welcome back"
+  },
+  "Me connecter": {
+    "ar": "تسجيل الدخول",
+    "en": "Sign in"
+  },
+  "Recevoir le lien": {
+    "ar": "استلام الرابط",
+    "en": "Get the link"
+  },
+  "Renvoyer le lien": {
+    "ar": "إعادة إرسال الرابط",
+    "en": "Resend link"
+  },
+  "Confirmez votre email": {
+    "ar": "أكد بريدك الإلكتروني",
+    "en": "Confirm your email"
+  },
+  "J’ai confirmé mon email": {
+    "ar": "لقد أكدت بريدي الإلكتروني",
+    "en": "I verified my email"
+  },
+  "Utiliser un autre compte": {
+    "ar": "استخدام حساب آخر",
+    "en": "Use another account"
+  },
+  "ou avec votre email": {
+    "ar": "أو باستخدام بريدك الإلكتروني",
+    "en": "or with your email"
+  },
+  "votre adresse email": {
+    "ar": "بريدك الإلكتروني",
+    "en": "your email address"
+  },
+  "Ouvrez le lien envoyé à": {
+    "ar": "افتح الرابط المرسل إلى",
+    "en": "Open the link sent to"
+  },
+  ", puis revenez ici.": {
+    "ar": "، ثم عُد إلى هنا.",
+    "en": ", then come back here."
+  },
+  "Un dernier clic pour commencer à commander.": {
+    "ar": "خطوة أخيرة لبدء الطلب.",
+    "en": "One last step to start ordering."
+  },
+  "Lien de vérification envoyé. Consultez aussi vos courriers indésirables.": {
+    "ar": "تم إرسال رابط التحقق. تفقّد البريد غير المرغوب فيه أيضاً.",
+    "en": "Verification link sent. Check your spam folder too."
+  },
+  "Vous êtes connecté. Vous pouvez confirmer votre commande.": {
+    "ar": "تم تسجيل دخولك. يمكنك تأكيد طلبك.",
+    "en": "You are signed in. You can confirm your order."
+  },
+  "Votre adresse n’est pas encore confirmée. Ouvrez le lien reçu, puis réessayez.": {
+    "ar": "لم يتم تأكيد بريدك بعد. افتح الرابط ثم حاول مجدداً.",
+    "en": "Your email is not verified. Open the link and retry."
+  },
+  "Si cette adresse possède un compte, vous recevrez un lien de réinitialisation.": {
+    "ar": "إذا كان البريد مرتبطاً بحساب فستتلقى رابط إعادة التعيين.",
+    "en": "If this email has an account, you will receive a reset link."
+  },
+  "8 caractères minimum. Confirmez ensuite votre adresse grâce au lien reçu par email.": {
+    "ar": "8 أحرف على الأقل. ثم أكد بريدك عبر الرابط المرسل.",
+    "en": "At least 8 characters. Then verify your address using the email link."
+  },
+  "Connexion…": {
+    "ar": "جارٍ تسجيل الدخول…",
+    "en": "Signing in…"
+  },
+  "Vérification…": {
+    "ar": "جارٍ التحقق…",
+    "en": "Verifying…"
+  },
+  "Enregistrement…": {
+    "ar": "جارٍ الحفظ…",
+    "en": "Saving…"
+  },
+  "Un instant…": {
+    "ar": "لحظة…",
+    "en": "Just a moment…"
+  },
+  "Vos informations personnelles.": {
+    "ar": "معلوماتك الشخصية.",
+    "en": "Your personal information."
+  },
+  "Profil mis à jour.": {
+    "ar": "تم تحديث الملف الشخصي.",
+    "en": "Profile updated."
+  },
+  "Utiliser ma position": {
+    "ar": "استخدام موقعي",
+    "en": "Use my location"
+  },
+  "Me géolocaliser": {
+    "ar": "تحديد موقعي",
+    "en": "Locate me"
+  },
+  "Choisir sur la carte": {
+    "ar": "اختيار على الخريطة",
+    "en": "Choose on map"
+  },
+  "Choisir ma position de livraison": {
+    "ar": "اختيار موقع التوصيل",
+    "en": "Choose delivery location"
+  },
+  "Confirmer cette position": {
+    "ar": "تأكيد هذا الموقع",
+    "en": "Confirm this location"
+  },
+  "Cliquez sur la carte ou déplacez le repère pour indiquer l’endroit exact.": {
+    "ar": "اضغط على الخريطة أو حرّك العلامة لتحديد المكان بدقة.",
+    "en": "Tap the map or move the pin to set the exact location."
+  },
+  "Recherche de l’adresse…": {
+    "ar": "جارٍ البحث عن العنوان…",
+    "en": "Looking up address…"
+  },
+  "Localisation…": {
+    "ar": "جارٍ تحديد الموقع…",
+    "en": "Locating…"
+  },
+  "Position de livraison mise à jour.": {
+    "ar": "تم تحديث موقع التوصيل.",
+    "en": "Delivery location updated."
+  },
+  "La géolocalisation n’est pas disponible sur cet appareil.": {
+    "ar": "تحديد الموقع غير متاح على هذا الجهاز.",
+    "en": "Location is unavailable on this device."
+  },
+  "Autorisez l’accès à votre position dans le navigateur.": {
+    "ar": "اسمح للمتصفح بالوصول إلى موقعك.",
+    "en": "Allow location access in your browser."
+  },
+  "Impossible de récupérer votre position.": {
+    "ar": "تعذّر تحديد موقعك.",
+    "en": "Unable to get your location."
+  },
+  "Langue": {
+    "ar": "اللغة",
+    "en": "Language"
+  },
+  "Français": {
+    "ar": "Français",
+    "en": "Français"
+  },
+  "English": {
+    "ar": "English",
+    "en": "English"
+  },
+  "العربية": {
+    "ar": "العربية",
+    "en": "العربية"
+  },
+  "ou": {
+    "ar": "أو",
+    "en": "or"
+  },
+  "Réduire": {
+    "ar": "تقليل",
+    "en": "Decrease"
+  },
+  "Augmenter": {
+    "ar": "زيادة",
+    "en": "Increase"
+  },
+  "Retirer": {
+    "ar": "إزالة",
+    "en": "Remove"
+  },
+  "Modifier": {
+    "ar": "تعديل",
+    "en": "Edit"
+  },
+  "Supprimer": {
+    "ar": "حذف",
+    "en": "Delete"
+  },
+  "Ouvrir": {
+    "ar": "فتح",
+    "en": "Open"
+  },
+  "Produits": {
+    "ar": "المنتجات",
+    "en": "Products"
+  },
+  "Catégories": {
+    "ar": "الفئات",
+    "en": "Categories"
+  },
+  "Catégorie": {
+    "ar": "الفئة",
+    "en": "Category"
+  },
+  "Livreurs": {
+    "ar": "الموصّلون",
+    "en": "Drivers"
+  },
+  "Clients": {
+    "ar": "العملاء",
+    "en": "Customers"
+  },
+  "Statistiques": {
+    "ar": "الإحصائيات",
+    "en": "Statistics"
+  },
+  "Paramètres": {
+    "ar": "الإعدادات",
+    "en": "Settings"
+  },
+  "Vue d’ensemble": {
+    "ar": "نظرة عامة",
+    "en": "Overview"
+  },
+  "Revenus": {
+    "ar": "الإيرادات",
+    "en": "Revenue"
+  },
+  "Statut": {
+    "ar": "الحالة",
+    "en": "Status"
+  },
+  "Actions": {
+    "ar": "الإجراءات",
+    "en": "Actions"
+  },
+  "En cours": {
+    "ar": "قيد التنفيذ",
+    "en": "In progress"
+  },
+  "Actif": {
+    "ar": "نشط",
+    "en": "Active"
+  },
+  "Inactif": {
+    "ar": "غير نشط",
+    "en": "Inactive"
+  },
+  "Disponible": {
+    "ar": "متاح",
+    "en": "Available"
+  },
+  "En course": {
+    "ar": "في مهمة",
+    "en": "On a delivery"
+  },
+  "Hors ligne": {
+    "ar": "غير متصل",
+    "en": "Offline"
+  },
+  "Suspendu": {
+    "ar": "موقوف",
+    "en": "Suspended"
+  },
+  "Annuler": {
+    "ar": "إلغاء",
+    "en": "Cancel"
+  },
+  "Annulées": {
+    "ar": "ملغاة",
+    "en": "Cancelled"
+  },
+  "Livrées": {
+    "ar": "تم توصيلها",
+    "en": "Delivered"
+  },
+  "Précédent": {
+    "ar": "السابق",
+    "en": "Previous"
+  },
+  "Suivant": {
+    "ar": "التالي",
+    "en": "Next"
+  },
+  "Image": {
+    "ar": "الصورة",
+    "en": "Image"
+  },
+  "Image du rayon": {
+    "ar": "صورة القسم",
+    "en": "Department image"
+  },
+  "Aperçu": {
+    "ar": "معاينة",
+    "en": "Preview"
+  },
+  "Description": {
+    "ar": "الوصف",
+    "en": "Description"
+  },
+  "Détails": {
+    "ar": "التفاصيل",
+    "en": "Details"
+  },
+  "Stock": {
+    "ar": "المخزون",
+    "en": "Stock"
+  },
+  "Prix (DT)": {
+    "ar": "السعر (د.ت)",
+    "en": "Price (TND)"
+  },
+  "Ordre": {
+    "ar": "الترتيب",
+    "en": "Order"
+  },
+  "Note / 5": {
+    "ar": "التقييم / 5",
+    "en": "Rating / 5"
+  },
+  "Note": {
+    "ar": "التقييم",
+    "en": "Rating"
+  },
+  "Commerce": {
+    "ar": "المتجر",
+    "en": "Store"
+  },
+  "Zone": {
+    "ar": "المنطقة",
+    "en": "Area"
+  },
+  "Véhicule": {
+    "ar": "المركبة",
+    "en": "Vehicle"
+  },
+  "Rayons accueil": {
+    "ar": "أقسام الرئيسية",
+    "en": "Home departments"
+  },
+  "Libellé de la carte": {
+    "ar": "عنوان البطاقة",
+    "en": "Card label"
+  },
+  "Nom arabe (facultatif)": {
+    "ar": "الاسم بالعربية (اختياري)",
+    "en": "Arabic name (optional)"
+  },
+  "Nom français": {
+    "ar": "الاسم بالفرنسية",
+    "en": "French name"
+  },
+  "Nom anglais": {
+    "ar": "الاسم بالإنجليزية",
+    "en": "English name"
+  },
+  "Description arabe": {
+    "ar": "الوصف بالعربية",
+    "en": "Arabic description"
+  },
+  "Description française": {
+    "ar": "الوصف بالفرنسية",
+    "en": "French description"
+  },
+  "Description anglaise": {
+    "ar": "الوصف بالإنجليزية",
+    "en": "English description"
+  },
+  "Traductions": {
+    "ar": "الترجمات",
+    "en": "Translations"
+  },
+  "Choisir un commerce": {
+    "ar": "اختر متجراً",
+    "en": "Choose a store"
+  },
+  "Choisir une catégorie": {
+    "ar": "اختر فئة",
+    "en": "Choose a category"
+  },
+  "Choisir depuis la galerie": {
+    "ar": "اختيار من المعرض",
+    "en": "Choose from gallery"
+  },
+  "Choisir une image depuis la galerie": {
+    "ar": "اختيار صورة من المعرض",
+    "en": "Choose an image from gallery"
+  },
+  "Menu du restaurant uniquement": {
+    "ar": "قائمة المطعم فقط",
+    "en": "Restaurant menu only"
+  },
+  "Catégorie de l’accueil client": {
+    "ar": "قسم الرئيسية",
+    "en": "Home department"
+  },
+  "Les changements sont enregistrés dans la base et visibles sur le site client.": {
+    "ar": "تُحفظ التغييرات في قاعدة البيانات وتظهر للعملاء.",
+    "en": "Changes are saved to the database and visible to customers."
+  },
+  "Aucun résultat. Essayez un autre nom ou un autre statut.": {
+    "ar": "لا توجد نتائج. جرّب اسماً أو حالة أخرى.",
+    "en": "No results. Try another name or status."
+  },
+  "Cet élément sera supprimé de la base. Les commandes historiques seront conservées.": {
+    "ar": "سيُحذف هذا العنصر مع الاحتفاظ بالطلبات السابقة.",
+    "en": "This item will be deleted. Historical orders are preserved."
+  },
+  "Élément créé.": {
+    "ar": "تم إنشاء العنصر.",
+    "en": "Item created."
+  },
+  "Élément supprimé.": {
+    "ar": "تم حذف العنصر.",
+    "en": "Item deleted."
+  },
+  "Modifications enregistrées.": {
+    "ar": "تم حفظ التغييرات.",
+    "en": "Changes saved."
+  },
+  "Total utilisateurs": {
+    "ar": "إجمالي المستخدمين",
+    "en": "Total users"
+  },
+  "Total commandes": {
+    "ar": "إجمالي الطلبات",
+    "en": "Total orders"
+  },
+  "Restaurants actifs": {
+    "ar": "المطاعم النشطة",
+    "en": "Active restaurants"
+  },
+  "Rayons accueil actifs": {
+    "ar": "الأقسام النشطة",
+    "en": "Active departments"
+  },
+  "Livreurs actifs": {
+    "ar": "الموصّلون النشطون",
+    "en": "Active drivers"
+  },
+  "Livreurs disponibles": {
+    "ar": "الموصّلون المتاحون",
+    "en": "Available drivers"
+  },
+  "Commandes livrées": {
+    "ar": "الطلبات الموصلة",
+    "en": "Delivered orders"
+  },
+  "Commandes récentes": {
+    "ar": "الطلبات الأخيرة",
+    "en": "Recent orders"
+  },
+  "Enregistrer les paramètres": {
+    "ar": "حفظ الإعدادات",
+    "en": "Save settings"
+  },
+  "Nom de la plateforme": {
+    "ar": "اسم المنصة",
+    "en": "Platform name"
+  },
+  "Email de contact": {
+    "ar": "بريد التواصل",
+    "en": "Contact email"
+  },
+  "Tous les statuts": {
+    "ar": "جميع الحالات",
+    "en": "All statuses"
+  },
+  "Tous les livreurs": {
+    "ar": "جميع الموصّلين",
+    "en": "All drivers"
+  },
+  "Période": {
+    "ar": "الفترة",
+    "en": "Period"
+  },
+  "30 derniers jours": {
+    "ar": "آخر 30 يوماً",
+    "en": "Last 30 days"
+  },
+  "7 derniers jours": {
+    "ar": "آخر 7 أيام",
+    "en": "Last 7 days"
+  },
+  "3 derniers mois": {
+    "ar": "آخر 3 أشهر",
+    "en": "Last 3 months"
+  },
+  "Tout marquer comme lu": {
+    "ar": "تحديد الكل كمقروء",
+    "en": "Mark all as read"
+  },
+  "Marquer comme lu": {
+    "ar": "تحديد كمقروء",
+    "en": "Mark as read"
+  },
+  "Centre de notifications": {
+    "ar": "مركز الإشعارات",
+    "en": "Notification centre"
+  },
+  "Administrateur": {
+    "ar": "المسؤول",
+    "en": "Administrator"
+  },
+  "Retour au site client": {
+    "ar": "العودة إلى الموقع",
+    "en": "Back to storefront"
+  },
+  "Connexion Admin": {
+    "ar": "دخول المسؤول",
+    "en": "Admin sign in"
+  },
+  "Espace de travail": {
+    "ar": "مساحة العمل",
+    "en": "Workspace"
+  },
+  "Rechercher une commande": {
+    "ar": "ابحث عن طلب",
+    "en": "Search orders"
+  },
+  "Assigner un livreur": {
+    "ar": "تعيين موصّل",
+    "en": "Assign driver"
+  },
+  "Choisir un livreur disponible": {
+    "ar": "اختر موصّلاً متاحاً",
+    "en": "Choose an available driver"
+  },
+  "Non assigné": {
+    "ar": "غير معيّن",
+    "en": "Unassigned"
+  },
+  "Nouveau statut": {
+    "ar": "الحالة الجديدة",
+    "en": "New status"
+  },
+  "Faire avancer la commande": {
+    "ar": "تحديث حالة الطلب",
+    "en": "Advance order"
+  },
+  "mama chami": {
+    "ar": "ماما شامي",
+    "en": "Mama Chami"
+  },
+  "Burger Express": {
+    "ar": "برغر إكسبرس",
+    "en": "Burger Express"
+  },
+  "Taxi Pizza": {
+    "ar": "تاكسي بيتزا",
+    "en": "Taxi Pizza"
+  },
+  "Douceurs de Tunis": {
+    "ar": "حلويات تونس",
+    "en": "Douceurs de Tunis"
+  },
+  "Épicerie Hadhri": {
+    "ar": "بقالة حضري",
+    "en": "Hadhri Grocery"
+  },
+  "Sushi Nara": {
+    "ar": "سوشي نارا",
+    "en": "Sushi Nara"
+  },
+  "Cuisine tunisienne": {
+    "ar": "المطبخ التونسي",
+    "en": "Tunisian cuisine"
+  },
+  "Pizzas": {
+    "ar": "البيتزا",
+    "en": "Pizzas"
+  },
+  "Burgers": {
+    "ar": "البرغر",
+    "en": "Burgers"
+  },
+  "Sushi": {
+    "ar": "السوشي",
+    "en": "Sushi"
+  },
+  "Pâtisserie tunisienne": {
+    "ar": "حلويات تونسية",
+    "en": "Tunisian pastries"
+  },
+  "Produits de nettoyage": {
+    "ar": "مواد التنظيف",
+    "en": "Cleaning products"
+  },
+  "Accessoires électroniques": {
+    "ar": "إكسسوارات إلكترونية",
+    "en": "Electronic accessories"
+  },
+  "Produits du quotidien": {
+    "ar": "منتجات يومية",
+    "en": "Everyday essentials"
+  },
+  "Produits alimentaires": {
+    "ar": "مواد غذائية",
+    "en": "Groceries"
+  },
+  "Produits divers": {
+    "ar": "منتجات متنوعة",
+    "en": "Other products"
+  },
+  "Biscuits et snacks": {
+    "ar": "بسكويت ووجبات خفيفة",
+    "en": "Biscuits and snacks"
+  },
+  "Confiseries": {
+    "ar": "الحلويات",
+    "en": "Confectionery"
+  },
+  "Cartes de recharge mobile / top-up": {
+    "ar": "بطاقات شحن الهاتف",
+    "en": "Mobile top-up cards"
+  },
+  "Chips nature 100 g": {
+    "ar": "رقائق بطاطا طبيعية 100 غ",
+    "en": "Plain crisps 100 g"
+  },
+  "Pizza Margherita": {
+    "ar": "بيتزا مارغريتا",
+    "en": "Margherita pizza"
+  },
+  "Éponges multi-usages x3": {
+    "ar": "إسفنج متعدد الاستعمالات ×3",
+    "en": "Multipurpose sponges ×3"
+  },
+  "Nettoyant sol citron 1 L": {
+    "ar": "منظف أرضيات بالليمون 1 لتر",
+    "en": "Lemon floor cleaner 1 L"
+  },
+  "Salade méchouia": {
+    "ar": "سلطة مشوية",
+    "en": "Mechouia salad"
+  },
+  "Frites": {
+    "ar": "بطاطا مقلية",
+    "en": "Fries"
+  },
+  "Bonbons assortis 150 g": {
+    "ar": "حلوى مشكلة 150 غ",
+    "en": "Mixed sweets 150 g"
+  },
+  "Câble USB 1 m": {
+    "ar": "كابل USB بطول متر",
+    "en": "USB cable 1 m"
+  },
+  "Pizza Pepperoni": {
+    "ar": "بيتزا بيبروني",
+    "en": "Pepperoni pizza"
+  },
+  "Riz long grain 1 kg": {
+    "ar": "أرز طويل الحبة 1 كغ",
+    "en": "Long-grain rice 1 kg"
+  },
+  "Coca-Cola": {
+    "ar": "كوكاكولا",
+    "en": "Coca-Cola"
+  },
+  "Baklawa": {
+    "ar": "بقلاوة",
+    "en": "Baklava"
+  },
+  "Carte de recharge 5 DT": {
+    "ar": "بطاقة شحن 5 د.ت",
+    "en": "Top-up card 5 TND"
+  },
+  "Eau minérale": {
+    "ar": "مياه معدنية",
+    "en": "Mineral water"
+  },
+  "Lablabi": {
+    "ar": "لبلابي",
+    "en": "Lablabi"
+  },
+  "Thé à la menthe": {
+    "ar": "شاي بالنعناع",
+    "en": "Mint tea"
+  },
+  "Coca-Cola 33 cl": {
+    "ar": "كوكاكولا 33 صل",
+    "en": "Coca-Cola 330 ml"
+  },
+  "Cahier A5 96 pages": {
+    "ar": "دفتر A5 من 96 صفحة",
+    "en": "A5 notebook 96 pages"
+  },
+  "Ghraiba": {
+    "ar": "غريبة",
+    "en": "Ghraiba"
+  },
+  "California Roll x8": {
+    "ar": "كاليفورنيا رول ×8",
+    "en": "California roll ×8"
+  },
+  "Burger Classic": {
+    "ar": "برغر كلاسيك",
+    "en": "Classic burger"
+  },
+  "Burger Poulet": {
+    "ar": "برغر دجاج",
+    "en": "Chicken burger"
+  },
+  "Soupe miso": {
+    "ar": "حساء ميسو",
+    "en": "Miso soup"
+  },
+  "Pizza Végétarienne": {
+    "ar": "بيتزا نباتية",
+    "en": "Vegetarian pizza"
+  },
+  "Couscous": {
+    "ar": "كسكسي",
+    "en": "Couscous"
+  },
+  "Eau minérale 1,5 L": {
+    "ar": "مياه معدنية 1.5 لتر",
+    "en": "Mineral water 1.5 L"
+  },
+  "Cheeseburger": {
+    "ar": "برغر بالجبن",
+    "en": "Cheeseburger"
+  },
+  "Ojja merguez": {
+    "ar": "عجة بالمرقاز",
+    "en": "Ojja with merguez"
+  },
+  "Chocolat au lait 100 g": {
+    "ar": "شوكولاتة بالحليب 100 غ",
+    "en": "Milk chocolate 100 g"
+  },
+  "Nigiri assortiment x8": {
+    "ar": "نيغيري مشكل ×8",
+    "en": "Assorted nigiri ×8"
+  },
+  "Écouteurs filaires": {
+    "ar": "سماعات سلكية",
+    "en": "Wired earphones"
+  },
+  "Pizza 4 Fromages": {
+    "ar": "بيتزا أربعة أجبان",
+    "en": "Four-cheese pizza"
+  },
+  "Brik à l’œuf": {
+    "ar": "بريك بالبيض",
+    "en": "Egg brik"
+  },
+  "Pizza Hawaïenne": {
+    "ar": "بيتزا هاواي",
+    "en": "Hawaiian pizza"
+  },
+  "Piles AA x4": {
+    "ar": "بطاريات AA ×4",
+    "en": "AA batteries ×4"
+  },
+  "Sashimi saumon": {
+    "ar": "ساشيمي سلمون",
+    "en": "Salmon sashimi"
+  },
+  "Biscuits au beurre 200 g": {
+    "ar": "بسكويت بالزبدة 200 غ",
+    "en": "Butter biscuits 200 g"
+  },
+  "Lait demi-écrémé 1 L": {
+    "ar": "حليب نصف دسم 1 لتر",
+    "en": "Semi-skimmed milk 1 L"
+  },
+  "Savon doux 100 g": {
+    "ar": "صابون لطيف 100 غ",
+    "en": "Gentle soap 100 g"
+  },
+  "Carte de recharge 10 DT": {
+    "ar": "بطاقة شحن 10 د.ت",
+    "en": "Top-up card 10 TND"
+  },
+  "Dentifrice": {
+    "ar": "معجون أسنان",
+    "en": "Toothpaste"
+  },
+  "Chips croustillantes nature.": {
+    "ar": "رقائق بطاطا طبيعية مقرمشة.",
+    "en": "Crispy plain potato chips."
+  },
+  "Tomate, mozzarella, basilic frais.": {
+    "ar": "طماطم وموزاريلا وحبق طازج.",
+    "en": "Tomato, mozzarella and fresh basil."
+  },
+  "Lot de 3 éponges.": {
+    "ar": "عبوة من 3 قطع إسفنج.",
+    "en": "Pack of 3 sponges."
+  },
+  "Nettoyant multi-surfaces parfum citron.": {
+    "ar": "منظف متعدد الأسطح برائحة الليمون.",
+    "en": "Lemon-scented multisurface cleaner."
+  },
+  "Poivrons et tomates grillés, à l’huile d’olive.": {
+    "ar": "فلفل وطماطم مشوية بزيت الزيتون.",
+    "en": "Grilled peppers and tomatoes with olive oil."
+  },
+  "Frites maison, sel fin.": {
+    "ar": "بطاطا مقلية منزلية وملح ناعم.",
+    "en": "House fries with fine salt."
+  },
+  "Assortiment de bonbons.": {
+    "ar": "تشكيلة من الحلوى.",
+    "en": "An assortment of sweets."
+  },
+  "Câble de charge et transfert.": {
+    "ar": "كابل للشحن ونقل البيانات.",
+    "en": "Charging and data transfer cable."
+  },
+  "Sauce tomate, mozzarella, pepperoni épicé.": {
+    "ar": "صلصة طماطم وموزاريلا وبيبروني حار.",
+    "en": "Tomato sauce, mozzarella and spicy pepperoni."
+  },
+  "Sac de riz 1 kg.": {
+    "ar": "كيس أرز 1 كغ.",
+    "en": "1 kg bag of rice."
+  },
+  "Canette 33 cl, bien fraîche.": {
+    "ar": "علبة باردة 33 صل.",
+    "en": "Chilled 330 ml can."
+  },
+  "Pâte filo, pistaches, sirop au miel.": {
+    "ar": "عجينة فيلو وفستق وقطر بالعسل.",
+    "en": "Filo pastry, pistachios and honey syrup."
+  },
+  "Recharge mobile 5 DT, tous opérateurs.": {
+    "ar": "شحن هاتف بقيمة 5 د.ت لجميع المشغّلين.",
+    "en": "5 TND mobile top-up for all operators."
+  },
+  "Bouteille 50 cl.": {
+    "ar": "قارورة 50 صل.",
+    "en": "500 ml bottle."
+  },
+  "Soupe de pois chiches, pain, harissa, œuf.": {
+    "ar": "حساء حمص وخبز وهريسة وبيض.",
+    "en": "Chickpea soup with bread, harissa and egg."
+  },
+  "Thé vert traditionnel à la menthe fraîche.": {
+    "ar": "شاي أخضر تقليدي بالنعناع الطازج.",
+    "en": "Traditional green tea with fresh mint."
+  },
+  "Canette fraîche.": {
+    "ar": "علبة باردة.",
+    "en": "Chilled can."
+  },
+  "Cahier ligné A5.": {
+    "ar": "دفتر مسطّر بحجم A5.",
+    "en": "A5 lined notebook."
+  },
+  "Sablé traditionnel à l’amande.": {
+    "ar": "بسكويت تقليدي باللوز.",
+    "en": "Traditional almond shortbread."
+  },
+  "Avocat, surimi, concombre, sésame.": {
+    "ar": "أفوكادو وسوريمي وخيار وسمسم.",
+    "en": "Avocado, surimi, cucumber and sesame."
+  },
+  "Steak bœuf, cheddar, salade, tomate.": {
+    "ar": "لحم بقر وشيدر وخس وطماطم.",
+    "en": "Beef patty, cheddar, lettuce and tomato."
+  },
+  "Filet de poulet croustillant, sauce maison.": {
+    "ar": "فيليه دجاج مقرمش وصلصة منزلية.",
+    "en": "Crispy chicken fillet with house sauce."
+  },
+  "Soupe miso traditionnelle, tofu, algues.": {
+    "ar": "حساء ميسو تقليدي بالتوفو والأعشاب البحرية.",
+    "en": "Traditional miso soup with tofu and seaweed."
+  },
+  "Poivrons, champignons, olives, oignons.": {
+    "ar": "فلفل وفطر وزيتون وبصل.",
+    "en": "Peppers, mushrooms, olives and onions."
+  },
+  "Couscous traditionnel tunisien.": {
+    "ar": "كسكسي تونسي تقليدي.",
+    "en": "Traditional Tunisian couscous."
+  },
+  "Bouteille 1,5 L.": {
+    "ar": "قارورة 1.5 لتر.",
+    "en": "1.5 L bottle."
+  },
+  "Double cheddar, oignons caramélisés.": {
+    "ar": "شيدر مضاعف وبصل مكرمل.",
+    "en": "Double cheddar and caramelised onions."
+  },
+  "Sauce tomate épicée, merguez, œufs.": {
+    "ar": "صلصة طماطم حارة ومرقاز وبيض.",
+    "en": "Spicy tomato sauce, merguez and eggs."
+  },
+  "Tablette de chocolat au lait.": {
+    "ar": "لوح شوكولاتة بالحليب.",
+    "en": "Milk chocolate bar."
+  },
+  "Assortiment de nigiri du jour.": {
+    "ar": "تشكيلة نيغيري اليوم.",
+    "en": "Assorted nigiri of the day."
+  },
+  "Écouteurs filaires avec micro.": {
+    "ar": "سماعات سلكية مع ميكروفون.",
+    "en": "Wired earphones with microphone."
+  },
+  "Mozzarella, gorgonzola, parmesan, chèvre.": {
+    "ar": "موزاريلا وغورغونزولا وبارميزان وجبن ماعز.",
+    "en": "Mozzarella, gorgonzola, parmesan and goat cheese."
+  },
+  "Feuille de malsouka croustillante, œuf, thon, persil.": {
+    "ar": "ورقة ملسوقة مقرمشة مع البيض والتونة والبقدونس.",
+    "en": "Crispy malsouka pastry with egg, tuna and parsley."
+  },
+  "Jambon, ananas, mozzarella.": {
+    "ar": "لحم جامبون وأناناس وموزاريلا.",
+    "en": "Ham, pineapple and mozzarella."
+  },
+  "Lot de 4 piles AA.": {
+    "ar": "عبوة من 4 بطاريات AA.",
+    "en": "Pack of 4 AA batteries."
+  },
+  "Tranches fines de saumon frais.": {
+    "ar": "شرائح رقيقة من السلمون الطازج.",
+    "en": "Thin slices of fresh salmon."
+  },
+  "Biscuits sablés au beurre.": {
+    "ar": "بسكويت هش بالزبدة.",
+    "en": "Butter shortbread biscuits."
+  },
+  "Brique de lait 1 L.": {
+    "ar": "عبوة حليب 1 لتر.",
+    "en": "1 L milk carton."
+  },
+  "Savon doux pour le corps.": {
+    "ar": "صابون لطيف للجسم.",
+    "en": "Gentle body soap."
+  },
+  "Recharge mobile 10 DT, tous opérateurs.": {
+    "ar": "شحن هاتف بقيمة 10 د.ت لجميع المشغّلين.",
+    "en": "10 TND mobile top-up for all operators."
+  },
+  "Tube de dentifrice.": {
+    "ar": "أنبوب معجون أسنان.",
+    "en": "Tube of toothpaste."
+  },
+  "Classique": {
+    "ar": "عادي",
+    "en": "Classic"
+  },
+  "Grande": {
+    "ar": "كبير",
+    "en": "Large"
+  },
+  "Standard": {
+    "ar": "عادي",
+    "en": "Standard"
+  },
+  "Activité des livreurs": {
+    "ar": "نشاط الموصّلين",
+    "en": "Driver activity"
+  },
+  "Activité du catalogue": {
+    "ar": "نشاط الكتالوج",
+    "en": "Catalogue activity"
+  },
+  "Activé": {
+    "ar": "مفعّل",
+    "en": "Enabled"
+  },
+  "Admin Hadhri": {
+    "ar": "إدارة حضري",
+    "en": "Hadhri Admin"
+  },
+  "Articles commandés": {
+    "ar": "المنتجات المطلوبة",
+    "en": "Ordered items"
+  },
+  "Aucune carte bancaire n’est nécessaire. Les paiements en ligne ne sont pas activés dans cette version.": {
+    "ar": "لا تحتاج إلى بطاقة بنكية. الدفع الإلكتروني غير مفعّل في هذه النسخة.",
+    "en": "No bank card needed. Online payments are not enabled in this version."
+  },
+  "Aucune commande ne correspond à votre recherche.": {
+    "ar": "لا توجد طلبات تطابق بحثك.",
+    "en": "No orders match your search."
+  },
+  "Bonjour ! Voici ce qui se passe sur Hadhri Delivery aujourd’hui.": {
+    "ar": "مرحباً! إليك نشاط حضري دليفري اليوم.",
+    "en": "Hello! Here is today's Hadhri Delivery activity."
+  },
+  "Catalogue de test avec stockage persistant. L’espace Admin est protégé par mot de passe. Les commandes clients sont liées à leur session.": {
+    "ar": "كتالوج تجريبي محفوظ. لوحة الإدارة محمية بكلمة مرور والطلبات مرتبطة بحسابات العملاء.",
+    "en": "Persisted test catalogue. Admin is password protected and orders belong to customer sessions."
+  },
+  "Catalogue et commandes synchronisés avec la base locale": {
+    "ar": "الكتالوج والطلبات متزامنة مع قاعدة البيانات المحلية",
+    "en": "Catalogue and orders synced with the local database"
+  },
+  "Ce livreur n’est plus disponible.": {
+    "ar": "هذا الموصّل لم يعد متاحاً.",
+    "en": "This driver is no longer available."
+  },
+  "Ce tarif s’appliquera aux futures commandes. Les commandes de démonstration existantes conservent leurs frais.": {
+    "ar": "يطبق هذا السعر على الطلبات الجديدة. تحتفظ الطلبات السابقة برسومها.",
+    "en": "This fee applies to future orders. Existing orders retain their fees."
+  },
+  "Chiffre des commandes": {
+    "ar": "قيمة الطلبات",
+    "en": "Order value"
+  },
+  "Choisissez votre mot de passe administrateur (12 caractères minimum).": {
+    "ar": "اختر كلمة مرور المسؤول (12 حرفاً على الأقل).",
+    "en": "Choose your admin password (at least 12 characters)."
+  },
+  "Commerces les plus commandés": {
+    "ar": "المتاجر الأكثر طلباً",
+    "en": "Most ordered stores"
+  },
+  "Créer mon accès": {
+    "ar": "إنشاء حساب الدخول",
+    "en": "Create my access"
+  },
+  "Créer votre accès Admin": {
+    "ar": "إنشاء حساب المسؤول",
+    "en": "Create admin access"
+  },
+  "Données enregistrées dans la base.": {
+    "ar": "تم حفظ البيانات في قاعدة البيانات.",
+    "en": "Data saved to the database."
+  },
+  "Détails et suivi de la commande de démonstration": {
+    "ar": "تفاصيل وتتبع الطلب التجريبي",
+    "en": "Demo order details and tracking"
+  },
+  "Entrez votre mot de passe pour gérer votre plateforme.": {
+    "ar": "أدخل كلمة المرور لإدارة المنصة.",
+    "en": "Enter your password to manage your platform."
+  },
+  "Environnement de test : aucune livraison réelle.": {
+    "ar": "بيئة تجريبية: لا يوجد توصيل فعلي.",
+    "en": "Test environment: no real deliveries."
+  },
+  "Explorez votre plateforme.": {
+    "ar": "اكتشف منصتك.",
+    "en": "Explore your platform."
+  },
+  "Filtrer le statut": {
+    "ar": "تصفية حسب الحالة",
+    "en": "Filter status"
+  },
+  "Filtrer par livreur": {
+    "ar": "تصفية حسب الموصّل",
+    "en": "Filter by driver"
+  },
+  "Frais de livraison par défaut (DT)": {
+    "ar": "رسوم التوصيل الافتراضية (د.ت)",
+    "en": "Default delivery fee (TND)"
+  },
+  "Gérer les livreurs": {
+    "ar": "إدارة الموصّلين",
+    "en": "Manage drivers"
+  },
+  "Gérez votre activité depuis un seul espace.": {
+    "ar": "أدر نشاطك من مكان واحد.",
+    "en": "Manage your business in one place."
+  },
+  "Hadhri Admin © 2026": {
+    "ar": "إدارة حضري © 2026",
+    "en": "Hadhri Admin © 2026"
+  },
+  "Indicateur du graphique": {
+    "ar": "مؤشر الرسم البياني",
+    "en": "Chart indicator"
+  },
+  "Informations de la plateforme": {
+    "ar": "معلومات المنصة",
+    "en": "Platform information"
+  },
+  "La commande doit être prête avant l’assignation.": {
+    "ar": "يجب أن يكون الطلب جاهزاً قبل تعيين الموصّل.",
+    "en": "The order must be ready before assigning a driver."
+  },
+  "Les dernières activités de votre plateforme": {
+    "ar": "آخر أنشطة منصتك",
+    "en": "Latest platform activity"
+  },
+  "Livreur assigné à la commande.": {
+    "ar": "تم تعيين الموصّل للطلب.",
+    "en": "Driver assigned to the order."
+  },
+  "L’assignation est possible lorsque la commande est prête.": {
+    "ar": "يمكن تعيين الموصّل عندما يصبح الطلب جاهزاً.",
+    "en": "A driver can be assigned when the order is ready."
+  },
+  "Montants encaissés à la livraison": {
+    "ar": "المبالغ المحصلة عند التوصيل",
+    "en": "Amounts collected on delivery"
+  },
+  "Panier moyen livré": {
+    "ar": "متوسط قيمة الطلب الموصل",
+    "en": "Average delivered order"
+  },
+  "Paramètres enregistrés.": {
+    "ar": "تم حفظ الإعدادات.",
+    "en": "Settings saved."
+  },
+  "Prêts à prendre la route": {
+    "ar": "جاهزون للانطلاق",
+    "en": "Ready to go"
+  },
+  "Rapport exporté.": {
+    "ar": "تم تصدير التقرير.",
+    "en": "Report exported."
+  },
+  "Retrouvez vos commandes en attente dans l’espace livraisons.": {
+    "ar": "اعثر على طلباتك المعلقة في قسم التوصيلات.",
+    "en": "Find pending orders in Deliveries."
+  },
+  "Revenus encaissés": {
+    "ar": "الإيرادات المحصلة",
+    "en": "Collected revenue"
+  },
+  "Réglages partagés par le site client et l’Admin": {
+    "ar": "إعدادات مشتركة للموقع ولوحة الإدارة",
+    "en": "Settings shared by the storefront and Admin"
+  },
+  "Répartition par catégorie": {
+    "ar": "التوزيع حسب الفئة",
+    "en": "Breakdown by category"
+  },
+  "Se connecter pour commander": {
+    "ar": "سجّل الدخول للطلب",
+    "en": "Sign in to order"
+  },
+  "Statut de commande mis à jour.": {
+    "ar": "تم تحديث حالة الطلب.",
+    "en": "Order status updated."
+  },
+  "Statut des commandes": {
+    "ar": "حالات الطلبات",
+    "en": "Order statuses"
+  },
+  "Sur la période sélectionnée": {
+    "ar": "خلال الفترة المختارة",
+    "en": "During the selected period"
+  },
+  "Taux d’annulation": {
+    "ar": "معدل الإلغاء",
+    "en": "Cancellation rate"
+  },
+  "Total des commandes livrées": {
+    "ar": "إجمالي الطلبات الموصلة",
+    "en": "Total delivered orders"
+  },
+  "Un peu plus proche de ce que vous aimez.": {
+    "ar": "أقرب إلى كل ما تحب.",
+    "en": "Closer to what you love."
+  },
+  "Une livraison à assigner ?": {
+    "ar": "هل يوجد طلب يحتاج موصّلاً؟",
+    "en": "A delivery to assign?"
+  },
+  "Voir les livraisons →": {
+    "ar": "عرض التوصيلات ←",
+    "en": "View deliveries →"
+  },
+  "Votre commerce. Toujours en mouvement.": {
+    "ar": "تجارتك. دائماً في تقدم.",
+    "en": "Your business. Always moving."
+  },
+  "Vue d’ensemble des revenus": {
+    "ar": "نظرة عامة على الإيرادات",
+    "en": "Revenue overview"
+  },
+  "Vérifiez le nom, le montant et le stock.": {
+    "ar": "تحقق من الاسم والمبلغ والمخزون.",
+    "en": "Check the name, amount and stock."
+  },
+  "Vérifiez votre panier et votre adresse de livraison.": {
+    "ar": "تحقق من سلتك وعنوان التوصيل.",
+    "en": "Check your cart and delivery address."
+  },
+  "Évolution de l’activité": {
+    "ar": "تطور النشاط",
+    "en": "Activity over time"
+  },
+  "éléments au total": {
+    "ar": "عناصر إجمالاً",
+    "en": "items in total"
+  },
+  "livreurs enregistrés": {
+    "ar": "موصّلون مسجلون",
+    "en": "registered drivers"
+  },
+  "résultats": {
+    "ar": "نتائج",
+    "en": "results"
+  },
+  "résultats · Page": {
+    "ar": "نتائج · صفحة",
+    "en": "results · Page"
+  },
+  "% de commandes livrées": {
+    "ar": "% من الطلبات الموصلة",
+    "en": "% of orders delivered"
+  },
+  "produits": {
+    "ar": "منتجات",
+    "en": "products"
+  },
+  "restaurants": {
+    "ar": "مطاعم",
+    "en": "restaurants"
+  },
+  "commandes": {
+    "ar": "طلبات",
+    "en": "orders"
+  },
+  "commerces": {
+    "ar": "متاجر",
+    "en": "stores"
+  },
+  "catégorie": {
+    "ar": "فئة",
+    "en": "category"
+  },
+  "restaurant": {
+    "ar": "مطعم",
+    "en": "restaurant"
+  },
+  "produit": {
+    "ar": "منتج",
+    "en": "product"
+  },
+  "client": {
+    "ar": "عميل",
+    "en": "customer"
+  },
+  "livreur": {
+    "ar": "موصّل",
+    "en": "driver"
+  },
+  "rayon d’accueil": {
+    "ar": "قسم الرئيسية",
+    "en": "home department"
+  },
+  "aujourd’hui": {
+    "ar": "اليوم",
+    "en": "today"
+  },
+  "cette semaine": {
+    "ar": "هذا الأسبوع",
+    "en": "this week"
+  },
+  "ce mois": {
+    "ar": "هذا الشهر",
+    "en": "this month"
+  },
+  "en ligne": {
+    "ar": "متصل",
+    "en": "online"
+  },
+  "en rupture de stock": {
+    "ar": "نفد المخزون",
+    "en": "out of stock"
+  },
+  "en stock": {
+    "ar": "في المخزون",
+    "en": "in stock"
+  },
+  "sur les": {
+    "ar": "من أصل",
+    "en": "out of"
+  },
+  "derniers jours": {
+    "ar": "الأيام الأخيرة",
+    "en": "last days"
+  },
+  "derniers jours ·": {
+    "ar": "الأيام الأخيرة ·",
+    "en": "last days ·"
+  },
+  "notifications non lues": {
+    "ar": "إشعارات غير مقروءة",
+    "en": "unread notifications"
+  },
+  "Paiements": {
+    "ar": "المدفوعات",
+    "en": "Payments"
+  },
+  "Environnement": {
+    "ar": "البيئة",
+    "en": "Environment"
+  },
+  "Exporter commandes": {
+    "ar": "تصدير الطلبات",
+    "en": "Export orders"
+  },
+  "CATALOGUE DE TEST": {
+    "ar": "كتالوج تجريبي",
+    "en": "TEST CATALOGUE"
+  },
+  "ESPACE ADMINISTRATEUR": {
+    "ar": "مساحة المسؤول",
+    "en": "ADMIN AREA"
+  },
+  "ENCORE UN PETIT INSTANT": {
+    "ar": "لحظة أخرى",
+    "en": "JUST A MOMENT"
+  },
+  "VOTRE PLATEFORME, EN UN COUP D’ŒIL": {
+    "ar": "منصتك في لمحة",
+    "en": "YOUR PLATFORM AT A GLANCE"
+  },
+  "Clients, livreurs et administrateur": {
+    "ar": "العملاء والموصّلون والمسؤول",
+    "en": "Customers, drivers and administrator"
+  },
+  "Email ou mot de passe incorrect.": {
+    "ar": "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
+    "en": "Incorrect email or password."
+  },
+  "Cette adresse possède déjà un compte. Connectez-vous.": {
+    "ar": "هذا البريد مرتبط بحساب. سجّل الدخول.",
+    "en": "This email already has an account. Sign in."
+  },
+  "Adresse email invalide.": {
+    "ar": "البريد الإلكتروني غير صالح.",
+    "en": "Invalid email address."
+  },
+  "Trop de tentatives. Réessayez plus tard.": {
+    "ar": "محاولات كثيرة. حاول لاحقاً.",
+    "en": "Too many attempts. Try again later."
+  },
+  "Déconnexion impossible. Réessayez.": {
+    "ar": "تعذّر تسجيل الخروج. حاول مجدداً.",
+    "en": "Unable to sign out. Try again."
+  },
+  "Vérifiez le nom, le téléphone et l’adresse complète (10 caractères minimum).": {
+    "ar": "تحقق من الاسم والهاتف والعنوان الكامل (10 أحرف على الأقل).",
+    "en": "Check your name, phone and full address (at least 10 characters)."
+  },
+  "Connexion interrompue. Réessayez : votre commande ne sera pas dupliquée.": {
+    "ar": "انقطع الاتصال. حاول مجدداً: لن يتكرر طلبك.",
+    "en": "Connection interrupted. Retry: your order will not be duplicated."
+  },
+  "Rayon indisponible · Retour": {
+    "ar": "القسم غير متوفر · العودة",
+    "en": "Department unavailable · Back"
+  },
+  "Recherches récentes": {
+    "ar": "عمليات البحث الأخيرة",
+    "en": "Recent searches"
+  },
+  "Rechercher": {
+    "ar": "بحث",
+    "en": "Search"
+  },
+  "Recherche": {
+    "ar": "البحث",
+    "en": "Search"
+  },
+  "Effacer": {
+    "ar": "مسح",
+    "en": "Clear"
+  },
+  "Résultats": {
+    "ar": "النتائج",
+    "en": "Results"
+  },
+  "Aucun résultat trouvé": {
+    "ar": "لم يتم العثور على نتائج",
+    "en": "No results found"
+  },
+  "Commencez votre recherche": {
+    "ar": "ابدأ البحث",
+    "en": "Start searching"
+  },
+  "Formats (une ligne : nom | supplément DT)": {
+    "ar": "الأحجام (سطر لكل حجم: الاسم | السعر الإضافي)",
+    "en": "Sizes (one line: name | extra price TND)"
+  }
+}

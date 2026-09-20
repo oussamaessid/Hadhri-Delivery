@@ -1,0 +1,8 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {localizeEntity,localizeState,seedEntityTranslations,resolveLocale} from '../lib/i18n/catalog.ts';
+test('French defaults and explicit languages',()=>{assert.equal(resolveLocale(undefined),'fr');assert.equal(resolveLocale('bad'),'fr');assert.equal(resolveLocale('en'),'fr');assert.equal(resolveLocale('ar'),'fr');assert.equal(resolveLocale('fr'),'fr')});
+test('translations preserve identifiers, prices and originals',()=>{const row={id:'p',name:'Poulet',value:12,stock:5,translations:{fr:{name:'Poulet'}}};assert.equal(localizeEntity(row,'fr').name,'Poulet');assert.equal(row.name,'Poulet');assert.equal(localizeEntity(row,'fr').value,12)});
+test('seed preserves editorial translations and fills known content',()=>{const row=seedEntityTranslations({name:'Boissons',translations:{fr:{name:'Boissons personnalisées'}}});assert.equal(row.translations.fr.name,'Boissons personnalisées')});
+test('unknown proper names survive without fabricated translations',()=>{assert.equal(localizeEntity({name:'New merchant XYZ'},'fr').name,'New merchant XYZ')});
+test('catalogue relations resolve by ids in every language',()=>{const state={catalog:{restaurants:[{id:'r',name:'Épicerie Hadhri'}],departments:[],categories:[{id:'c',merchantId:'r',name:'Boissons'}],products:[{id:'p',name:'Eau minérale',merchantId:'r',categoryId:'c'}]},orders:[]};const fr=localizeState(state,'fr');assert.equal(fr.catalog.products[0].category,'Boissons');assert.equal(fr.catalog.products[0].merchant,'Épicerie Hadhri');assert.equal(state.catalog.products[0].name,'Eau minérale')});

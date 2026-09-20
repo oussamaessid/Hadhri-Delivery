@@ -1,0 +1,20 @@
+[
+ ["^(.+) ajouté au panier$","تمت إضافة $1 إلى السلة","$1 added to cart"],
+ ["^([0-9]+) disponibles$","متوفر: $1","$1 available"],
+ ["^([0-9]+) articles?$","عدد المنتجات: $1","$1 items"],
+ ["^([0-9]+) produits?$","عدد المنتجات: $1","$1 products"],
+ ["^([0-9]+) restaurants?$","عدد المطاعم: $1","$1 restaurants"],
+ ["^([0-9]+) résultats?$","عدد النتائج: $1","$1 results"],
+ ["^Rechercher dans (.+)$","ابحث في $1","Search in $1"],
+ ["^Ouvrez le lien envoyé à (.+), puis connectez-vous\\.$","افتح الرابط المرسل إلى $1، ثم سجّل الدخول.","Open the link sent to $1, then sign in."],
+ ["^Livraison : (.+)$","التوصيل: $1","Delivery: $1"],
+ ["^Total estimé : (.+)$","المجموع التقديري: $1","Estimated total: $1"],
+ ["^Continuer · (.+)$","متابعة · $1","Continue · $1"],
+ ["^Ajouter (.+)$","إضافة $1","Add $1"],
+ ["^Réduire (.+)$","تقليل $1","Decrease $1"],
+ ["^Augmenter (.+)$","زيادة $1","Increase $1"],
+ ["^Supprimer (.+)$","حذف $1","Delete $1"],
+ ["^Modifier (.+)$","تعديل $1","Edit $1"],
+ ["^Retirer (.+)$","إزالة $1","Remove $1"],
+ ["^Ouvrir (.+)$","فتح $1","Open $1"]
+]

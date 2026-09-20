@@ -1,0 +1,23 @@
+FROM node:24-alpine AS build
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN STATIC_EXPORT=1 npx next build --webpack
+
+FROM node:24-alpine
+RUN apk add --no-cache nginx
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --omit=dev --ignore-scripts
+COPY backend ./backend
+COPY features ./features
+COPY lib ./lib
+COPY --from=build /app/out /app/public-site
+COPY deploy/nginx.render.conf /etc/nginx/http.d/default.conf
+COPY deploy/start-render.sh ./start-render.sh
+RUN sed -i '/^[[:space:]]*pid[[:space:]]/d' /etc/nginx/nginx.conf && mkdir -p /app/.data/backups /tmp/nginx /run/nginx && chown -R node:node /app/.data /var/lib/nginx /var/log/nginx /run/nginx
+USER node
+ENV NODE_ENV=production API_HOST=127.0.0.1 API_PORT=3001
+EXPOSE 10000
+CMD ["sh", "/app/start-render.sh"]

@@ -1,0 +1,1170 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Hadhri Delivery — API locale",
+    "version": "1.0.0",
+    "description": "API exécutables. Catalogue de test, base persistante. Sessions HttpOnly. Créez votre accès dans /admin. Les anciens endpoints envisagés sont archivés dans api/planned-openapi.json."
+  },
+  "servers": [
+    {
+      "url": "/api/v1"
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Disponibilité et moteur de base de données",
+        "operationId": "get_health",
+        "x-implementation-status": "implemented",
+        "tags": [
+          "Client"
+        ],
+        "responses": {
+          "200": {
+            "description": "Succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Données invalides"
+          },
+          "401": {
+            "description": "Connexion requise"
+          },
+          "409": {
+            "description": "Conflit de révision"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        }
+      }
+    },
+    "/state": {
+      "get": {
+        "summary": "Catalogue public et commandes de la session",
+        "operationId": "get_state",
+        "x-implementation-status": "implemented",
+        "tags": [
+          "Client"
+        ],
+        "responses": {
+          "200": {
+            "description": "Succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Données invalides"
+          },
+          "401": {
+            "description": "Connexion requise"
+          },
+          "409": {
+            "description": "Conflit de révision"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        }
+      }
+    },
+    "/auth/status": {
+      "get": {
+        "summary": "État de connexion et première configuration",
+        "operationId": "get_auth_status",
+        "x-implementation-status": "implemented",
+        "tags": [
+          "Authentification"
+        ],
+        "responses": {
+          "200": {
+            "description": "Succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Données invalides"
+          },
+          "401": {
+            "description": "Connexion requise"
+          },
+          "409": {
+            "description": "Conflit de révision"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        }
+      }
+    },
+    "/auth/setup": {
+      "post": {
+        "summary": "Créer le premier compte Admin",
+        "operationId": "post_auth_setup",
+        "x-implementation-status": "implemented",
+        "tags": [
+          "Authentification"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "password"
+                ],
+                "properties": {
+                  "password": {
+                    "type": "string",
+                    "minLength": 12,
+                    "format": "password"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Données invalides"
+          },
+          "401": {
+            "description": "Connexion requise"
+          },
+          "409": {
+            "description": "Conflit de révision"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "summary": "Connexion Admin",
+        "operationId": "post_auth_login",
+        "x-implementation-status": "implemented",
+        "tags": [
+          "Authentification"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "password"
+                ],
+                "properties": {
+                  "password": {
+                    "type": "string",
+                    "minLength": 12,
+                    "format": "password"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Données invalides"
+          },
+          "401": {
+            "description": "Connexion requise"
+          },
+          "409": {
+            "description": "Conflit de révision"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "summary": "Fermer la session",
+        "operationId": "post_auth_logout",
+        "x-implementation-status": "implemented",
+        "tags": [
+          "Authentification"
+        ],
+        "responses": {
+          "200": {
+            "description": "Succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Données invalides"
+          },
+          "401": {
+            "description": "Connexion requise"
+          },
+          "409": {
+            "description": "Conflit de révision"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        }
+      }
+    },
+    "/customer/me": {
+      "get": {
+        "summary": "Compte client connecté",
+        "operationId": "get_customer_me",
+        "x-implementation-status": "implemented",
+        "tags": [
+          "Client"
+        ],
+        "responses": {
+          "200": {
+            "description": "Succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Données invalides"
+          },
+          "401": {
+            "description": "Connexion requise"
+          },
+          "409": {
+            "description": "Conflit de révision"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        }
+      }
+    },
+    "/customer/logout": {
+      "post": {
+        "summary": "Déconnexion client",
+        "operationId": "post_customer_logout",
+        "x-implementation-status": "implemented",
+        "tags": [
+          "Client"
+        ],
+        "responses": {
+          "200": {
+            "description": "Succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Données invalides"
+          },
+          "401": {
+            "description": "Connexion requise"
+          },
+          "409": {
+            "description": "Conflit de révision"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        }
+      }
+    },
+    "/orders": {
+      "post": {
+        "summary": "Compte client obligatoire : confirmer une commande avec contrôle de stock et de prix",
+        "operationId": "post_orders",
+        "x-implementation-status": "implemented",
+        "tags": [
+          "Client"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Checkout"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Données invalides"
+          },
+          "401": {
+            "description": "Connexion requise"
+          },
+          "409": {
+            "description": "Conflit de révision"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        }
+      }
+    },
+    "/admin/state": {
+      "get": {
+        "summary": "Catalogue complet, commandes, clients, livreurs et paramètres",
+        "operationId": "get_admin_state",
+        "x-implementation-status": "implemented",
+        "tags": [
+          "Admin"
+        ],
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Données invalides"
+          },
+          "401": {
+            "description": "Connexion requise"
+          },
+          "409": {
+            "description": "Conflit de révision"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Créer, modifier, supprimer des éléments ; révision obligatoire",
+        "operationId": "patch_admin_state",
+        "x-implementation-status": "implemented",
+        "tags": [
+          "Admin"
+        ],
+        "security": [
+          {
+            "session": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Mutation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Données invalides"
+          },
+          "401": {
+            "description": "Connexion requise"
+          },
+          "409": {
+            "description": "Conflit de révision"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        }
+      }
+    },
+    "/restaurants": {
+      "get": {
+        "summary": "Lister restaurants",
+        "operationId": "get_restaurants",
+        "x-implementation-status": "implemented",
+        "tags": [
+          "Client"
+        ],
+        "responses": {
+          "200": {
+            "description": "Succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Données invalides"
+          },
+          "401": {
+            "description": "Connexion requise"
+          },
+          "409": {
+            "description": "Conflit de révision"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        },
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "merchantId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/restaurants/{id}": {
+      "get": {
+        "summary": "Détail restaurants ; menu inclus pour un commerce",
+        "operationId": "get_restaurants__id_",
+        "x-implementation-status": "implemented",
+        "tags": [
+          "Client"
+        ],
+        "responses": {
+          "200": {
+            "description": "Succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Données invalides"
+          },
+          "401": {
+            "description": "Connexion requise"
+          },
+          "409": {
+            "description": "Conflit de révision"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/shops": {
+      "get": {
+        "summary": "Lister shops",
+        "operationId": "get_shops",
+        "x-implementation-status": "implemented",
+        "tags": [
+          "Client"
+        ],
+        "responses": {
+          "200": {
+            "description": "Succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Données invalides"
+          },
+          "401": {
+            "description": "Connexion requise"
+          },
+          "409": {
+            "description": "Conflit de révision"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        },
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "merchantId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/shops/{id}": {
+      "get": {
+        "summary": "Détail shops ; menu inclus pour un commerce",
+        "operationId": "get_shops__id_",
+        "x-implementation-status": "implemented",
+        "tags": [
+          "Client"
+        ],
+        "responses": {
+          "200": {
+            "description": "Succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Données invalides"
+          },
+          "401": {
+            "description": "Connexion requise"
+          },
+          "409": {
+            "description": "Conflit de révision"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/products": {
+      "get": {
+        "summary": "Lister products",
+        "operationId": "get_products",
+        "x-implementation-status": "implemented",
+        "tags": [
+          "Client"
+        ],
+        "responses": {
+          "200": {
+            "description": "Succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Données invalides"
+          },
+          "401": {
+            "description": "Connexion requise"
+          },
+          "409": {
+            "description": "Conflit de révision"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        },
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "merchantId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "summary": "Détail products ; menu inclus pour un commerce",
+        "operationId": "get_products__id_",
+        "x-implementation-status": "implemented",
+        "tags": [
+          "Client"
+        ],
+        "responses": {
+          "200": {
+            "description": "Succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Données invalides"
+          },
+          "401": {
+            "description": "Connexion requise"
+          },
+          "409": {
+            "description": "Conflit de révision"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/categories": {
+      "get": {
+        "summary": "Lister categories",
+        "operationId": "get_categories",
+        "x-implementation-status": "implemented",
+        "tags": [
+          "Client"
+        ],
+        "responses": {
+          "200": {
+            "description": "Succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Données invalides"
+          },
+          "401": {
+            "description": "Connexion requise"
+          },
+          "409": {
+            "description": "Conflit de révision"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        },
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "merchantId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/categories/{id}": {
+      "get": {
+        "summary": "Détail categories ; menu inclus pour un commerce",
+        "operationId": "get_categories__id_",
+        "x-implementation-status": "implemented",
+        "tags": [
+          "Client"
+        ],
+        "responses": {
+          "200": {
+            "description": "Succès",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Données invalides"
+          },
+          "401": {
+            "description": "Connexion requise"
+          },
+          "409": {
+            "description": "Conflit de révision"
+          },
+          "500": {
+            "description": "Erreur serveur"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/customer/firebase-config": {
+      "get": {
+        "tags": [
+          "Client"
+        ],
+        "summary": "Configuration publique Firebase Web",
+        "operationId": "get_customer_firebase_config",
+        "x-implementation-status": "implemented",
+        "responses": {
+          "200": {
+            "description": "configured et config (null si Firebase n’est pas configuré). Aucun secret serveur."
+          },
+          "400": {
+            "description": "Données invalides"
+          },
+          "409": {
+            "description": "Compte déjà lié à une autre identité"
+          }
+        }
+      }
+    },
+    "/customer/firebase-session": {
+      "post": {
+        "tags": [
+          "Client"
+        ],
+        "summary": "Ouvrir une session après validation Firebase",
+        "operationId": "post_customer_firebase_session",
+        "x-implementation-status": "implemented",
+        "description": "Valide le jeton Firebase, exige email_verified=true et lie le UID au client. Cookie HttpOnly limité à la durée du jeton (maximum une heure).",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "idToken"
+                ],
+                "properties": {
+                  "idToken": {
+                    "type": "string",
+                    "maxLength": 16000
+                  },
+                  "phone": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Session ouverte, customer contient id, name, email et phone."
+          },
+          "400": {
+            "description": "Données invalides"
+          },
+          "409": {
+            "description": "Compte déjà lié à une autre identité"
+          },
+          "401": {
+            "description": "Jeton invalide ou expiré"
+          },
+          "403": {
+            "description": "Email non confirmé, fournisseur interdit ou compte suspendu"
+          },
+          "429": {
+            "description": "Trop de tentatives"
+          },
+          "503": {
+            "description": "Firebase non configuré"
+          }
+        }
+      }
+    },
+    "/departments": {
+      "get": {
+        "tags": [
+          "Catalogue"
+        ],
+        "summary": "Lister les rayons d’accueil et leurs images",
+        "operationId": "get_departments",
+        "x-implementation-status": "implemented",
+        "responses": {
+          "200": {
+            "description": "Rayon(s) avec id, name, detail, image, status et ordre value."
+          },
+          "400": {
+            "description": "Requête invalide"
+          },
+          "404": {
+            "description": "Rayon introuvable"
+          },
+          "409": {
+            "description": "Conflit"
+          }
+        }
+      }
+    },
+    "/departments/{id}": {
+      "get": {
+        "tags": [
+          "Catalogue"
+        ],
+        "summary": "Consulter un rayon d’accueil",
+        "operationId": "get_departments_id",
+        "x-implementation-status": "implemented",
+        "responses": {
+          "200": {
+            "description": "Rayon(s) avec id, name, detail, image, status et ordre value."
+          },
+          "400": {
+            "description": "Requête invalide"
+          },
+          "404": {
+            "description": "Rayon introuvable"
+          },
+          "409": {
+            "description": "Conflit"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "Entity": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "status",
+          "detail",
+          "value"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "detail": {
+            "type": "string"
+          },
+          "value": {
+            "type": "number"
+          },
+          "stock": {
+            "type": "integer"
+          },
+          "merchantId": {
+            "type": "string"
+          },
+          "categoryId": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "variants": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "price": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Checkout": {
+        "type": "object",
+        "required": [
+          "requestId",
+          "lines",
+          "customer"
+        ],
+        "properties": {
+          "requestId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "lines": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "productId",
+                "quantity"
+              ],
+              "properties": {
+                "productId": {
+                  "type": "string"
+                },
+                "quantity": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "variantId": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "customer": {
+            "type": "object",
+            "required": [
+              "name",
+              "phone",
+              "address",
+              "notes"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "address": {
+                "type": "string"
+              },
+              "notes": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "Mutation": {
+        "type": "object",
+        "required": [
+          "revision",
+          "changes"
+        ],
+        "properties": {
+          "revision": {
+            "type": "integer"
+          },
+          "changes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "kind",
+                "value"
+              ],
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "enum": [
+                    "restaurants",
+                    "shops",
+                    "products",
+                    "categories",
+                    "customers",
+                    "drivers",
+                    "orders",
+                    "notifications",
+                    "settings"
+                  ]
+                },
+                "id": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "object",
+                  "nullable": true,
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "session": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "hadhri_session"
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{$APP_DOMAIN} {
+ encode gzip
+ header Strict-Transport-Security "max-age=31536000"
+ @docs path /api-docs* /swagger* /openapi* /api/openapi*
+ respond @docs 404
+ reverse_proxy admin:80
+}

@@ -1,0 +1,3 @@
+import {statuses,type Order} from '../data/demo';
+export function allowedStatuses(order:Order){if(['DELIVERED','CANCELLED'].includes(order.status))return [order.status];const next=statuses[statuses.indexOf(order.status)+1];return [order.status,...(next?[next]:[]),'CANCELLED'];}
+export function changeStatus(order:Order,next:string):Order{if(!allowedStatuses(order).includes(next))throw new Error('Cette transition de statut n’est pas autorisée.');if(['DRIVER_ASSIGNED','PICKED_UP','ON_THE_WAY','DELIVERED'].includes(next)&&!order.driver)throw new Error('Assignez un livreur avant de continuer.');return {...order,status:next};}

@@ -1,0 +1,59 @@
+import {readFile} from 'node:fs/promises';
+import mysql from 'mysql2/promise';
+
+// Statements are never split by ';' inside string/JSON literals in our migration files, so a naive split is safe.
+function splitStatements(sql){return sql.split(';').map(s=>s.trim()).filter(Boolean)}
+// Our SQL was written with Postgres-style $1,$2... placeholders; mysql2 uses positional '?'.
+function toMysqlPlaceholders(sql){return sql.replace(/\$\d+/g,'?')}
+// Some ALTER ... IF [NOT] EXISTS clauses aren't recognized on every MariaDB/MySQL build; treat their
+// "already applied" errors as success so migrations stay idempotent across restarts.
+const IGNORABLE_DDL_ERRORS=new Set(['ER_DUP_FIELDNAME','ER_CANT_DROP_FIELD_OR_KEY','ER_DUP_KEYNAME','ER_DUP_INDEX','ER_FK_DUP_NAME','ER_DUP_CONSTRAINT_NAME']);
+// MariaDB has no "ADD CONSTRAINT ... FOREIGN KEY IF NOT EXISTS" syntax; re-adding an existing
+// foreign key surfaces as a generic ER_CANT_CREATE_TABLE wrapping InnoDB errno 121 ("duplicate key
+// name"). Detect that specific wrapped case instead of ignoring ER_CANT_CREATE_TABLE outright.
+function isIgnorable(e){return IGNORABLE_DDL_ERRORS.has(e.code)||(e.code==='ER_CANT_CREATE_TABLE'&&/errno:\s*121\b/.test(e.message))}
+
+function wrapConnection(runner){
+ return {
+  query:async(sql,params=[])=>{const [rows]=await runner.query(toMysqlPlaceholders(sql),params);return {rows:Array.isArray(rows)?rows.map(row=>({...row,...(typeof row.data==='string'?{data:JSON.parse(row.data)}:{})})):[]}},
+  exec:async sql=>{for(const statement of splitStatements(sql))try{await runner.query(statement)}catch(e){if(!isIgnorable(e))throw e}},
+ };
+}
+
+async function ensureDatabaseExists({host,port,user,password,database,ssl}){
+ const admin=await mysql.createConnection({host,port,user,password,ssl});
+ try{await admin.query(`CREATE DATABASE IF NOT EXISTS \`${database}\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci`)}
+ finally{await admin.end()}
+}
+
+export async function dropDatabase({database}={}){
+ const url=new URL(process.env.DATABASE_URL);
+ const admin=await mysql.createConnection({host:url.hostname,port:url.port||3306,user:decodeURIComponent(url.username),password:decodeURIComponent(url.password)});
+ try{await admin.query(`DROP DATABASE IF EXISTS \`${database||url.pathname.slice(1)}\``)}
+ finally{await admin.end()}
+}
+
+export async function connectDatabase({database}={}){
+ if(!process.env.DATABASE_URL)throw new Error('DATABASE_URL est requis (ex: mysql://root:@127.0.0.1:3306/hadhri) — installez/démarrez MySQL (XAMPP) au préalable.');
+ const url=new URL(process.env.DATABASE_URL);
+ const config={host:url.hostname,port:Number(url.port||3306),user:decodeURIComponent(url.username),password:decodeURIComponent(url.password),database:database||url.pathname.slice(1)};
+ if(process.env.DATABASE_SSL==='true')config.ssl={rejectUnauthorized:true,...(process.env.DATABASE_SSL_CA?{ca:process.env.DATABASE_SSL_CA}:{})};
+ if(process.env.DATABASE_AUTO_CREATE!=='false')await ensureDatabaseExists(config);
+ const pool=mysql.createPool({...config,charset:'utf8mb4_unicode_ci',dateStrings:false});
+ const db={
+  ...wrapConnection(pool),
+  close:()=>pool.end(),
+  transaction:async fn=>{
+   const connection=await pool.getConnection();
+   try{
+    await connection.beginTransaction();
+    const value=await fn(wrapConnection(connection));
+    await connection.commit();
+    return value;
+   }catch(e){await connection.rollback();throw e}
+   finally{connection.release()}
+  },
+ };
+ await db.exec(await readFile(new URL('./migrations/001_catalog.sql',import.meta.url),'utf8'));
+ return db;
+}

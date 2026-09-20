@@ -1,0 +1,40 @@
+services:
+  gateway:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      APP_DOMAIN: ${APP_DOMAIN:?Set the public DNS domain}
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - admin
+  backend:
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      SEED_DEMO_DATA: "false"
+      BACKUP_ENCRYPTION_KEY: ${BACKUP_ENCRYPTION_KEY:?Set a 32-byte hexadecimal backup key}
+      APP_ORIGIN: https://${APP_DOMAIN:?Set the public DNS domain}
+      COOKIE_SECURE: "true"
+      GOOGLE_APPLICATION_CREDENTIALS: /run/secrets/firebase_admin
+    secrets:
+      - firebase_admin
+    volumes:
+      - backend_data:/app/.data
+  admin:
+    restart: unless-stopped
+  database:
+    restart: unless-stopped
+volumes:
+  caddy_data:
+  caddy_config:
+  backend_data:
+
+secrets:
+  firebase_admin:
+    file: ${FIREBASE_ADMIN_CREDENTIALS_FILE:?Set the external service account file path}

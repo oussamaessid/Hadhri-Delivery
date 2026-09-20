@@ -1,0 +1,21 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {loyaltySummary} from '../features/customer/services/loyalty.ts';
+import {initialState} from '../features/admin/data/demo.ts';
+import {createCustomerOrders} from '../features/customer/services/checkout.ts';
+const order=(overrides)=>({id:'o',customerAccountId:'U1',status:'DELIVERED',date:'2026-01-01T00:00:00.000Z',customer:'',merchant:'',total:0,driver:'',address:'',items:[],...overrides});
+test('no reward before the 5th delivered order',()=>{const orders=[1,2,3,4].map(i=>order({id:'o'+i,date:'2026-01-0'+i}));const s=loyaltySummary(orders,'U1');assert.equal(s.completedOrders,4);assert.equal(s.availableDt,0);assert.equal(s.remaining,1);assert.equal(s.nextRewardDt,5);});
+test('5th order unlocks 5 DT, 10th unlocks 10 more',()=>{const orders=Array.from({length:10},(_,i)=>order({id:'o'+i,date:'2026-01-'+String(10+i).padStart(2,'0')}));const s=loyaltySummary(orders,'U1');assert.equal(s.completedOrders,10);assert.equal(s.availableDt,15);assert.equal(s.milestonesReached,2);assert.equal(s.history.length,2);assert.deepEqual(s.history.map(h=>h.rewardDt),[5,10]);assert.equal(s.remaining,5);assert.equal(s.nextRewardDt,5);});
+test('non-delivered and other customers orders do not count',()=>{const orders=[order({id:'a',status:'PENDING'}),order({id:'b',status:'CANCELLED'}),order({id:'c',customerAccountId:'U2'})];const s=loyaltySummary(orders,'U1');assert.equal(s.completedOrders,0);});
+test('redeemed discounts reduce the available balance',()=>{const orders=Array.from({length:5},(_,i)=>order({id:'o'+i,date:'2026-01-'+String(10+i).padStart(2,'0')}));orders.push(order({id:'redeem',status:'PENDING',loyaltyDiscountDt:5}));const s=loyaltySummary(orders,'U1');assert.equal(s.availableDt,0);assert.equal(s.history[0].fullyRedeemed,true);});
+test('checkout applies the loyalty discount and caps it at the order total',()=>{
+ const state=initialState();
+ state.catalog.customers.push({id:'U1',name:'Client Test',phone:'20000111',status:'ACTIVE',detail:'',value:0});
+ for(let i=0;i<5;i++)state.orders.unshift({id:'PAST-'+i,customerAccountId:'U1',status:'DELIVERED',date:'2026-01-0'+(i+1)+'T00:00:00.000Z',customer:'Client Test',merchant:'Chez Monastir',total:20,driver:'',address:'x',items:[]});
+ const input={requestId:'test-loyalty-1',clientSessionId:'demo-user',customerAccountId:'U1',useLoyaltyDiscount:true,lines:[{productId:'P6',quantity:1}],customer:{name:'Client Test',phone:'20000111',address:'12 rue de la Paix, Tunis',notes:''}};
+ const before=state.catalog.products.find(p=>p.id==='P6');
+ const result=createCustomerOrders(state,input);
+ const expectedTotal=Math.round((before.value+state.settings.fee)*100)/100;
+ assert.equal(result.orders[0].loyaltyDiscountDt,Math.min(5,expectedTotal));
+ assert.equal(result.orders[0].total,Number((expectedTotal-Math.min(5,expectedTotal)).toFixed(2)));
+});
