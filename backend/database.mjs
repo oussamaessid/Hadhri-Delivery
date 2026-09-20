@@ -16,7 +16,24 @@ function isIgnorable(e){return IGNORABLE_DDL_ERRORS.has(e.code)||(e.code==='ER_C
 function wrapConnection(runner){
  return {
   query:async(sql,params=[])=>{const [rows]=await runner.query(toMysqlPlaceholders(sql),params);return {rows:Array.isArray(rows)?rows.map(row=>({...row,...(typeof row.data==='string'?{data:JSON.parse(row.data)}:{})})):[]}},
-  exec:async sql=>{for(const statement of splitStatements(sql))try{await runner.query(statement)}catch(e){if(!isIgnorable(e))throw e}},
+  exec:async sql=>{for(let statement of splitStatements(sql))try{
+   statement=statement.replace(/^--[^\n]*(?:\n|$)/gm,'').trim();
+   const alteration=statement.match(/^ALTER TABLE (\w+) (ADD|DROP) (COLUMN|(?:UNIQUE )?INDEX|CONSTRAINT)(?: IF (?:NOT )?EXISTS)? (\w+)/i);
+   if(alteration){
+    const [,table,action,kind,name]=alteration;
+    const index=kind.includes('INDEX'), column=kind==='COLUMN';
+    const source=column?'COLUMNS':index?'STATISTICS':'TABLE_CONSTRAINTS';
+    const nameColumn=column?'COLUMN_NAME':index?'INDEX_NAME':'CONSTRAINT_NAME';
+    const schemaColumn=column||index?'TABLE_SCHEMA':'CONSTRAINT_SCHEMA';
+    const [found]=await runner.query(`SELECT * FROM information_schema.${source} WHERE ${schemaColumn}=DATABASE() AND TABLE_NAME=? AND ${nameColumn}=?`,[table,name]);
+    if(action==='ADD'&&found.length||action==='DROP'&&!found.length)continue;
+    statement=statement.replace(/ IF (?:NOT )?EXISTS/i,'');
+    if(action==='DROP'&&kind==='CONSTRAINT'){
+     const [version]=await runner.query('SELECT VERSION() AS version');
+     if(!version[0].version.includes('MariaDB'))statement=statement.replace('DROP CONSTRAINT',found[0].CONSTRAINT_TYPE==='FOREIGN KEY'?'DROP FOREIGN KEY':'DROP CHECK');
+    }
+   }
+   await runner.query(statement)}catch(e){if(!isIgnorable(e))throw e}},
  };
 }
 
