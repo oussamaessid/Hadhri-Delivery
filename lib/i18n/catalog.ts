@@ -1,6 +1,6 @@
 export type Locale='fr';
 export type Translation={name?:string;description?:string;detail?:string};
-export type Translatable={name:string;nameArabic?:string;description?:string;detail?:string;translations?:Partial<Record<Locale,Translation>>;variants?:{id:string;name:string;price:number;translations?:Partial<Record<Locale,Translation>>}[]};
+export type Translatable={name:string;description?:string;detail?:string;translations?:Partial<Record<Locale,Translation>>;variants?:{id:string;name:string;price:number;translations?:Partial<Record<Locale,Translation>>}[]};
 export function resolveLocale(_input:unknown):Locale {return 'fr'}
 export function localizedText(value:string,_lang:Locale){return value}
 export function localizeEntity<T extends Translatable>(row:T,lang:Locale):T {
