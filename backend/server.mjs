@@ -21,7 +21,8 @@ const customerAuth=createCustomerAuth(verifyToken);
 const db=await connectDatabase({database});
 await db.query('INSERT IGNORE INTO app_state(id,data) VALUES(1,$1)',[JSON.stringify(bootstrapState(initialState,seedDemo))]);
 await migrateStorage(db);
-if(seedDemo){await seedShopping(db);await seedRestaurantLogos(db);}
+await seedShopping(db);
+if(seedDemo)await seedRestaurantLogos(db);
 await configureCustomers(db);
 await db.transaction(async tx=>{const {data}=await snapshot(tx);for(const key of ['restaurants','departments','categories','products'])data.catalog[key]=data.catalog[key].map(seedEntityTranslations);await saveSnapshot(tx,data)});
 const backupsDir=join(resolve(dataDir),'..','backups');
