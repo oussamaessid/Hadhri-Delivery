@@ -1,3 +1,4 @@
+import {StartupGate} from '@/components/app/startup-gate';
 import { LanguageInitializer } from "@/lib/i18n/react";
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Plus_Jakarta_Sans } from "next/font/google";
@@ -64,7 +65,7 @@ export default function RootLayout({
         className={`antialiased ${jakarta.variable} ${fraunces.variable}`}
       >
         <LanguageInitializer />
-        {children}
+        <StartupGate>{children}</StartupGate>
       </body>
     </html>
   );
