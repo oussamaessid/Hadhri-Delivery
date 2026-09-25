@@ -1,0 +1,33 @@
+# Single VPS (OVH, Contabo…): same image as Render, behind Caddy for automatic HTTPS.
+# Usage: docker compose -f docker-compose.vps.yml --env-file .env.vps up -d --build
+services:
+  app:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile.render
+    restart: unless-stopped
+    env_file: .env.vps
+    environment:
+      NODE_ENV: production
+      COOKIE_SECURE: "true"
+      APP_ORIGIN: https://${APP_DOMAIN:?Set APP_DOMAIN in .env.vps}
+    volumes:
+      - app_data:/app/.data
+  gateway:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      APP_DOMAIN: ${APP_DOMAIN:?Set APP_DOMAIN in .env.vps}
+    volumes:
+      - ./deploy/Caddyfile.vps:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - app
+volumes:
+  app_data:
+  caddy_data:
+  caddy_config:
