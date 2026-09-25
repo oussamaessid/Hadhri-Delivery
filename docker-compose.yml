@@ -11,6 +11,7 @@ services:
       dockerfile: backend/Dockerfile
     environment:
       DATABASE_URL: mysql://${MYSQL_USER:-hadhri}:${MYSQL_PASSWORD:?Set MYSQL_PASSWORD in .env}@database:3306/${MYSQL_DATABASE:-hadhri}
+      DATABASE_AUTO_CREATE: "false"
       FIREBASE_PROJECT_ID: ${FIREBASE_PROJECT_ID:-}
       FIREBASE_API_KEY: ${FIREBASE_API_KEY:-}
       FIREBASE_AUTH_DOMAIN: ${FIREBASE_AUTH_DOMAIN:-}
@@ -21,18 +22,18 @@ services:
       database:
         condition: service_healthy
   database:
-    image: mariadb:10.11
+    image: mysql:8.4
     environment:
-      MARIADB_DATABASE: ${MYSQL_DATABASE:-hadhri}
-      MARIADB_USER: ${MYSQL_USER:-hadhri}
-      MARIADB_PASSWORD: ${MYSQL_PASSWORD:?Set MYSQL_PASSWORD in .env}
-      MARIADB_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-hadhri}
+      MYSQL_USER: ${MYSQL_USER:-hadhri}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?Set MYSQL_PASSWORD in .env}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Set MYSQL_ROOT_PASSWORD in .env}
     volumes:
       - mysql_data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      test: ["CMD-SHELL", "MYSQL_PWD=$$MYSQL_PASSWORD mysql -h 127.0.0.1 -u$$MYSQL_USER -D $$MYSQL_DATABASE -e 'SELECT 1'"]
       interval: 5s
       timeout: 5s
-      retries: 15
+      retries: 20
 volumes:
   mysql_data:

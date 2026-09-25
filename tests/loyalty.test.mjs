@@ -19,3 +19,25 @@ test('checkout applies the loyalty discount and caps it at the order total',()=>
  assert.equal(result.orders[0].loyaltyDiscountDt,Math.min(5,expectedTotal));
  assert.equal(result.orders[0].total,Number((expectedTotal-Math.min(5,expectedTotal)).toFixed(2)));
 });
+
+test('alternating rewards repeat through 30 delivered orders and accumulate',()=>{
+ const orders=Array.from({length:30},(_,i)=>order({id:'repeat-'+i}));
+ const totals=[5,15,20,30,35,45];
+ for(let tier=1;tier<=6;tier++){
+  const summary=loyaltySummary(orders.slice(0,tier*5),'U1');
+  assert.equal(summary.availableDt,totals[tier-1]);
+  assert.equal(summary.history.at(-1).rewardDt,tier%2?5:10);
+  assert.equal(summary.nextRewardDt,tier%2?10:5);
+  assert.equal(summary.nextTarget,tier*5+5);
+  assert.equal(summary.remaining,5);
+ }
+});
+test('orders before each milestone and duplicate records do not unlock extra rewards',()=>{
+ const orders=Array.from({length:29},(_,i)=>order({id:'unique-'+i}));
+ for(const count of [4,9,14,19,24,29]){
+  const summary=loyaltySummary([...orders.slice(0,count),orders[0]],'U1');
+  assert.equal(summary.completedOrders,count);
+  assert.equal(summary.milestonesReached,Math.floor(count/5));
+  assert.equal(summary.remaining,1);
+ }
+});

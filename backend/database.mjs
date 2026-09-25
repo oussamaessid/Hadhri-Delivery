@@ -15,7 +15,7 @@ function isIgnorable(e){return IGNORABLE_DDL_ERRORS.has(e.code)||(e.code==='ER_C
 
 function wrapConnection(runner){
  return {
-  query:async(sql,params=[])=>{const [rows]=await runner.query(toMysqlPlaceholders(sql),params);return {rows:Array.isArray(rows)?rows.map(row=>({...row,...(typeof row.data==='string'?{data:JSON.parse(row.data)}:{})})):[]}},
+  query:async(sql,params=[])=>{const [rows]=await runner.query(toMysqlPlaceholders(sql),params);return {rowCount:Array.isArray(rows)?rows.length:rows.affectedRows,rows:Array.isArray(rows)?rows.map(row=>({...row,...(typeof row.data==='string'?{data:JSON.parse(row.data)}:{})})):[]}},
   exec:async sql=>{for(let statement of splitStatements(sql))try{
    statement=statement.replace(/^--[^\n]*(?:\n|$)/gm,'').trim();
    const alteration=statement.match(/^ALTER TABLE (\w+) (ADD|DROP) (COLUMN|(?:UNIQUE )?INDEX|CONSTRAINT)(?: IF (?:NOT )?EXISTS)? (\w+)/i);
@@ -44,6 +44,7 @@ async function ensureDatabaseExists({host,port,user,password,database,ssl}){
 }
 
 export async function dropDatabase({database}={}){
+ if(!database||!/^hadhri_test_[a-zA-Z0-9_]+$/.test(database))throw new Error('Suppression réservée aux bases de test hadhri_test_.');
  const url=new URL(process.env.DATABASE_URL);
  const admin=await mysql.createConnection({host:url.hostname,port:url.port||3306,user:decodeURIComponent(url.username),password:decodeURIComponent(url.password)});
  try{await admin.query(`DROP DATABASE IF EXISTS \`${database||url.pathname.slice(1)}\``)}
@@ -53,10 +54,14 @@ export async function dropDatabase({database}={}){
 export async function connectDatabase({database}={}){
  if(!process.env.DATABASE_URL)throw new Error('DATABASE_URL est requis (ex: mysql://root:@127.0.0.1:3306/hadhri) — installez/démarrez MySQL (XAMPP) au préalable.');
  const url=new URL(process.env.DATABASE_URL);
- const config={host:url.hostname,port:Number(url.port||3306),user:decodeURIComponent(url.username),password:decodeURIComponent(url.password),database:database||url.pathname.slice(1)};
- if(process.env.DATABASE_SSL==='true')config.ssl={rejectUnauthorized:true,...(process.env.DATABASE_SSL_CA?{ca:process.env.DATABASE_SSL_CA}:{})};
+ if(url.protocol!=='mysql:')throw new Error('DATABASE_URL doit utiliser mysql://. Les données PostgreSQL doivent être migrées séparément.');
+ const dbName=database||decodeURIComponent(url.pathname.slice(1));
+ if(!/^[a-zA-Z0-9_]+$/.test(dbName))throw new Error('Nom de base MySQL invalide.');
+ const config={host:url.hostname,port:Number(url.port||3306),user:decodeURIComponent(url.username),password:decodeURIComponent(url.password),database:dbName,timezone:'Z',connectTimeout:10000};
+ if(process.env.DATABASE_SSL==='true'||url.searchParams.get('ssl-mode')==='REQUIRED')config.ssl={rejectUnauthorized:true,...(process.env.DATABASE_SSL_CA?{ca:process.env.DATABASE_SSL_CA}:{})};
  if(process.env.DATABASE_AUTO_CREATE!=='false')await ensureDatabaseExists(config);
  const pool=mysql.createPool({...config,charset:'utf8mb4_unicode_ci',dateStrings:false});
+ pool.on('connection',connection=>{connection.query("SET time_zone = '+00:00'",error=>{if(error)connection.destroy()})});
  const db={
   ...wrapConnection(pool),
   close:()=>pool.end(),
@@ -71,6 +76,5 @@ export async function connectDatabase({database}={}){
    finally{connection.release()}
   },
  };
- await db.exec(await readFile(new URL('./migrations/001_catalog.sql',import.meta.url),'utf8'));
- return db;
+ try{await db.exec(await readFile(new URL('./migrations/001_catalog.sql',import.meta.url),'utf8'));return db}catch(e){await pool.end();throw e}
 }

@@ -19,25 +19,25 @@ npm run dev
 
 Le premier accès Admin propose de choisir un mot de passe (8 caractères minimum). Il est haché avec scrypt. Les sessions utilisent des cookies HttpOnly et SameSite. Aucun mot de passe de démonstration n’est fourni. Ctrl+C arrête les deux serveurs.
 
-## Stockage
+## MySQL et suivi HTTP
 
-Le backend se connecte à un serveur **MySQL/MariaDB** via `DATABASE_URL` (ex : `mysql://root:@127.0.0.1:3306/hadhri` avec XAMPP). Démarrez MySQL dans le panneau de contrôle XAMPP avant `npm run dev` ou `npm run backend` — la base et les tables sont créées automatiquement si elles n'existent pas encore. Ne pas supprimer cette base : elle contient les commandes et le compte Admin. Le localStorage contient uniquement le panier et une ancienne identité de démonstration inutilisée par le serveur. Les anciennes données navigateur ne sont pas importées automatiquement.
+Le backend utilise MySQL (pilote mysql2), compatible MariaDB/XAMPP. Les migrations SQL dans `backend/migrations` sont appliquées au démarrage. Les anciens fichiers PostgreSQL sont uniquement historiques.
 
-Les migrations SQL s’appliquent au démarrage. Les tables séparent commerces, catégories, produits, clients, livreurs, commandes, notifications et sessions. Les liens produit/catégorie/commerce sont contrôlés par clés étrangères. Le catalogue de test est inséré uniquement au premier démarrage. Les prix sont recalculés côté serveur ; stock et commande sont enregistrés dans la même transaction. Les modifications Admin utilisent une révision pour refuser l’écrasement de données récentes.
+Démarrer MySQL dans XAMPP, puis renseigner `DATABASE_URL=mysql://UTILISATEUR:MOT_DE_PASSE@127.0.0.1:3306/hadhri` dans `.env`. Encoder les caractères spéciaux du mot de passe dans l’URL. Une ancienne URL PostgreSQL est refusée explicitement ; aucune base PostgreSQL n’est effacée ou convertie automatiquement.
 
-La migration 002 conserve les données enregistrées par la première version du backend. Pour une sauvegarde locale simple : utiliser `mysqldump` sur la base `hadhri` (ou l'export phpMyAdmin de XAMPP), ou s'appuyer sur les instantanés JSON automatiques dans `.data/backups`.
+Le web et l’Admin n’utilisent plus WebSocket : synchronisation HTTPS toutes les 5 secondes dans l’Admin et 10 secondes côté client, pause si la page est cachée ou hors ligne, reprise au retour, temporisation en cas d’échec. Les alertes nouvelles commandes sont dédupliquées ; les anciennes commandes servent de référence au premier chargement. Le mobile utilisait déjà HTTP toutes les 15 secondes. Les notifications application fermée demandent un dispositif push distinct.
 
-## Docker et MySQL serveur
+Voir [MYSQL.md](docs/MYSQL.md) et [OOREDOO-DEPLOYMENT.md](docs/OOREDOO-DEPLOYMENT.md).
+
+## Docker
+
+Renseigner `.env` à partir de `.env.example`, notamment MYSQL_PASSWORD et MYSQL_ROOT_PASSWORD, puis :
 
 ```bash
-cp .env.example .env
-# Renseigner MYSQL_PASSWORD dans .env
- docker compose up -d --build
+docker compose up -d --build
 ```
 
-Site : http://localhost:8080. `docker compose down` conserve le volume MySQL/MariaDB. Ne pas ajouter `-v` sans sauvegarde. Docker Desktop doit être démarré. La configuration Docker a été préparée mais ne peut pas être exécutée tant que le moteur Docker est arrêté.
-
-`DATABASE_URL` permet également d’utiliser un serveur MySQL/MariaDB existant (XAMPP ou autre) avec `npm run dev`. Ne jamais versionner `.env` ou `.data`.
+Site local : http://localhost:8080. Le volume `mysql_data` conserve les données. Ne jamais ajouter `-v` lors de l’arrêt. Pour la production avec HTTPS, suivre le guide Ooredoo.
 
 ## Parcours et limites
 

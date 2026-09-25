@@ -54,7 +54,7 @@ export default defineConfig(async () => {
 
   return {
     server: {
-      proxy: {"/api/v1": {target:"http://127.0.0.1:3001",changeOrigin:false,ws:true}},
+      proxy: {"/api/v1": {target:"http://127.0.0.1:3001",changeOrigin:false}},
       ...(managedLinux ? { host: "0.0.0.0", allowedHosts: ["terminal.local"] } : {}),
       ...(isCodexSeatbeltSandbox ? { watch: { useFsEvents: false, usePolling: true } } : {}),
     },

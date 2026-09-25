@@ -1,6 +1,6 @@
 'use client';
 import {getApps,initializeApp,type FirebaseOptions} from 'firebase/app';
-import {getAuth,setPersistence,browserLocalPersistence,onIdTokenChanged,signInWithPopup,GoogleAuthProvider,FacebookAuthProvider,createUserWithEmailAndPassword,signInWithEmailAndPassword,sendEmailVerification,sendPasswordResetEmail,updateProfile,signOut,type Auth,type User} from 'firebase/auth';
+import {getAuth,setPersistence,browserLocalPersistence,onIdTokenChanged,signInWithPopup,GoogleAuthProvider,createUserWithEmailAndPassword,signInWithEmailAndPassword,sendEmailVerification,sendPasswordResetEmail,updateProfile,signOut,type Auth,type User} from 'firebase/auth';
 import {api} from './local-store';
 export type CustomerAccount={id:string;name:string;email:string;phone:string};
 let loading:Promise<Auth>|undefined;
@@ -51,9 +51,8 @@ export async function registerWithEmail(input:{email:string;password:string;name
  try{localStorage.setItem('hadhri-registration-phone:'+user.uid,input.phone)}catch{}
  await updateProfile(user,{displayName:input.name});return user;
 }
-export function socialSignIn(provider:'google'|'facebook',auth:Auth){
- const selected=provider==='google'?new GoogleAuthProvider():new FacebookAuthProvider();
- if(provider==='facebook')selected.addScope('email');
+export function socialSignIn(auth:Auth){
+ const selected=new GoogleAuthProvider();
  return signInWithPopup(auth,selected).then(result=>result.user);
 }
 export async function sendVerificationLink(user:User){

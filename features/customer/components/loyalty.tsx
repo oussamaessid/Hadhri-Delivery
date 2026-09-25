@@ -4,29 +4,29 @@ import {Gift,Sparkles,PartyPopper} from 'lucide-react';
 import {money} from '../../admin/data/demo';
 import type {LoyaltySummary} from '../services/loyalty';
 function ProgressTrack({remaining}:{remaining:number}){
- const done=5-remaining;
- const pct=Math.max(6,Math.round((done/5)*100));
- return <div className="loyalty-progress-track" role="progressbar" aria-valuemin={0} aria-valuemax={5} aria-valuenow={done} aria-label="Progression fidélité"><div className="loyalty-progress-fill" style={{width:pct+'%'}}/>{[1,2,3,4,5].map(i=><span key={i} className={"loyalty-dot"+(i<=done?" done":"")}/> )}</div>;
+ const done=Math.max(0,Math.min(5,5-remaining));
+ return <ol className="loyalty-stamps" aria-label={t(`${done} commandes livrées sur 5 pour ce palier`)}>{[1,2,3,4,5].map(i=><li key={i} className={"loyalty-stamp"+(i<=done?" is-complete":"")} aria-label={t(`Commande ${i} : ${i<=done?'livrée':'à venir'}`)}>{i<=done?<img src="/images/hadhri-logo-transparent.png" alt=""/>:i===5?<Gift size={26}/>:String(i).padStart(2,'0')}</li>)}</ol>;
 }
 export function LoyaltyBanner({loyalty}:{loyalty:LoyaltySummary}){
- return <section className="loyalty-banner hd-card" aria-label={t("Programme fidélité")}>
-  <span className="loyalty-banner-icon"><Gift size={22}/></span>
-  <div className="loyalty-banner-body">
-   <strong>{t("🎁 Votre fidélité est récompensée")}</strong>
-   {t(loyalty.availableDt>0
-    ?<p className="loyalty-reward-line"><Sparkles size={14}/>{t(`Récompense disponible : ${money(loyalty.availableDt)} — utilisez-la dans votre panier.`)}</p>
-    :<><ProgressTrack remaining={loyalty.remaining}/><p>{t(loyalty.remaining===1?`Encore 1 commande pour gagner ${money(loyalty.nextRewardDt)}`:`Encore ${loyalty.remaining} commandes pour gagner ${money(loyalty.nextRewardDt)}`)}</p><small className="loyalty-hint">{t(`${loyalty.completedOrders} / ${loyalty.nextTarget} commandes · 5 commandes → 5 DT · 10 commandes → 10 DT`)}</small></>)}
-  </div>
+ return <section className="loyalty-pass" aria-label={t("Programme fidélité")}>
+  <div className="loyalty-pass-eyebrow"><Sparkles size={15}/>{t("LES PETITES HABITUDES, LES BELLES RÉCOMPENSES")}</div>
+  <h2>{t("🎁 Votre fidélité est récompensée")}</h2>
+  <p className="loyalty-pass-intro">{t(loyalty.remaining===1?'Encore 1 commande livrée pour gagner':'Encore '+loyalty.remaining+' commandes livrées pour gagner')}</p>
+  <div className="loyalty-pass-amount">{t(money(loyalty.nextRewardDt))} <span>{t("sur une prochaine commande")}</span></div>
+  <ProgressTrack remaining={loyalty.remaining}/>
+  <p className="loyalty-pass-count">{t(`${loyalty.completedOrders} / ${loyalty.nextTarget} commandes livrées`)}</p>
+  {loyalty.availableDt>0&&<p className="loyalty-pass-balance"><Sparkles size={16}/>{t(`${money(loyalty.availableDt)} disponibles dans votre panier`)}</p>}
+  <div className="loyalty-pass-footer"><span>{t("5 livrées → 5 DT")}</span><span aria-hidden="true"> · </span><span>{t("10 → 10 DT")}</span></div>
  </section>;
 }
 export function LoyaltyProfileSection({loyalty}:{loyalty:LoyaltySummary}){
  return <section className="loyalty-profile-section hd-card">
   <h2><Gift size={18}/>{t(" Mon programme fidélité")}</h2>
-  <p className="loyalty-tagline">{t("Commandez régulièrement et profitez de récompenses.")}</p>
+  <p className="loyalty-tagline">{t("Toutes les 5 commandes livrées, gagnez alternativement 5 DT puis 10 DT de remise, sans limite. Les remises non utilisées se cumulent.")}</p>
   <div className="loyalty-progress-row"><span>{t(`${loyalty.completedOrders} / ${loyalty.nextTarget} commandes`)}</span>{t(loyalty.availableDt>0&&<span className="loyalty-chip"><Sparkles size={12}/>{t(money(loyalty.availableDt))}</span>)}</div>
   <ProgressTrack remaining={loyalty.remaining}/>
   <p className="loyalty-next-line">{t(loyalty.availableDt>0?`🎉 Récompense disponible : ${money(loyalty.availableDt)} — utilisez-la dans votre panier.`:loyalty.remaining===1?`Plus qu’une commande avant votre récompense de ${money(loyalty.nextRewardDt)}.`:`Plus que ${loyalty.remaining} commandes avant votre récompense de ${money(loyalty.nextRewardDt)}.`)}</p>
-  <div className="loyalty-steps"><span className={loyalty.milestonesReached>=1?"done":""}>{t("5 commandes → 5 DT")}</span><span className={loyalty.milestonesReached>=2?"done":""}>{t("10 commandes → 10 DT")}</span></div>
+  <div className="loyalty-steps"><span className={loyalty.milestonesReached>=1?"done":""}>{t("5 commandes → 5 DT")}</span><span className={loyalty.milestonesReached>=2?"done":""}>{t("10 commandes → 10 DT")}</span><span className={loyalty.milestonesReached>=3?"done":""}>{t("15 commandes → 5 DT")}</span><span className={loyalty.milestonesReached>=4?"done":""}>{t("20 commandes → 10 DT")}</span></div>
   {t(loyalty.history.length>0&&<div className="loyalty-history"><small>{t("Historique fidélité")}</small>{t(loyalty.history.slice().reverse().map(h=><div key={h.tier} className="loyalty-history-row"><span>{t(`${h.orderCount}ᵉ commande livrée`)}</span><b>{t(money(h.rewardDt))}</b><span className={"loyalty-tag "+(h.fullyRedeemed?"used":h.usedDt>0?"partial":"open")}>{t(h.fullyRedeemed?'Utilisée':h.usedDt>0?'Partiellement utilisée':'Disponible')}</span></div>))}</div>)}
  </section>;
 }

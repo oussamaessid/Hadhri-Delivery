@@ -1,0 +1,35 @@
+// Read-only MySQL source, atomic import into an EMPTY PostgreSQL database.
+import mysql from 'mysql2/promise';
+import {mkdir,writeFile} from 'node:fs/promises';
+import {isDeepStrictEqual} from 'node:util';
+import {connectDatabase} from './database.mjs';
+const tables=['app_state','admin_account','customer_accounts','sessions','merchants','categories','products','departments','customers','drivers','orders','notifications','seed_history','admin_login_limits'];
+const generated=new Set(['request_id','client_session_id','order_date']);
+const source=await mysql.createConnection({uri:process.env.MYSQL_SOURCE_URL,dateStrings:true});
+let target;
+try{
+ await source.query("SET time_zone = '+00:00'");
+ await source.query('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ');
+ await source.query('START TRANSACTION WITH CONSISTENT SNAPSHOT, READ ONLY');
+ const backup={createdAt:new Date().toISOString(),tables:{}};
+ for(const table of tables){const [rows]=await source.query(`SELECT * FROM \`${table}\``);backup.tables[table]=rows}
+ await source.commit();
+ await mkdir('.data/migration-backups',{recursive:true});
+ const path='.data/migration-backups/mysql-'+Date.now()+'.json';
+ await writeFile(path,JSON.stringify(backup),{mode:0o600,flag:'wx'});
+ console.log('Sauvegarde complète privée : '+path);
+ target=await connectDatabase();
+ await target.transaction(async tx=>{
+  for(const table of tables){if((await tx.query(`SELECT 1 FROM "${table}" LIMIT 1`)).rowCount)throw new Error('Import refusé : cible non vide ('+table+').')}
+  for(const table of tables){
+   const rows=backup.tables[table];
+   for(const row of rows){const columns=Object.keys(row).filter(c=>!generated.has(c));await tx.query(`INSERT INTO "${table}" (${columns.map(c=>'"'+c+'"').join(',')}) VALUES (${columns.map((_,i)=>'$'+(i+1)).join(',')})`,columns.map(c=>row[c]))}
+   const imported=(await tx.query(`SELECT * FROM "${table}"`)).rows;
+   const normalize=row=>Object.fromEntries(Object.entries(row).filter(([key])=>!generated.has(key)).map(([key,value])=>[key,key==='data'&&typeof value==='string'?JSON.parse(value):value instanceof Date?value.toISOString():key.endsWith('_at')&&typeof value==='string'&&!/^\d+$/.test(value)?new Date(value+'Z').toISOString():key==='started_at'?String(value):value]));
+   const sort=rows=>rows.map(normalize).sort((a,b)=>String(a.id??a.token??a.name).localeCompare(String(b.id??b.token??b.name)));
+   if(!isDeepStrictEqual(sort(rows),sort(imported)))throw new Error('Vérification des données échouée : '+table);
+   console.log(table+': '+rows.length+' lignes importées et vérifiées');
+  }
+ });
+ console.log('Import complet validé. Source MySQL conservée.');
+}finally{await source.end();if(target)await target.close()}

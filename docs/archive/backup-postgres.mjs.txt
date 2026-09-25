@@ -1,0 +1,13 @@
+import {spawn} from 'node:child_process';
+import {mkdir,open,unlink} from 'node:fs/promises';
+const url=new URL(process.env.DATABASE_URL);
+if(!['postgres:','postgresql:'].includes(url.protocol))throw new Error('Une URL PostgreSQL est requise');
+await mkdir('.data/sql-backups',{recursive:true});
+const file='.data/sql-backups/hadhri-'+Date.now()+'.dump';
+const fd=await open(file,'wx',0o600);
+const env={...process.env,PGHOST:url.hostname,PGPORT:url.port||'5432',PGUSER:decodeURIComponent(url.username),PGPASSWORD:decodeURIComponent(url.password),PGDATABASE:decodeURIComponent(url.pathname.slice(1))};
+if(process.env.DATABASE_SSL==='true')env.PGSSLMODE='verify-full';
+try{
+ await new Promise((resolve,reject)=>{const child=spawn(process.env.PG_DUMP_BIN||'pg_dump',['--format=custom','--no-owner'],{env,stdio:['ignore',fd.fd,'inherit']});child.on('error',reject);child.on('exit',code=>code===0?resolve():reject(new Error('pg_dump a échoué : '+code)))});
+ console.log('Sauvegarde PostgreSQL : '+file);
+}catch(e){await unlink(file);throw e}finally{await fd.close()}

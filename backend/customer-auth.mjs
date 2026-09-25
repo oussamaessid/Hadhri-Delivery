@@ -1,5 +1,5 @@
-import {randomBytes,randomUUID,createHash} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
+import {randomBytes,randomUUID,createHash} from 'node:crypto';
 import {z} from 'zod';
 import {snapshot,saveSnapshot} from './storage.mjs';
 import {firebaseConfig,verifyFirebaseToken} from './firebase.mjs';
@@ -7,7 +7,7 @@ const hash=value=>createHash('sha256').update(value).digest('hex');
 const profile=a=>({id:a.id,name:a.name,email:a.email,phone:a.phone});
 const phone=z.string().transform(s=>s.replace(/[\s.-]/g,'')).refine(s=>/^(\+216)?[0-9]{8}$/.test(s),'Numéro tunisien invalide');
 export async function configureCustomers(db){
- for(const migration of ['003_customer_accounts.sql','007_remove_email_verification.sql','008_firebase_customers.sql'])await db.exec(await readFile(new URL('./migrations/'+migration,import.meta.url),'utf8'));
+ for(const migration of ['003_customer_accounts.sql','008_firebase_customers.sql'])await db.exec(await readFile(new URL('./migrations/'+migration,import.meta.url),'utf8'));
 }
 export async function currentCustomer(db,cookies){
  const token=cookies.hadhri_customer;if(!token)return null;

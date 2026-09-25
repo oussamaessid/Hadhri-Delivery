@@ -2,6 +2,7 @@
 @import "tw-animate-css";
 @import "../vendor/shadcn-tailwind-4.13.0.css";
 @import "./design-tokens.css";
+@import "./hadhri-premium.css";
 
 @utility scrollbar-thin {
   scrollbar-width: thin;
@@ -489,25 +490,6 @@ html[dir=rtl] .profile{text-align:right}html[dir=rtl] .nav-count,html[dir=rtl] .
    HADHRI PREMIUM — Hero Monastir, cartes modernes, animations 150-300ms
    Mobile-first 375px → 768px → 1440px. Tout en français.
    ============================================================ */
-.hd-hero{display:grid;grid-template-columns:1fr;gap:var(--space-6);background:linear-gradient(135deg,#0b4fd6 0%,#0a3fb0 45%,#f97316 130%);border-radius:var(--radius-2xl);padding:clamp(24px,4vw,48px);color:#fff;overflow:hidden;position:relative;margin:var(--space-4) 0 var(--space-8);box-shadow:var(--shadow-lift)}
-.hd-hero::after{content:'';position:absolute;inset:auto -80px -80px auto;width:280px;height:280px;background:radial-gradient(circle,#ffffff33,transparent 70%);pointer-events:none}
-.hd-hero-content{position:relative;z-index:1;max-width:620px}
-.hd-hero .section-kicker{color:#ffe9d6}
-.hd-hero h1{font-family:var(--font-display);font-size:var(--text-display);line-height:var(--leading-tight);letter-spacing:-.02em;margin:var(--space-3) 0}
-.hd-hero h1 em{font-style:normal;color:#ffd9ad}
-.hd-hero-sub{color:#eaf1ff;font-size:var(--text-body);line-height:var(--leading-body);margin:var(--space-3) 0 var(--space-5);max-width:52ch}
-.hd-hero-actions{display:flex;align-items:center;gap:var(--space-4);flex-wrap:wrap;margin-bottom:var(--space-5)}
-.hd-cta{min-height:3.25rem;padding:0 var(--space-8);font-size:1.0625rem;border-radius:var(--radius-full);background:#fff!important;color:#0a3fb0!important;border:1px solid #fff;box-shadow:0 8px 22px rgb(0 0 0 / .22);transition:transform var(--duration-fast) var(--ease-spring),box-shadow var(--duration-medium) var(--ease-out)}
-.hd-cta:hover:not(:disabled){transform:translateY(-2px) scale(1.02);box-shadow:0 12px 28px rgb(0 0 0 / .28)}
-.hd-hero-meta{font-size:var(--text-small);color:#ffe9d6}
-.hd-search{background:#fff!important;border-color:transparent!important;color:var(--hd-ink);max-width:520px}
-.hd-hero-visual{position:relative;z-index:1;display:none}
-.hd-hero-visual img{width:100%;height:260px;object-fit:cover;border-radius:var(--radius-xl);box-shadow:var(--shadow-lift)}
-.hd-hero-badge{position:absolute;left:var(--space-4);bottom:var(--space-4);background:#ffffffee;border-radius:var(--radius-lg);padding:var(--space-3) var(--space-4);color:var(--hd-ink);box-shadow:var(--shadow-card)}
-.hd-hero-badge strong{display:block;font-size:var(--text-h3)}
-.hd-hero-badge small{color:var(--hd-muted)}
-@media(min-width:768px){.hd-hero{grid-template-columns:1.1fr .9fr;align-items:center}.hd-hero-visual{display:block}}
-@media(min-width:1200px){.hd-hero{padding:56px}.hd-hero-visual img{height:320px}}
 
 /* Cartes restaurants / produits premium */
 .hd-card{border-radius:var(--radius-xl)}
@@ -547,12 +529,8 @@ html[dir=rtl] .profile{text-align:right}html[dir=rtl] .nav-count,html[dir=rtl] .
 @keyframes hd-rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .customer-primary,.customer-secondary,.header-orders-card,.header-cart-icon,.menu-categories button{transition:transform var(--duration-fast) var(--ease-out),background var(--duration-fast) var(--ease-out),border-color var(--duration-fast) var(--ease-out),box-shadow var(--duration-medium) var(--ease-out)}
 .home-departments .department-tabs [data-slot=tabs-trigger]{transition:transform var(--duration-medium) var(--ease-out),box-shadow var(--duration-medium) var(--ease-out),border-color var(--duration-fast) var(--ease-out)}
-@media(prefers-reduced-motion:reduce){.hd-hero,.storefront section,.restaurant-card,.department-product,.shop-product,.customer-primary,.customer-secondary{animation:none!important;transition:none!important;transform:none!important}}
-@media(max-width:600px){.hd-hero{margin:12px 0 24px}.hd-hero-actions .hd-cta{width:100%}}
+@media(prefers-reduced-motion:reduce){.storefront section,.restaurant-card,.department-product,.shop-product,.customer-primary,.customer-secondary{animation:none!important;transition:none!important;transform:none!important}}
 
-/* Hero logo Hadhri — image remplacée par le logo */
-.hd-hero-logo{width:100%;height:260px;object-fit:contain!important;background:transparent;border-radius:0;box-shadow:none;padding:8px;filter:drop-shadow(0 10px 22px rgb(0 0 0 / .35))}
-@media(min-width:1200px){.hd-hero-logo{height:320px}}
 
 /* ---------- Détail commande premium (fenêtre order) ---------- */
 .od-sheet{padding:0!important;overflow:hidden auto;border-radius:20px 0 0 20px}
@@ -601,3 +579,76 @@ html[dir=rtl] .profile{text-align:right}html[dir=rtl] .nav-count,html[dir=rtl] .
 
 .entity-form .admin-description-input { width:100%; min-height:110px; padding:12px; border:1.5px solid #94a3b8; border-radius:10px; background:#fff; color:#172033; resize:vertical; }
 .entity-form .admin-description-input:focus { outline:2px solid #2563eb; outline-offset:2px; border-color:#2563eb; }
+
+
+/* ============================================================
+   Bleu Hadhri — carte fidélité, panier et footer alignés sur le logo et le hero.
+   ============================================================ */
+.loyalty-pass,.customer-header .header-cart-icon,.customer-footer{--hd-blue:#2f5bd3;--hd-blue-deep:#0a3fb0;--hd-navy:#1f3a66;--hd-slate:#64748b;--hd-blue-soft:#eef3fd;--hd-blue-line:#dbe4f6}
+
+/* Carte fidélité */
+.loyalty-pass{position:relative;overflow:hidden;text-align:center;max-width:1320px;margin:var(--space-4) auto var(--space-8);padding:clamp(28px,4vw,48px) clamp(18px,4vw,48px) 0;border:1px solid var(--hd-blue-line);border-radius:32px;background:radial-gradient(ellipse at top right,#dfe8fc 0,transparent 45%),linear-gradient(180deg,#fff 0%,#f7f9fe 100%);box-shadow:0 18px 40px rgb(31 58 102 / .08);color:var(--hd-navy)}
+.loyalty-pass-eyebrow{display:inline-flex;align-items:center;justify-content:center;gap:10px;color:#5a6f95;font-size:clamp(11px,1.1vw,14px);font-weight:800;letter-spacing:.22em}
+.loyalty-pass-eyebrow svg{color:#5a6f95}
+.loyalty-pass h2{margin:clamp(12px,2vw,20px) 0 0;color:var(--hd-navy);font-family:inherit;font-size:clamp(1.6rem,3.2vw,2.6rem);font-weight:800;letter-spacing:-.02em;line-height:1.15}
+.loyalty-pass-intro{margin-top:clamp(12px,2vw,22px);color:var(--hd-slate);font-size:clamp(1rem,1.5vw,1.3rem)}
+.loyalty-pass-amount{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:4px;color:var(--hd-blue)!important;font-size:clamp(2.6rem,6vw,4.6rem);font-weight:800;letter-spacing:-.03em;line-height:1.1}
+.loyalty-pass-amount span{color:var(--hd-slate);font-size:clamp(.95rem,1.3vw,1.15rem);font-weight:500;letter-spacing:0}
+.loyalty-pass .loyalty-stamps{display:flex;justify-content:center;flex-wrap:nowrap;gap:clamp(10px,2.4vw,28px);margin:clamp(24px,4vw,44px) 0 0;padding:0;list-style:none}
+.loyalty-pass .loyalty-stamp{flex:0 1 auto;display:grid;place-items:center;width:clamp(52px,9vw,110px);min-width:0;aspect-ratio:1;height:auto;border-radius:50%;border:2px dashed #cdd7e8;background:transparent;color:#8a97b0;font-size:clamp(16px,2.3vw,30px);font-weight:700;box-shadow:none;overflow:hidden}
+.loyalty-pass .loyalty-stamp.is-complete{border:3px solid #4a72e0!important;background:#fff;box-shadow:0 10px 24px rgb(47 91 211 / .18)!important}
+.loyalty-pass .loyalty-stamp.is-complete img{width:84%;height:auto;object-fit:contain}
+.loyalty-pass .loyalty-stamp:last-child{border-color:#d8b56a;background:#fdf6e7;color:#a8782c}
+.loyalty-pass .loyalty-stamp:last-child svg{width:clamp(20px,2.8vw,34px);height:auto}
+.loyalty-pass .loyalty-stamp.is-complete:last-child{border-style:solid;background:#fff}
+.loyalty-pass-count{margin:clamp(20px,3vw,40px) 0 clamp(22px,3vw,36px);color:var(--hd-slate);font-size:clamp(.95rem,1.3vw,1.15rem)}
+.loyalty-pass-balance{display:inline-flex;align-items:center;gap:8px;margin:-8px 0 24px;padding:8px 16px;border-radius:999px;background:var(--hd-blue-soft);color:var(--hd-blue);font-weight:700}
+.loyalty-pass-footer{display:flex;justify-content:center;align-items:center;gap:clamp(12px,3vw,32px);margin:0 calc(-1 * clamp(18px,4vw,48px));padding:clamp(16px,2.4vw,26px) 16px;border-top:1px solid var(--hd-blue-line);background:#eef2fb;color:#4a5b7c;font-size:clamp(.9rem,1.3vw,1.15rem);font-weight:700}
+.loyalty-profile-section .loyalty-stamp.is-complete{border:2px solid #4a72e0!important;box-shadow:0 6px 14px rgb(47 91 211 / .18)!important;background:#fff;overflow:hidden}
+.loyalty-profile-section .loyalty-stamp.is-complete img{width:84%;height:auto;object-fit:contain}
+
+/* Icône panier + compteur */
+.customer-header .header-cart-icon{position:relative;display:grid;place-items:center;width:48px;height:48px;min-width:48px;min-height:48px;border-radius:14px;border:1px solid var(--hd-blue-line);background:#fff;color:var(--hd-blue-deep);box-shadow:0 6px 16px rgb(31 58 102 / .10)}
+.customer-header .header-cart-icon:hover{background:var(--hd-blue-soft);border-color:#c3d2f3;box-shadow:0 10px 22px rgb(31 58 102 / .14)}
+.customer-header .header-cart-icon svg{width:22px;height:22px}
+.customer-header .header-cart-icon b{position:absolute;top:-8px;inset-inline-end:-8px;display:grid;place-items:center;min-width:22px;height:22px;padding:0 6px;border-radius:999px;border:2px solid #fff;background:var(--hd-blue);color:#fff;font-size:11px;font-weight:800;line-height:1;box-shadow:0 4px 10px rgb(47 91 211 / .35)}
+
+/* Footer */
+.customer-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 24px;margin-top:48px;border-top:0;border-radius:28px 28px 0 0;background:linear-gradient(135deg,#0b4fd6 0%,#0a3fb0 55%,#082f86 100%);color:#dbe6ff}
+.customer-footer .brand{color:#fff!important;font-size:1.25rem;font-weight:800}
+.customer-footer span{color:#dbe6ff}
+
+/* Logo du header : légère animation flottante. */
+@keyframes hd-logo-float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-4px) rotate(-1.5deg)}}
+.customer-header .brand img{animation:hd-logo-float 4.5s ease-in-out infinite;transform-origin:left center}
+.customer-header .brand:hover img{animation-play-state:paused}
+
+/* Hero + carte fidélité fusionnés, sur le fond du site. */
+.hd-hero{--hd-blue:#2f5bd3;--hd-navy:#1f3a66;--hd-blue-line:#dbe4f6;position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-columns:1fr;gap:clamp(24px,4vw,48px);align-items:center;margin:20px 0 36px;padding:clamp(28px,5vw,64px) clamp(20px,5vw,64px);border:1px solid var(--hd-blue-line);border-radius:36px;background:var(--hd-bg);color:var(--hd-navy);box-shadow:0 20px 50px rgb(31 58 102 / .07)}
+.hd-hero::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(420px 300px at 0% 0%,rgb(47 91 211 / .13),transparent 70%),radial-gradient(380px 280px at 100% 100%,rgb(249 115 22 / .12),transparent 70%),radial-gradient(circle,rgb(31 58 102 / .09) 1.2px,transparent 1.6px) 0 0/22px 22px;-webkit-mask-image:linear-gradient(180deg,#000,#000 70%,transparent);mask-image:linear-gradient(180deg,#000,#000 70%,transparent)}
+.hd-hero::after{content:"";position:absolute;z-index:-1;right:-70px;top:-70px;width:220px;height:220px;border-radius:50%;border:34px solid rgb(47 91 211 / .06);pointer-events:none}
+.hd-hero-content{display:flex;flex-direction:column;align-items:center;text-align:center;max-width:720px;margin-inline:auto;width:100%}
+.hd-hero .section-kicker{display:inline-flex;align-items:center;gap:9px;padding:8px 16px;border-radius:999px;border:1px solid var(--hd-blue-line);background:#fff;color:var(--hd-blue);font-size:12px;font-weight:800;letter-spacing:.16em;box-shadow:0 6px 16px rgb(31 58 102 / .08)}
+.hd-hero .section-kicker::before{content:"";width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 4px rgb(34 197 94 / .2);animation:hd-live 2s ease-in-out infinite}
+@keyframes hd-live{50%{box-shadow:0 0 0 7px rgb(34 197 94 / .05)}}
+.hd-hero h1{display:flex;flex-direction:column;align-items:inherit;margin:clamp(16px,2.4vw,24px) 0 clamp(22px,3vw,34px);font-family:var(--font-display);font-size:clamp(2.2rem,5.4vw,4.2rem);font-weight:800;line-height:1.05;letter-spacing:-.03em;color:var(--hd-navy);text-wrap:balance}
+.hd-hero h1 em{position:relative;padding-bottom:.18em;font-style:italic;font-weight:700;background:linear-gradient(100deg,#2f5bd3 0%,#0a3fb0 45%,#f97316 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hd-hero h1 em::after{content:"";position:absolute;left:4%;right:4%;bottom:0;height:.2em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'%3E%3Cpath d='M2 8 Q 25 1 50 7 T 100 7 T 150 7 T 198 5' fill='none' stroke='%23f97316' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E") center/100% 100% no-repeat;opacity:.85}
+.hd-search{width:100%;max-width:560px;min-height:58px;padding:0 20px!important;background:#fff!important;border:1.5px solid var(--hd-blue-line)!important;border-radius:999px!important;color:var(--hd-navy);box-shadow:0 14px 34px rgb(31 58 102 / .10)!important;transition:border-color var(--duration-fast) var(--ease-out),box-shadow var(--duration-medium) var(--ease-out)}
+.hd-search svg{color:var(--hd-blue)}
+.hd-search:focus-within{border-color:var(--hd-blue)!important;box-shadow:0 0 0 4px rgb(47 91 211 / .15),0 14px 34px rgb(31 58 102 / .12)!important}
+
+/* Avec fidélité : texte à gauche, carte fidélité à droite (empilés sur mobile). */
+.hd-hero .loyalty-pass{margin:0;max-width:none;width:100%;padding:clamp(22px,3vw,34px) clamp(16px,3vw,30px) 0;border:1.5px dashed #c9d6f2;border-radius:28px;background:var(--hd-bg);box-shadow:none}
+.hd-hero .loyalty-pass-footer{margin:0 calc(-1 * clamp(16px,3vw,30px));background:rgb(47 91 211 / .06);border-top:1.5px dashed #c9d6f2}
+.hd-hero .loyalty-pass h2{font-size:clamp(1.35rem,2.2vw,1.9rem)}
+.hd-hero .loyalty-pass-amount{font-size:clamp(2.4rem,4.2vw,3.6rem)}
+.hd-hero .loyalty-pass .loyalty-stamps{gap:clamp(8px,1.4vw,16px);margin-top:clamp(20px,3vw,30px)}
+.hd-hero .loyalty-pass .loyalty-stamp{width:clamp(48px,6.2vw,78px);font-size:clamp(15px,1.7vw,22px)}
+.hd-hero .loyalty-pass-count{margin:clamp(16px,2vw,24px) 0}
+@media(min-width:1024px){
+ .hd-hero.has-loyalty{grid-template-columns:1.05fr 1fr}
+ .hd-hero.has-loyalty .hd-hero-content{align-items:flex-start;text-align:left;margin:0}
+ html[dir=rtl] .hd-hero.has-loyalty .hd-hero-content{text-align:right}
+}
+@media(max-width:600px){.hd-hero{margin:12px 0 24px;border-radius:28px}.hd-search{min-height:52px}}

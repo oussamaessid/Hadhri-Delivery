@@ -17,7 +17,9 @@
     "docs:prepare": "node scripts/prepare-api-docs.mjs",
     "docs:validate": "node scripts/validate-api-docs.mjs",
     "backend": "node --env-file-if-exists=.env backend/server.mjs",
-    "db:restore": "node --env-file-if-exists=.env backend/restore-db.mjs"
+    "db:restore": "node --env-file-if-exists=.env backend/restore-db.mjs",
+    "db:seed-catalog": "node --env-file-if-exists=.env backend/seed-catalog.mjs",
+    "db:backup": "node --env-file-if-exists=.env scripts/backup-mysql.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
@@ -47,7 +49,6 @@
     "sonner": "^2.0.8",
     "tailwind-merge": "3.6.0",
     "vaul": "^1.1.2",
-    "ws": "^8.21.3",
     "zod": "^3.25.76"
   },
   "devDependencies": {

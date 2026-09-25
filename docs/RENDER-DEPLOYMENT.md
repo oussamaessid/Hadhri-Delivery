@@ -1,6 +1,6 @@
 # Render + Aiven — préparation pour les tests
 
-Les fichiers render.yaml et deploy/Dockerfile.render préparent un seul service gratuit : nginx sert le site compilé et transmet /api vers Node.js. WebSocket utilise le même domaine. Aucune donnée de démonstration n’est ajoutée à une nouvelle base.
+Les fichiers render.yaml et deploy/Dockerfile.render préparent un seul service gratuit : nginx sert le site compilé et transmet /api vers Node.js. Les mises à jour utilisent des requêtes HTTP périodiques sur le même domaine. Aucune donnée de démonstration n’est ajoutée à une nouvelle base.
 
 Le compte GitHub doit être connecté pour créer le dépôt privé. Aucun dépôt distant, service Render ou service Aiven n’a été créé par cette préparation. Ne pas inclure .env, .data, fichiers de compte de service Firebase ou clés privées dans le dépôt.
 
