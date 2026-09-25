@@ -11,8 +11,10 @@ services:
       NODE_ENV: production
       COOKIE_SECURE: "true"
       APP_ORIGIN: https://${APP_DOMAIN:?Set APP_DOMAIN in .env.vps}
+      DATABASE_SSL_CA_FILE: /run/secrets/db-ca.pem
     volumes:
       - app_data:/app/.data
+      - ./db-ca.pem:/run/secrets/db-ca.pem:ro
   gateway:
     image: caddy:2-alpine
     restart: unless-stopped

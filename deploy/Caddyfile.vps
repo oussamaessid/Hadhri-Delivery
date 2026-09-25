@@ -3,3 +3,6 @@
  header Strict-Transport-Security "max-age=31536000"
  reverse_proxy app:10000
 }
+www.{$APP_DOMAIN} {
+ redir https://{$APP_DOMAIN}{uri} permanent
+}

@@ -58,7 +58,9 @@ export async function connectDatabase({database}={}){
  const dbName=database||decodeURIComponent(url.pathname.slice(1));
  if(!/^[a-zA-Z0-9_]+$/.test(dbName))throw new Error('Nom de base MySQL invalide.');
  const config={host:url.hostname,port:Number(url.port||3306),user:decodeURIComponent(url.username),password:decodeURIComponent(url.password),database:dbName,timezone:'Z',connectTimeout:10000};
- if(process.env.DATABASE_SSL==='true'||url.searchParams.get('ssl-mode')==='REQUIRED')config.ssl={rejectUnauthorized:true,...(process.env.DATABASE_SSL_CA?{ca:process.env.DATABASE_SSL_CA}:{})};
+ // An empty CA file (VPS without a custom certificate) falls back to the system trust store.
+ const sslCa=process.env.DATABASE_SSL_CA||(process.env.DATABASE_SSL_CA_FILE?(await readFile(process.env.DATABASE_SSL_CA_FILE,'utf8').catch(()=>'')).trim():'');
+ if(process.env.DATABASE_SSL==='true'||url.searchParams.get('ssl-mode')==='REQUIRED')config.ssl={rejectUnauthorized:true,...(sslCa?{ca:sslCa}:{})};
  if(process.env.DATABASE_AUTO_CREATE!=='false')await ensureDatabaseExists(config);
  const pool=mysql.createPool({...config,charset:'utf8mb4_unicode_ci',dateStrings:false});
  pool.on('connection',connection=>{connection.query("SET time_zone = '+00:00'",error=>{if(error)connection.destroy()})});
