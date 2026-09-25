@@ -25,7 +25,7 @@ export function HomeCatalog({loyalty,state,query,setQuery,openMerchant,add,reduc
  },[requestedDepartment]);
  const selectDepartment=(value:string)=>{scrollToResults.current=true;setDepartment(value)};
  const matches=(text:string)=>text.toLocaleLowerCase().includes(query.trim().toLocaleLowerCase());
- const restaurants=state.catalog.restaurants.filter(m=>matches([m.name,...state.catalog.products.filter(p=>p.merchantId===m.id).map(p=>p.name)].join(' ')));
+ const restaurants=state.catalog.restaurants.filter(m=>!m.id.startsWith('shop-')).filter(m=>matches([m.name,...state.catalog.products.filter(p=>p.merchantId===m.id).map(p=>p.name)].join(' ')));
  const merchants=state.catalog.restaurants;
  const products=state.catalog.products.filter(p=>{
   const category=state.catalog.categories.find(c=>c.id===p.categoryId);

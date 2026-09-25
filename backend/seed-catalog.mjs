@@ -1,7 +1,8 @@
-// Adds sample restaurants, shops, categories, products and drivers to the current database.
+// Adds sample restaurants, shops, categories, products to the current database.
 // Safe to re-run: records whose id already exists are left untouched.
 // Usage: npm run db:seed-catalog
 import {connectDatabase} from './database.mjs';
+import {resolve} from 'node:path';
 import {snapshot, saveSnapshot} from './storage.mjs';
 
 const allDays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
@@ -116,23 +117,18 @@ const merchants = [
   ]],
 ];
 
-// [id, name, zone, vehicle, phone]
-const drivers = [
-  ['driver-mehdi-trabelsi', 'Mehdi Trabelsi', 'Centre-ville Monastir', 'Moto', '+216 22 000 101'],
-];
-
 const fr = (name, description, detail) => ({fr: {name, description, detail}});
 
-const db = await connectDatabase();
-await db.transaction(async tx => {
-  await tx.query('SELECT id FROM app_state WHERE id=1 FOR UPDATE');
-  const {data} = await snapshot(tx);
+export function addExampleCatalog(data) {
   const {restaurants, categories, products, departments} = data.catalog;
   const departmentIds = new Set(departments.map(d => d.id));
   const has = (list, id) => list.some(e => e.id === id);
-  const added = {restaurants: 0, categories: 0, products: 0, drivers: 0};
+  const added = {restaurants: 0, categories: 0, products: 0};
 
-  for (const [id, name, detail, image, phone, open, close, menu] of merchants) {
+  for (const [presetId, name, detail, image, phone, open, close, menu] of merchants) {
+    const normalize = value => value.toLowerCase().replace(/[^a-z]/g, '');
+    const existing = restaurants.find(m => m.id === presetId || normalize(m.name) === normalize(name));
+    const id = existing?.id || presetId;
     if (!has(restaurants, id)) {
       restaurants.push({id, name, detail, image, phone, status: 'ACTIVE', value: 4.6, description: detail,
         scheduleDays: allDays, scheduleOpen: open, scheduleClose: close, translations: fr(name, detail, detail)});
@@ -152,7 +148,7 @@ await db.transaction(async tx => {
         if (has(products, productId)) return;
         const product = {id: productId, name: productName, status: 'ACTIVE', detail: name, merchant: name, merchantId: id,
           categoryId, category: categoryName, value: price, stock: 50, description,
-          image: department ? `/images/departments/${department}.jpg` : image,
+          image: department ? `/images/departments/${department}.jpg` : slug === 'pizzas' || slug === 'calzones' ? '/images/pizza.jpg' : slug === 'burgers' || slug === 'sandwichs' ? '/images/burger.jpg' : '/images/groceries.jpg',
           translations: fr(productName, description, name)};
         if (sizes) product.variants = [{id: 'standard', name: 'Classique', price: 0}, {id: 'large', name: 'Grande', price: 5}];
         products.push(product);
@@ -161,14 +157,23 @@ await db.transaction(async tx => {
     }
   }
 
-  for (const [id, name, zone, vehicle, phone] of drivers) {
-    if (has(data.catalog.drivers, id)) continue;
-    data.catalog.drivers.push({id, name, status: 'AVAILABLE', detail: zone, zone, vehicle, phone, value: 5});
-    added.drivers++;
-  }
+  return added;
+}
 
+export async function seedExampleCatalog(db) {
+return db.transaction(async tx => {
+  await tx.query('SELECT id FROM app_state WHERE id=1 FOR UPDATE');
+  const migration = 'example-catalog-2026-09-25-v1';
+  if ((await tx.query('SELECT name FROM seed_history WHERE name=$1', [migration])).rows.length) return;
+  const {data} = await snapshot(tx);
+  const added = addExampleCatalog(data);
   await saveSnapshot(tx, data);
   await tx.query('UPDATE app_state SET revision=revision+1 WHERE id=1');
-  console.log(`Ajoutés : ${added.restaurants} commerce(s), ${added.categories} catégorie(s), ${added.products} produit(s), ${added.drivers} livreur(s).`);
+  await tx.query('INSERT INTO seed_history(name) VALUES($1)', [migration]);
+  console.log(`Ajoutés : ${added.restaurants} commerce(s), ${added.categories} catégorie(s), ${added.products} produit(s).`);
 });
-await db.close();
+}
+if (process.argv[1] && resolve(process.argv[1]) === decodeURIComponent(new URL(import.meta.url).pathname)) {
+ const db = await connectDatabase();
+ try { await seedExampleCatalog(db); } finally { await db.close(); }
+}
