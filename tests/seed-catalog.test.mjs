@@ -22,7 +22,9 @@ test('example catalogue covers every rayon and distinct restaurant menus',()=>{
 });
 test('seeding preserves edited records and reuses existing restaurant IDs',()=>{
  const data=empty();data.catalog.restaurants.push({id:'existing-pizza',name:"O'Pizza",detail:'Adresse conservée'});
+ data.catalog.categories.push({id:'existing-pizzas',merchantId:'existing-pizza',name:'Pizzas'});
  addExampleCatalog(data);
+ assert.equal(data.catalog.categories.filter(c=>c.merchantId==='existing-pizza'&&c.name==='Pizzas').length,1);
  assert.equal(data.catalog.restaurants.filter(m=>m.name.includes('Pizza')).length,1);
  const product=data.catalog.products.find(p=>p.merchantId==='existing-pizza');product.value=99;
  const before=JSON.stringify(data);

@@ -135,7 +135,14 @@ export function addExampleCatalog(data) {
       added.restaurants++;
     }
     for (const [slug, categoryName, department, items] of menu) {
-      const categoryId = `${id}-${slug}`;
+      const presetCategoryId = `${id}-${slug}`;
+      const matchingCategory = categories.find(c => c.merchantId === id && c.id !== presetCategoryId && normalize(c.name) === normalize(categoryName));
+      const categoryId = matchingCategory?.id || presetCategoryId;
+      if (matchingCategory) {
+        for (const product of products) if (product.categoryId === presetCategoryId && product.merchantId === id) product.categoryId = categoryId;
+        const duplicateIndex = categories.findIndex(c => c.id === presetCategoryId && c.merchantId === id);
+        if (duplicateIndex >= 0) categories.splice(duplicateIndex, 1);
+      }
       if (!has(categories, categoryId)) {
         const category = {id: categoryId, name: categoryName, status: 'ACTIVE', detail: name, merchantId: id, merchant: name,
           value: categories.length + 1, translations: fr(categoryName, '', name)};
@@ -144,7 +151,7 @@ export function addExampleCatalog(data) {
         added.categories++;
       }
       items.forEach(([productName, price, description, sizes], i) => {
-        const productId = `${categoryId}-${i + 1}`;
+        const productId = `${presetCategoryId}-${i + 1}`;
         if (has(products, productId)) return;
         const product = {id: productId, name: productName, status: 'ACTIVE', detail: name, merchant: name, merchantId: id,
           categoryId, category: categoryName, value: price, stock: 50, description,
@@ -163,7 +170,7 @@ export function addExampleCatalog(data) {
 export async function seedExampleCatalog(db) {
 return db.transaction(async tx => {
   await tx.query('SELECT id FROM app_state WHERE id=1 FOR UPDATE');
-  const migration = 'example-catalog-2026-09-25-v1';
+  const migration = 'example-catalog-2026-09-25-v2';
   if ((await tx.query('SELECT name FROM seed_history WHERE name=$1', [migration])).rows.length) return;
   const {data} = await snapshot(tx);
   const added = addExampleCatalog(data);
