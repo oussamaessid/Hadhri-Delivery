@@ -213,7 +213,6 @@ img { user-select: none; }
 .department-product-info > small { font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--hd-muted); }
 .department-product-info h3 { font-size: 16px; font-weight: 700; line-height: 1.35; min-height: 2.7em; color: var(--hd-ink); }
 .department-product-info strong { font-size: 1.22rem; font-weight: 800; color: var(--hd-primary-strong); letter-spacing: -0.02em; }
-.department-product-info strong::after { content: " DT"; font-size: 0.72em; font-weight: 700; color: var(--hd-muted); }
 
 /* Bouton + et stepper */
 .add-product {
