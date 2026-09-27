@@ -677,3 +677,4 @@ html[dir=rtl] .profile{text-align:right}html[dir=rtl] .nav-count,html[dir=rtl] .
 .order-row-delivered{background:#effaf3}.order-row-delivered:hover{background:#e2f5e9}
 .od-hero.od-hero-delivered{background:#effaf3;border-color:#bfe6cd}
 .primary-button.success-button{background:#1f9d55;border-color:#1f9d55;color:#fff}.primary-button.success-button:hover:not(:disabled){background:#188046;border-color:#188046}
+.od-step.delivered{background:#1f9d55;color:#fff;box-shadow:0 4px 12px rgb(31 157 85 / .3)}
