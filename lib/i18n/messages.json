@@ -2230,5 +2230,21 @@
   "Enregistrement de votre profil…": {
     "ar": "جارٍ حفظ ملفك الشخصي…",
     "en": "Saving your profile…"
+  },
+  "Confirmer la commande": {
+    "ar": "تأكيد الطلب",
+    "en": "Confirm order"
+  },
+  "Mettre en livraison": {
+    "ar": "بدء التوصيل",
+    "en": "Send out for delivery"
+  },
+  "Marquer comme livrée": {
+    "ar": "تحديد كمُسلَّم",
+    "en": "Mark as delivered"
+  },
+  "Annuler la commande": {
+    "ar": "إلغاء الطلب",
+    "en": "Cancel order"
   }
 }
