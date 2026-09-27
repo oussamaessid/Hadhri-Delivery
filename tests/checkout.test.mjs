@@ -25,3 +25,29 @@ test('historical split requests remain idempotent',()=>{
  const s=initialState();const order={...s.orders[0],requestId:input.requestId+':R1',clientSessionId:input.clientSessionId};s.orders.unshift(order);
  assert.deepEqual(createCustomerOrders(s,input).orders,[order]);
 });
+test('free-delivery restaurants cost nothing and the next paid position still pays the first-position fee',()=>{
+ const s=initialState();const merchantOf=id=>s.catalog.products.find(p=>p.id===id).merchantId;
+ const free=s.catalog.restaurants.find(m=>m.id===merchantOf('P6'));free.freeDelivery=true;
+ assert.equal(calculateCart(s,[{productId:'P6',quantity:1}]).fee,0);
+ const mixed=calculateCart(s,[{productId:'P6',quantity:1},{productId:'P2',quantity:1}]);
+ assert.deepEqual(mixed.baskets.map(b=>b.fee),[0,4]);assert.equal(mixed.fee,4);
+});
+test('restaurants follow their opening days and hours in Tunisia time, including after midnight',async()=>{
+ const {isOpenNow}=await import('../features/admin/data/demo.ts');
+ const m={id:'R',name:'R',detail:'',status:'ACTIVE',value:0,scheduleDays:['mon'],scheduleOpen:'11:00',scheduleClose:'23:00'};
+ assert.equal(isOpenNow(m,new Date('2026-09-28T10:30:00Z')),true); // lundi 11:30 à Tunis
+ assert.equal(isOpenNow(m,new Date('2026-09-28T09:30:00Z')),false); // lundi 10:30
+ assert.equal(isOpenNow(m,new Date('2026-09-29T10:30:00Z')),false); // mardi
+ const late={...m,scheduleOpen:'18:00',scheduleClose:'02:00'};
+ assert.equal(isOpenNow(late,new Date('2026-09-28T23:30:00Z')),true); // mardi 00:30, ouverture de lundi
+ assert.equal(isOpenNow(late,new Date('2026-09-29T23:30:00Z')),false); // mercredi 00:30, mardi fermé
+ assert.equal(isOpenNow({...m,scheduleDays:undefined}),null);
+});
+test('a closed restaurant cannot receive an order',()=>{
+ const s=initialState();const merchant=s.catalog.restaurants.find(m=>m.id===s.catalog.products.find(p=>p.id==='P6').merchantId);
+ const days=['mon','tue','wed','thu','fri','sat','sun'];const today=days[(new Date(Date.now()+3600_000).getUTCDay()+6)%7];
+ Object.assign(merchant,{scheduleDays:[days[(days.indexOf(today)+2)%7]],scheduleOpen:'11:00',scheduleClose:'12:00'});
+ assert.throws(()=>calculateCart(s,[{productId:'P6',quantity:1}]),/fermé actuellement/);
+ merchant.scheduleDays=undefined;
+ assert.doesNotThrow(()=>calculateCart(s,[{productId:'P6',quantity:1}]));
+});

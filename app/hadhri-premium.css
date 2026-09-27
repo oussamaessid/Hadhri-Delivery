@@ -480,3 +480,9 @@ img { user-select: none; }
   .loyalty-pass .loyalty-stamps, .loyalty-profile-section .loyalty-stamps { gap: 8px; }
   .loyalty-pass .loyalty-stamp, .loyalty-profile-section .loyalty-stamp { flex-basis: 52px; font-size: 15px; }
 }
+/* Livraison gratuite (restaurant activé par l’admin) */
+.free-delivery-badge { position: absolute; top: 10px; left: 10px; z-index: 1; background: var(--hd-success); color: #fff; font-size: 12px; font-weight: 800; padding: 5px 10px; border-radius: 99px; box-shadow: 0 2px 8px rgba(0,0,0,.18); }
+.free-delivery-tag { display: block; color: var(--hd-success); font-weight: 700; }
+.free-delivery-toggle { display: flex !important; flex-direction: row !important; align-items: center; gap: 10px; font-weight: 600; }
+.free-delivery-toggle input { width: 18px; height: 18px; accent-color: var(--hd-success); }
+.closed-badge { position: absolute; top: 10px; right: 10px; z-index: 1; background: #3b3a36; color: #fff; font-size: 12px; font-weight: 800; padding: 5px 10px; border-radius: 99px; }

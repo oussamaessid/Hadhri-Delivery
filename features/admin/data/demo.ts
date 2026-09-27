@@ -1,7 +1,7 @@
 export const weekdays=['mon','tue','wed','thu','fri','sat','sun'] as const;
 export type Weekday=typeof weekdays[number];
 export const weekdayLabels:Record<Weekday,string>={mon:'Lundi',tue:'Mardi',wed:'Mercredi',thu:'Jeudi',fri:'Vendredi',sat:'Samedi',sun:'Dimanche'};
-export type Entity = { translations?:Partial<Record<"fr",{name?:string;description?:string;detail?:string}>>; department?:string; merchantId?:string;categoryId?:string;description?:string;image?:string;icon?:string;variants?:{id:string;name:string;price:number}[]; id: string; name: string; status: string; detail: string; value: number; phone?: string; stock?: number; category?: string; merchant?: string; vehicle?: string; zone?: string; scheduleDays?:Weekday[]; scheduleOpen?:string; scheduleClose?:string };
+export type Entity = { translations?:Partial<Record<"fr",{name?:string;description?:string;detail?:string}>>; department?:string; merchantId?:string;categoryId?:string;description?:string;image?:string;icon?:string;variants?:{id:string;name:string;price:number}[]; id: string; name: string; status: string; detail: string; value: number; phone?: string; stock?: number; category?: string; merchant?: string; vehicle?: string; zone?: string; scheduleDays?:Weekday[]; scheduleOpen?:string; scheduleClose?:string; freeDelivery?:boolean };
 export function scheduleLabel(m:Entity):string{
  const days=m.scheduleDays;
  if(!days||!days.length)return '';
@@ -10,15 +10,17 @@ export function scheduleLabel(m:Entity):string{
  const hours=m.scheduleOpen&&m.scheduleClose?` · ${m.scheduleOpen} - ${m.scheduleClose}`:'';
  return dayText+hours;
 }
-export function isOpenNow(m:Entity):boolean|null{
+// Heure de Tunisie (UTC+1, sans heure d’été) : même résultat sur le serveur, le navigateur et le mobile.
+function tunisClock(now:Date){const t=new Date(now.getTime()+3600_000);return {day:weekdays[(t.getUTCDay()+6)%7],minutes:t.getUTCHours()*60+t.getUTCMinutes()}}
+export function isOpenNow(m:Entity,now=new Date()):boolean|null{
  if(!m.scheduleDays||!m.scheduleDays.length||!m.scheduleOpen||!m.scheduleClose)return null;
- const now=new Date();
- const day=weekdays[(now.getDay()+6)%7];
- if(!m.scheduleDays.includes(day))return false;
  const [oh,om]=m.scheduleOpen.split(':').map(Number);
  const [ch,cm]=m.scheduleClose.split(':').map(Number);
- const minutes=now.getHours()*60+now.getMinutes();
- return minutes>=oh*60+om&&minutes<ch*60+cm;
+ const open=oh*60+om,close=ch*60+cm;const {day,minutes}=tunisClock(now);
+ if(close>open)return m.scheduleDays.includes(day)&&minutes>=open&&minutes<close;
+ // Fermeture après minuit (ex. 18:00 - 02:00) : la nuit appartient au jour d’ouverture.
+ const previous=weekdays[(weekdays.indexOf(day)+6)%7];
+ return (m.scheduleDays.includes(day)&&minutes>=open)||(m.scheduleDays.includes(previous)&&minutes<close);
 }
 export type Order = {customerAccountId?:string;requestId?:string;clientSessionId?:string;phone?:string;notes?:string;deliveryFee?:number;loyaltyDiscountDt?:number;id:string; customer:string; merchant:string; total:number; status:string; date:string; driver:string; address:string; items:{productId?:string;merchantId?:string;merchant?:string;name:string;quantity:number;price:number}[]};
 export const statuses = ['PENDING','CONFIRMED','PREPARING','READY_FOR_PICKUP','DRIVER_ASSIGNED','PICKED_UP','ON_THE_WAY','DELIVERED','CANCELLED'];

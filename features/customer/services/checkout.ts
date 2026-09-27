@@ -1,5 +1,6 @@
 import type {DemoState, Order} from '../../admin/data/demo';
 import {loyaltySummary} from './loyalty.ts';
+import {isOpenNow,scheduleLabel} from '../../admin/data/demo.ts';
 export type CartLine={productId:string;quantity:number;variantId?:string};
 export type CustomerDetails={name:string;phone:string;address:string;notes:string};
 export type CheckoutInput={customerAccountId?:string;lines:CartLine[];customer:CustomerDetails;requestId:string;clientSessionId:string;useLoyaltyDiscount?:boolean};
@@ -17,12 +18,15 @@ export function calculateCart(state:DemoState,lines:CartLine[]){
  const {firstFee,extraFee}=deliveryFees(state.settings);
  const order:typeof products[number][][]=[];const index=new Map<string,number>();
  for(const p of products){const key=p.product.merchantId||p.product.merchant||p.product.detail;if(!index.has(key)){index.set(key,order.length);order.push([])}order[index.get(key)!].push(p)}
- const baskets=order.map((group,position)=>{
+ let paidPositions=0;
+ const baskets=order.map(group=>{
   const merchantId=group[0].product.merchantId;const merchant=group[0].product.merchant||group[0].product.detail;
   const commerce=state.catalog.restaurants.find(m=>merchantId?m.id===merchantId:m.name===merchant);
   if(!commerce||commerce.status!=='ACTIVE')throw new Error(`${merchant} n’accepte pas de commandes pour le moment.`);
+  if(isOpenNow(commerce)===false)throw new Error(`${merchant} est fermé actuellement (${scheduleLabel(commerce)}).`);
   const subtotalCents=group.reduce((sum,p)=>sum+cents(p.product.value)*p.quantity,0);
-  const fee=position===0?firstFee:extraFee;
+  // Livraison gratuite (activée par l’admin) : aucun frais, la position suivante reste la 1ère payante.
+  const fee=commerce.freeDelivery?0:paidPositions++===0?firstFee:extraFee;
   return {merchantId:merchantId||merchant,merchant,products:group,subtotal:subtotalCents/100,fee,total:(subtotalCents+cents(fee))/100};
  });
  return {baskets,subtotal:baskets.reduce((s,b)=>s+cents(b.subtotal),0)/100,fee:baskets.reduce((s,b)=>s+cents(b.fee),0)/100,total:baskets.reduce((s,b)=>s+cents(b.total),0)/100};
