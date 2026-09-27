@@ -483,6 +483,17 @@ img { user-select: none; }
 /* Livraison gratuite (restaurant activé par l’admin) */
 .free-delivery-badge { position: absolute; top: 10px; left: 10px; z-index: 1; background: var(--hd-success); color: #fff; font-size: 12px; font-weight: 800; padding: 5px 10px; border-radius: 99px; box-shadow: 0 2px 8px rgba(0,0,0,.18); }
 .free-delivery-tag { display: block; color: var(--hd-success); font-weight: 700; }
-.free-delivery-toggle { display: flex !important; flex-direction: row !important; align-items: center; gap: 10px; font-weight: 600; }
-.free-delivery-toggle input { width: 18px; height: 18px; accent-color: var(--hd-success); }
+.entity-form .free-delivery-toggle { flex-direction: row; align-items: center; gap: 12px; border: 1px solid #e0e3ee; border-radius: 10px; padding: 14px; cursor: pointer; transition: border-color .15s, background .15s; }
+.entity-form .free-delivery-toggle:has(input:checked) { border-color: var(--hd-success); background: var(--hd-success-soft); }
+.free-delivery-icon { display: grid; place-items: center; width: 36px; height: 36px; flex-shrink: 0; border-radius: 9px; background: var(--hd-success-soft); color: var(--hd-success); }
+.free-delivery-toggle:has(input:checked) .free-delivery-icon { background: #fff; }
+.free-delivery-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.free-delivery-text b { font-size: 14px; font-weight: 600; color: #383e55; }
+.free-delivery-text small { line-height: 1.5; }
+/* !important : le thème force bordure, fond et hauteur de tous les champs du formulaire. */
+.entity-form .free-delivery-toggle input { appearance: none; -webkit-appearance: none; flex-shrink: 0; width: 42px; height: 24px; min-height: 0; padding: 0; border: 0 !important; border-radius: 99px !important; background: #d5d8e3 !important; position: relative; cursor: pointer; transition: background .15s; }
+.entity-form .free-delivery-toggle input::after { content: ""; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.2); transition: transform .15s; }
+.entity-form .free-delivery-toggle input:checked { background: var(--hd-success) !important; }
+.entity-form .free-delivery-toggle input:checked::after { transform: translateX(18px); }
+.entity-form .free-delivery-toggle input:focus-visible { outline: 2px solid var(--hd-success); outline-offset: 2px; box-shadow: none; }
 .closed-badge { position: absolute; top: 10px; right: 10px; z-index: 1; background: #3b3a36; color: #fff; font-size: 12px; font-weight: 800; padding: 5px 10px; border-radius: 99px; }
