@@ -2,6 +2,7 @@ import {readFile} from 'node:fs/promises';
 import {randomBytes,randomUUID,createHash} from 'node:crypto';
 import {z} from 'zod';
 import {snapshot,saveSnapshot} from './storage.mjs';
+import {recordAccountEvents} from './account-events.mjs';
 import {firebaseConfig,verifyFirebaseToken} from './firebase.mjs';
 const hash=value=>createHash('sha256').update(value).digest('hex');
 const profile=a=>({id:a.id,name:a.name,email:a.email,phone:a.phone});
@@ -30,8 +31,8 @@ export function createCustomerAuth(verifyToken=verifyFirebaseToken){
    await db.transaction(async tx=>{
     await tx.query('SELECT id FROM app_state WHERE id=1 FOR UPDATE');
     await tx.query('UPDATE customer_accounts SET name=$1,phone=$2 WHERE id=$3',[input.name,input.phone,account.id]);
-    const {data:state}=await snapshot(tx);const customer=state.catalog.customers.find(c=>c.id===account.id);
-    if(customer){customer.name=input.name;customer.phone=input.phone;await saveSnapshot(tx,state);await tx.query('UPDATE app_state SET revision=revision+1 WHERE id=1')}
+    const {data:state}=await snapshot(tx);const before=structuredClone(state);const customer=state.catalog.customers.find(c=>c.id===account.id);
+    if(customer){customer.name=input.name;customer.phone=input.phone;await saveSnapshot(tx,state,before);await recordAccountEvents(tx,before,state);await tx.query('UPDATE app_state SET revision=revision+1 WHERE id=1')}
    });
    json({customer:{...profile(account),...input}});return true;
   }
@@ -53,7 +54,7 @@ export function createCustomerAuth(verifyToken=verifyFirebaseToken){
    let row=(await tx.query('SELECT * FROM customer_accounts WHERE firebase_uid=$1 OR email=$2',[uid,email])).rows;
    if(row.length>1||row[0]?.firebase_uid&&row[0].firebase_uid!==uid)fail('Cette adresse est déjà liée à un autre compte.',409);
    row=row[0];
-   const {data:state}=await snapshot(tx);
+   const {data:state}=await snapshot(tx);const before=structuredClone(state);
    if(row&&state.catalog.customers.find(c=>c.id===row.id)?.status!=='ACTIVE')fail('Votre compte ne peut pas se connecter. Contactez Hadhri Delivery.',403);
    if(row){
     // A verified Firebase email may claim a legacy local account; existing orders keep their owner.
@@ -63,7 +64,7 @@ export function createCustomerAuth(verifyToken=verifyFirebaseToken){
     row={id:randomUUID(),email,name:typeof claims.name==='string'&&claims.name.trim()?claims.name.trim().slice(0,100):email.split('@')[0],phone:input.phone||''};
     await tx.query('INSERT INTO customer_accounts(id,email,name,phone,firebase_uid) VALUES($1,$2,$3,$4,$5)',[row.id,row.email,row.name,row.phone,uid]);
     state.catalog.customers.push({id:row.id,name:row.name,phone:row.phone,status:'ACTIVE',detail:'Monastir',value:0});
-    await saveSnapshot(tx,state);await tx.query('UPDATE app_state SET revision=revision+1 WHERE id=1');
+    await saveSnapshot(tx,state,before);await recordAccountEvents(tx,before,state);await tx.query('UPDATE app_state SET revision=revision+1 WHERE id=1');
    }
    return row;
   });

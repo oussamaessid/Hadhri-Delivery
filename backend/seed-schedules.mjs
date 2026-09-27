@@ -23,6 +23,7 @@ await db.transaction(async tx => {
     restaurant.scheduleClose = randomTime(20, 24);
   }
   await saveSnapshot(tx, data);
+  await tx.query('UPDATE app_state SET revision=revision+1 WHERE id=1');
   console.log('Horaires générés pour', data.catalog.restaurants.length, 'restaurant(s) :');
   for (const r of data.catalog.restaurants) console.log(' -', r.name, ':', r.scheduleDays.join(','), r.scheduleOpen, '-', r.scheduleClose);
 });

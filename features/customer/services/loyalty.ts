@@ -21,7 +21,7 @@ export function loyaltySummary(orders:Order[],customerAccountId:string|undefined
  const nextRewardDt=tierRewardDt(nextTarget/5);
  return {completedOrders,availableDt,nextTarget,remaining,nextRewardDt,milestonesReached,justUnlocked:completedOrders>0&&completedOrders%5===0,history};
 }
-export type LoyaltyAdminStats={participants:number;countedOrders:number;rewards5:number;rewards10:number;usedRewards:number;availableRewards:number;perCustomer:{id:string;name:string;completedOrders:number;nextTarget:number;remaining:number;nextRewardDt:number;availableDt:number}[]};
+export type LoyaltyAdminStats={participants:number;countedOrders:number;rewards5:number;rewards10:number;usedRewards:number;availableRewards:number;perCustomer:{id:string;name:string;completedOrders:number;nextTarget:number;remaining:number;nextRewardDt:number;availableDt:number;earnedDt:number}[]};
 export function loyaltyAdminStats(orders:Order[],customers:{id:string;name:string}[]):LoyaltyAdminStats{
  const ids=new Set<string>();
  for(const o of orders)if(o.customerAccountId)ids.add(o.customerAccountId);
@@ -29,7 +29,7 @@ export function loyaltyAdminStats(orders:Order[],customers:{id:string;name:strin
  const perCustomer=[...ids].map(id=>{
   const summary=loyaltySummary(orders,id);
   const customer=customers.find(c=>c.id===id);
-  return {id,name:customer?.name||'Client',completedOrders:summary.completedOrders,nextTarget:summary.nextTarget,remaining:summary.remaining,nextRewardDt:summary.nextRewardDt,availableDt:summary.availableDt,milestones:summary.milestonesReached,history:summary.history};
+  return {id,name:customer?.name||'Client',completedOrders:summary.completedOrders,nextTarget:summary.nextTarget,remaining:summary.remaining,nextRewardDt:summary.nextRewardDt,availableDt:summary.availableDt,earnedDt:summary.history.reduce((n,h)=>n+h.rewardDt,0),milestones:summary.milestonesReached,history:summary.history};
  });
  const rewards5=perCustomer.reduce((s,c)=>s+c.history.filter(h=>h.rewardDt===5).length,0);
  const rewards10=perCustomer.reduce((s,c)=>s+c.history.filter(h=>h.rewardDt===10).length,0);

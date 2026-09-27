@@ -8,3 +8,20 @@ test('repeated checkout is idempotent and cannot consume stock twice',()=>{const
 test('out of stock, inactive and empty carts are rejected; mixed-merchant carts split into separate baskets',()=>{const s=initialState();assert.throws(()=>calculateCart(s,[{productId:'P1',quantity:1}]));assert.throws(()=>calculateCart(s,[{productId:'P6',quantity:999}]));assert.throws(()=>calculateCart(s,[]));assert.throws(()=>calculateCart(s,[{productId:'P6',quantity:-1}]));const mixed=calculateCart(s,[{productId:'P6',quantity:1},{productId:'P2',quantity:1}]);assert.equal(mixed.baskets.length,2);});
 test('invalid address and phone do not create an order',()=>{const s=initialState();assert.throws(()=>createCustomerOrders(s,{...input,customer:{...input.customer,address:'x'}}));assert.throws(()=>createCustomerOrders(s,{...input,customer:{...input.customer,phone:'abc'}}));assert.equal(s.orders.length,240);});
 test('multiple variants share the same product stock and retain their prices',()=>{const state=initialState();const p=state.catalog.products.find(p=>p.variants?.some(v=>v.id==='large'));const lines=[{productId:p.id,variantId:'standard',quantity:1},{productId:p.id,variantId:'large',quantity:2}];const result=createCustomerOrders(state,{...input,lines});assert.equal(result.orders.length,1);assert.equal(result.orders[0].total,p.value*3+10+4);assert.equal(result.state.catalog.products.find(x=>x.id===p.id).stock,p.stock-3);p.stock=2;assert.throws(()=>calculateCart(state,lines),/Stock insuffisant/)});
+test('delivery fee is charged once for the first position and at the extra rate for each additional position',()=>{const s=initialState();const single=calculateCart(s,[{productId:'P6',quantity:1}]);assert.equal(single.fee,4);const mixed=calculateCart(s,[{productId:'P6',quantity:1},{productId:'P2',quantity:1}]);assert.deepEqual(mixed.baskets.map(b=>b.fee),[4,1]);assert.equal(mixed.fee,5);const custom=calculateCart({...s,settings:{...s.settings,fee:3.5,extraFee:1.5}},[{productId:'P6',quantity:1},{productId:'P2',quantity:1}]);assert.equal(custom.fee,5);assert.throws(()=>calculateCart({...s,settings:{...s.settings,extraFee:-1}},[{productId:'P6',quantity:1}]));});
+test('multi-merchant checkout creates one order, one notification and one customer count',()=>{
+ const s=initialState();const lines=[{productId:'P6',quantity:2},{productId:'P2',quantity:1}];
+ const cart=calculateCart(s,lines);const result=createCustomerOrders(s,{...input,lines});
+ assert.equal(result.orders.length,1);const order=result.orders[0];
+ assert.equal(order.total,cart.total);assert.equal(order.deliveryFee,5);
+ assert.equal(order.items.length,2);assert.equal(new Set(order.items.map(i=>i.merchantId)).size,2);
+ assert.equal(result.state.notifications.length,s.notifications.length+1);
+ assert.equal(result.state.catalog.customers.find(c=>c.id==='U-'+input.requestId).value,1);
+ for(const l of lines)assert.equal(result.state.catalog.products.find(p=>p.id===l.productId).stock,s.catalog.products.find(p=>p.id===l.productId).stock-l.quantity);
+ const retry=createCustomerOrders(result.state,{...input,lines});assert.deepEqual(retry.state,result.state);assert.equal(retry.orders.length,1);
+ assert.throws(()=>createCustomerOrders(result.state,{...input,lines,clientSessionId:'other'}));
+});
+test('historical split requests remain idempotent',()=>{
+ const s=initialState();const order={...s.orders[0],requestId:input.requestId+':R1',clientSessionId:input.clientSessionId};s.orders.unshift(order);
+ assert.deepEqual(createCustomerOrders(s,input).orders,[order]);
+});

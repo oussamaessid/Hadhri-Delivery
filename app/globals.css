@@ -652,3 +652,23 @@ html[dir=rtl] .profile{text-align:right}html[dir=rtl] .nav-count,html[dir=rtl] .
  html[dir=rtl] .hd-hero.has-loyalty .hd-hero-content{text-align:right}
 }
 @media(max-width:600px){.hd-hero{margin:12px 0 24px;border-radius:28px}.hd-search{min-height:52px}}
+/* Modern customer footer with contact details */
+.customer-footer{display:block;padding-block:44px calc(24px + var(--safe-bottom,0px))}
+.customer-footer .footer-grid{max-width:1260px;margin:auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px 48px}
+.customer-footer .brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none}
+.customer-footer .brand img{width:44px;height:44px;object-fit:contain;border-radius:12px;background:#fff;padding:4px}
+.customer-footer .footer-brand p{margin:12px 0 20px;color:#dbe6ff;max-width:34ch;line-height:1.55}
+.customer-footer .footer-cta{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:999px;background:#fff;color:#0a3fb0;font-weight:700;text-decoration:none;transition:transform .15s,box-shadow .15s}
+.customer-footer .footer-cta:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(3,20,70,.35)}
+.customer-footer h2{margin:0 0 14px;font-size:.8rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#fff}
+.customer-footer .footer-col{display:flex;flex-direction:column;gap:12px}
+.customer-footer .footer-col a,.customer-footer .footer-col span{display:inline-flex;align-items:center;gap:10px;color:#dbe6ff;text-decoration:none;overflow-wrap:anywhere}
+.customer-footer .footer-col svg{flex:none;opacity:.85}
+.customer-footer .footer-col a:hover{color:#fff;text-decoration:underline;text-underline-offset:3px}
+.customer-footer .footer-bottom{max-width:1260px;margin:32px auto 0;padding-top:20px;border-top:1px solid rgba(255,255,255,.18);font-size:.85rem}
+.customer-footer .footer-bottom span{color:#b9cbf5}
+@media(max-width:760px){.customer-footer .footer-grid{grid-template-columns:1fr 1fr}.customer-footer .footer-brand{grid-column:1/-1}}
+@media(max-width:480px){.customer-footer .footer-grid{grid-template-columns:1fr}}
+.loyalty-steps{display:inline-flex;align-items:center;gap:4px}.loyalty-steps i{width:14px;height:6px;border-radius:3px;background:#e6e8f0}.loyalty-steps i.done{background:var(--hd-success,#256b43)}.loyalty-steps small{margin-left:6px;color:#8c90a3;font-size:12px}
+.account-timeline{list-style:none;margin:12px 0 0;padding:0 0 0 14px;border-left:2px solid #eceef5;display:flex;flex-direction:column;gap:14px}.account-timeline li{position:relative}.account-timeline li::before{content:'';position:absolute;left:-20px;top:5px;width:10px;height:10px;border-radius:50%;background:#c9cce0;border:2px solid #fff}.account-timeline li.event-LOYALTY_UNLOCKED::before,.account-timeline li.event-LOYALTY_PROGRESS::before{background:var(--hd-success,#256b43)}.account-timeline li.event-LOYALTY_USED::before{background:#e39b3b}.account-timeline li.event-ACCOUNT_UPDATED::before,.account-timeline li.event-ACCOUNT_CREATED::before{background:#6a60dc}.account-timeline span{display:flex;justify-content:space-between;gap:10px;font-size:13px}.account-timeline small{color:#9a9eb0;white-space:nowrap}.account-timeline p{margin:3px 0 0;font-size:12px;color:#7c8196}
+.busy-layer{position:fixed;inset:0;z-index:10000;display:grid;place-items:center;padding:16px;background:rgb(255 255 255 / .82);backdrop-filter:blur(3px);animation:busy-fade .15s ease;pointer-events:all}.busy-layer.solid{background:#fff;backdrop-filter:none}.busy-card{display:flex;flex-direction:column;align-items:center;gap:14px;color:#2446b8;text-align:center}.busy-card p{margin:0;font-size:15px;font-weight:600;color:#252a3d}@keyframes busy-fade{from{opacity:0}to{opacity:1}}

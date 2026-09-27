@@ -1,3 +1,4 @@
+import {BusyLayer} from '@/components/app/busy-layer';
 import {StartupGate} from '@/components/app/startup-gate';
 import { LanguageInitializer } from "@/lib/i18n/react";
 import type { Metadata, Viewport } from "next";
@@ -21,6 +22,7 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
+  manifest: "/manifest.webmanifest",
   title: "Hadhri Delivery — Restaurants et livraison à Monastir",
   description:
     "Restaurants, poissons frais, fruits et légumes, poulet fermier et fruits secs — commandez en quelques clics, payez en espèces à la livraison.",
@@ -66,6 +68,7 @@ export default function RootLayout({
       >
         <LanguageInitializer />
         <StartupGate>{children}</StartupGate>
+        <BusyLayer />
       </body>
     </html>
   );

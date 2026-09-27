@@ -4,6 +4,7 @@ set -eu
 cd "$(dirname "$0")/.."
 git pull --ff-only
 [ -f db-ca.pem ] || : > db-ca.pem
+command -v ufw >/dev/null && ufw allow 443/udp >/dev/null || true
 docker compose -f docker-compose.vps.yml --env-file .env.vps up -d --build
 docker image prune -f
 echo "Démarrage de l'application…"

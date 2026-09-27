@@ -1,11 +1,12 @@
 'use client';
 import {requestJson} from '@/lib/api';
 import {startPolling} from '@/lib/polling';
+import {withBusy} from '@/lib/busy';
 import {localizeState} from '@/lib/i18n/catalog';
 import {useMemo,useSyncExternalStore} from 'react';
 import {type DemoState} from '../../admin/data/demo';
 import {type CheckoutInput} from './checkout';
-const empty:DemoState={catalog:{restaurants:[],products:[],categories:[],departments:[],customers:[],drivers:[]},orders:[],notifications:[],settings:{name:'Hadhri Delivery',email:'',fee:4,loyaltyEnabled:true}};
+const empty:DemoState={catalog:{restaurants:[],products:[],categories:[],departments:[],customers:[],drivers:[]},orders:[],notifications:[],settings:{name:'Hadhri Delivery',email:'',fee:4,extraFee:1,loyaltyEnabled:true}};
 let cached=empty,revision=0;
 let inFlight:Promise<void>|undefined,stopPolling:(()=>void)|undefined;
 const snapshotListeners=new Set<(state:DemoState)=>void>();
@@ -25,10 +26,11 @@ function refreshRequest(signal?:AbortSignal):Promise<void>{
  return inFlight;
 }
 export async function refresh(){try{await refreshRequest()}catch{/* API status is already displayed. */}}
-function ensurePolling(){if(!stopPolling)stopPolling=startPolling(refreshRequest,location.pathname.startsWith('/admin')?5000:10000)}
+// L’Admin continue de vérifier les commandes en arrière-plan pour que les notifications arrivent onglet caché.
+function ensurePolling(){if(!stopPolling){const admin=location.pathname.startsWith('/admin');stopPolling=startPolling(refreshRequest,admin?5000:10000,{whileHidden:admin})}}
 function releasePolling(){if(!listeners.size&&!snapshotListeners.size){stopPolling?.();stopPolling=undefined}}
 function subscribe(fn:()=>void){listeners.add(fn);ensurePolling();return()=>{listeners.delete(fn);releasePolling()}}
 export function subscribeSnapshots(fn:(state:DemoState)=>void){snapshotListeners.add(fn);ensurePolling();return()=>{snapshotListeners.delete(fn);releasePolling()}}
-export async function writeState(next:DemoState){const changes:{kind:string;id?:string;value:unknown}[]=[];for(const kind of [...Object.keys(cached.catalog),'orders','notifications']){const before=cached.catalog[kind]||cached[kind as 'orders'|'notifications'];const after=next.catalog[kind]||next[kind as 'orders'|'notifications'];for(const row of after)if(JSON.stringify(row)!==JSON.stringify(before.find(p=>p.id===row.id)))changes.push({kind,id:row.id,value:row});for(const row of before)if(!after.some(p=>p.id===row.id))changes.push({kind,id:row.id,value:null})}if(JSON.stringify(cached.settings)!==JSON.stringify(next.settings))changes.push({kind:'settings',value:next.settings});try{if(changes.length)await api('/admin/state',{method:'PATCH',body:JSON.stringify({revision,changes})});await refresh()}catch(e){await refresh();window.dispatchEvent(new CustomEvent('api-status',{detail:(e as Error).message}));throw e}}
+export async function writeState(next:DemoState){const changes:{kind:string;id?:string;value:unknown}[]=[];for(const kind of [...Object.keys(cached.catalog),'orders','notifications']){const before=cached.catalog[kind]||cached[kind as 'orders'|'notifications'];const after=next.catalog[kind]||next[kind as 'orders'|'notifications'];for(const row of after)if(JSON.stringify(row)!==JSON.stringify(before.find(p=>p.id===row.id)))changes.push({kind,id:row.id,value:row});for(const row of before)if(!after.some(p=>p.id===row.id))changes.push({kind,id:row.id,value:null})}if(JSON.stringify(cached.settings)!==JSON.stringify(next.settings))changes.push({kind:'settings',value:next.settings});try{if(changes.length)await withBusy('Enregistrement…',async()=>{await api('/admin/state',{method:'PATCH',body:JSON.stringify({revision,changes})});await refresh()},{delay:300});else await refresh()}catch(e){await refresh();window.dispatchEvent(new CustomEvent('api-status',{detail:(e as Error).message}));throw e}}
 export function useDemoStore(){const state=useSyncExternalStore(subscribe,()=>cached,()=>empty);const localized=useMemo(()=>localizeState(state,'fr'),[state]);return [typeof window!=="undefined"&&window.location.pathname.startsWith("/admin")?state:localized,writeState] as const}
 export async function placeLocalOrder(input:CheckoutInput){const orders=await api<DemoState['orders']>('/orders',{method:'POST',body:JSON.stringify(input)});await refresh();return orders}

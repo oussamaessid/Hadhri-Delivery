@@ -2082,5 +2082,153 @@
   "Formats (une ligne : nom | supplément DT)": {
     "ar": "الأحجام (سطر لكل حجم: الاسم | السعر الإضافي)",
     "en": "Sizes (one line: name | extra price TND)"
+  },
+  "Commander sur WhatsApp": {
+    "ar": "اطلب عبر واتساب",
+    "en": "Order on WhatsApp"
+  },
+  "Contact": {
+    "ar": "اتصل بنا",
+    "en": "Contact"
+  },
+  "Tous les jours, 9h – 23h": {
+    "ar": "كل يوم، 9 صباحًا – 11 ليلًا",
+    "en": "Every day, 9am – 11pm"
+  },
+  "Tous droits réservés.": {
+    "ar": "جميع الحقوق محفوظة.",
+    "en": "All rights reserved."
+  },
+  "Livraison · 1ère position (DT)": {
+    "ar": "التوصيل · النقطة الأولى (د.ت)",
+    "en": "Delivery · first stop (TND)"
+  },
+  "Livraison · chaque position supplémentaire (DT)": {
+    "ar": "التوصيل · كل نقطة إضافية (د.ت)",
+    "en": "Delivery · each additional stop (TND)"
+  },
+  "Une position = un restaurant ou un commerce différent dans la même commande. Frais = 1ère position + (positions − 1) × position supplémentaire. Ces tarifs s’appliqueront aux futures commandes ; les commandes existantes conservent leurs frais.": {
+    "ar": "النقطة = مطعم أو متجر مختلف في نفس الطلب. الرسوم = النقطة الأولى + (عدد النقاط − 1) × النقطة الإضافية. تطبق هذه الأسعار على الطلبات الجديدة؛ تحتفظ الطلبات الحالية برسومها.",
+    "en": "A stop = a different restaurant or shop in the same order. Fee = first stop + (stops − 1) × additional stop. These rates apply to future orders; existing orders keep their fees."
+  },
+  "Livraison · ": {
+    "ar": "التوصيل · ",
+    "en": "Delivery · "
+  },
+  " positions": {
+    "ar": " نقاط",
+    "en": " stops"
+  },
+  "Étape": {
+    "ar": "المرحلة",
+    "en": "Step"
+  },
+  "Gagné / utilisé": {
+    "ar": "المكتسب / المستخدم",
+    "en": "Earned / used"
+  },
+  "Récompenses utilisées": {
+    "ar": "المكافآت المستخدمة",
+    "en": "Rewards used"
+  },
+  "Remises appliquées aux commandes": {
+    "ar": "خصومات مطبقة على الطلبات",
+    "en": "Discounts applied to orders"
+  },
+  " clients · Cliquez sur un client pour voir son historique fidélité": {
+    "ar": " عملاء · انقر على عميل لعرض سجل الولاء",
+    "en": " customers · Click a customer to see their loyalty history"
+  },
+  "État fidélité enregistré et historique du compte": {
+    "ar": "حالة الولاء المحفوظة وسجل الحساب",
+    "en": "Saved loyalty status and account history"
+  },
+  "État fidélité": {
+    "ar": "حالة الولاء",
+    "en": "Loyalty status"
+  },
+  "Étape en cours": {
+    "ar": "المرحلة الحالية",
+    "en": "Current step"
+  },
+  "Prochaine récompense": {
+    "ar": "المكافأة القادمة",
+    "en": "Next reward"
+  },
+  "Total gagné": {
+    "ar": "إجمالي المكتسب",
+    "en": "Total earned"
+  },
+  "Total utilisé": {
+    "ar": "إجمالي المستخدم",
+    "en": "Total used"
+  },
+  "Remise disponible": {
+    "ar": "الخصم المتاح",
+    "en": "Available discount"
+  },
+  "Mis à jour le ": {
+    "ar": "آخر تحديث ",
+    "en": "Updated on "
+  },
+  "Historique du compte": {
+    "ar": "سجل الحساب",
+    "en": "Account history"
+  },
+  "Chargement…": {
+    "ar": "جارٍ التحميل…",
+    "en": "Loading…"
+  },
+  "Aucun événement enregistré.": {
+    "ar": "لا توجد أحداث مسجلة.",
+    "en": "No events recorded."
+  },
+  "Compte créé": {
+    "ar": "تم إنشاء الحساب",
+    "en": "Account created"
+  },
+  "Compte modifié": {
+    "ar": "تم تعديل الحساب",
+    "en": "Account updated"
+  },
+  "Le navigateur a refusé d’afficher la notification. Vérifiez l’autorisation du site puis rechargez la page.": {
+    "ar": "رفض المتصفح عرض الإشعار. تحقق من إذن الموقع ثم أعد تحميل الصفحة.",
+    "en": "The browser refused to show the notification. Check the site permission, then reload the page."
+  },
+  "Les notifications exigent HTTPS. Ouvrez l’Admin avec l’adresse https:// du site (pas l’adresse IP ni http://).": {
+    "ar": "تتطلب الإشعارات HTTPS. افتح لوحة الإدارة عبر عنوان https:// للموقع (وليس عنوان IP أو http://).",
+    "en": "Notifications require HTTPS. Open the Admin with the site's https:// address (not the IP address or http://)."
+  },
+  "Ce navigateur ne gère pas les notifications. Sur iPhone, ajoutez d’abord le site à l’écran d’accueil (Partager → Sur l’écran d’accueil) puis ouvrez-le depuis l’icône.": {
+    "ar": "هذا المتصفح لا يدعم الإشعارات. على iPhone، أضف الموقع أولاً إلى الشاشة الرئيسية (مشاركة ← إضافة إلى الشاشة الرئيسية) ثم افتحه من الأيقونة.",
+    "en": "This browser does not support notifications. On iPhone, first add the site to the Home Screen (Share → Add to Home Screen), then open it from the icon."
+  },
+  "Vérification de votre compte…": {
+    "ar": "جارٍ التحقق من حسابك…",
+    "en": "Checking your account…"
+  },
+  "Connexion en cours…": {
+    "ar": "جارٍ تسجيل الدخول…",
+    "en": "Signing in…"
+  },
+  "Création de votre compte…": {
+    "ar": "جارٍ إنشاء حسابك…",
+    "en": "Creating your account…"
+  },
+  "Envoi du lien…": {
+    "ar": "جارٍ إرسال الرابط…",
+    "en": "Sending the link…"
+  },
+  "Envoi de votre commande…": {
+    "ar": "جارٍ إرسال طلبك…",
+    "en": "Sending your order…"
+  },
+  "Déconnexion…": {
+    "ar": "جارٍ تسجيل الخروج…",
+    "en": "Signing out…"
+  },
+  "Enregistrement de votre profil…": {
+    "ar": "جارٍ حفظ ملفك الشخصي…",
+    "en": "Saving your profile…"
   }
 }

@@ -1,9 +1,9 @@
-// One request at a time; hidden/offline pages do not keep polling.
-export function startPolling(task: (signal: AbortSignal) => Promise<unknown>, interval: number) {
+// One request at a time; offline pages, and hidden pages unless whileHidden, do not keep polling.
+export function startPolling(task: (signal: AbortSignal) => Promise<unknown>, interval: number, {whileHidden = false} = {}) {
   let stopped = false, running = false, failures = 0;
   let timer: ReturnType<typeof setTimeout> | undefined;
   const controller = new AbortController();
-  const available = () => !document.hidden && navigator.onLine !== false;
+  const available = () => (whileHidden || !document.hidden) && navigator.onLine !== false;
   async function run() {
     clearTimeout(timer);
     if (stopped || running || !available()) return;

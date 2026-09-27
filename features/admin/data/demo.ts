@@ -20,7 +20,7 @@ export function isOpenNow(m:Entity):boolean|null{
  const minutes=now.getHours()*60+now.getMinutes();
  return minutes>=oh*60+om&&minutes<ch*60+cm;
 }
-export type Order = {customerAccountId?:string;requestId?:string;clientSessionId?:string;phone?:string;notes?:string;deliveryFee?:number;loyaltyDiscountDt?:number;id:string; customer:string; merchant:string; total:number; status:string; date:string; driver:string; address:string; items:{productId?:string;name:string;quantity:number;price:number}[]};
+export type Order = {customerAccountId?:string;requestId?:string;clientSessionId?:string;phone?:string;notes?:string;deliveryFee?:number;loyaltyDiscountDt?:number;id:string; customer:string; merchant:string; total:number; status:string; date:string; driver:string; address:string; items:{productId?:string;merchantId?:string;merchant?:string;name:string;quantity:number;price:number}[]};
 export const statuses = ['PENDING','CONFIRMED','PREPARING','READY_FOR_PICKUP','DRIVER_ASSIGNED','PICKED_UP','ON_THE_WAY','DELIVERED','CANCELLED'];
 export const labels: Record<string,string> = {PENDING:'En attente',CONFIRMED:'Confirmée',PREPARING:'En préparation',READY_FOR_PICKUP:'Prête',DRIVER_ASSIGNED:'Livreur assigné',PICKED_UP:'Récupérée',ON_THE_WAY:'En livraison',DELIVERED:'Livrée',CANCELLED:'Annulée',ACTIVE:'Actif',INACTIVE:'Inactif',AVAILABLE:'Disponible',BUSY:'En course',OFFLINE:'Hors ligne',SUSPENDED:'Suspendu'};
 export const money = (n:number) => new Intl.NumberFormat('fr-TN',{minimumFractionDigits:2,maximumFractionDigits:2}).format(n)+' DT';
@@ -62,5 +62,5 @@ export function createOrders():Order[]{
 }
 export type NotificationItem = {id:string;title:string;detail:string;type:string;read:boolean;orderId?:string;date?:string};
 export const notifications:NotificationItem[]=[{id:'N1',title:'4 commandes attendent une confirmation',detail:'Vérifiez les nouvelles commandes avant de les transmettre aux commerces.',type:'Commandes',read:false,orderId:'CMD-10482'},{id:'N2',title:'Stock épuisé : Pizza Margherita',detail:'Chez Monastir · Le produit est temporairement indisponible.',type:'Stock',read:false},{id:'N3',title:'Mehdi Trabelsi est disponible',detail:'Zone Centre-ville Monastir · Prêt pour une nouvelle livraison.',type:'Livreurs',read:false},{id:'N4',title:'Rapport hebdomadaire disponible',detail:'Consultez les commandes et revenus dans Statistiques.',type:'Statistiques',read:true}];
-export type DemoState = {catalog:Record<string,Entity[]>;orders:Order[];notifications:NotificationItem[];settings:{name:string;email:string;fee:number;loyaltyEnabled?:boolean}};
-export function initialState():DemoState{return {catalog:structuredClone(catalog),orders:createOrders(),notifications:structuredClone(notifications),settings:{name:'Hadhri Delivery',email:'admin@example.com',fee:4,loyaltyEnabled:true}};}
+export type DemoState = {catalog:Record<string,Entity[]>;orders:Order[];notifications:NotificationItem[];settings:{name:string;email:string;fee:number;extraFee?:number;loyaltyEnabled?:boolean}};
+export function initialState():DemoState{return {catalog:structuredClone(catalog),orders:createOrders(),notifications:structuredClone(notifications),settings:{name:'Hadhri Delivery',email:'admin@example.com',fee:4,extraFee:1,loyaltyEnabled:true}};}
