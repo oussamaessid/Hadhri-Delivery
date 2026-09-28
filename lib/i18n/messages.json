@@ -1871,6 +1871,18 @@
     "ar": "10 طلبات مُسلَّمة: 10 دنانير هدية",
     "en": "10 delivered orders: 10 DT free"
   },
+  "Autres services": {
+    "ar": "خدمات أخرى",
+    "en": "Other services"
+  },
+  "Bientôt disponible": {
+    "ar": "متوفر قريباً",
+    "en": "Coming soon"
+  },
+  "De nouveaux services arrivent très bientôt.": {
+    "ar": "خدمات جديدة قادمة قريباً جداً.",
+    "en": "New services are coming very soon."
+  },
   "Voir les livraisons →": {
     "ar": "عرض التوصيلات ←",
     "en": "View deliveries →"

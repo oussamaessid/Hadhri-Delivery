@@ -732,3 +732,6 @@ html[dir=rtl] .profile{text-align:right}html[dir=rtl] .nav-count,html[dir=rtl] .
 .restaurant-card .closed-badge { position: absolute; inset: 12px auto auto 12px; z-index: 2; display: inline-flex; align-items: center; gap: 7px; padding: 7px 11px; border: 1px solid #f4c7c3; border-radius: 999px; background: #fff5f4; color: #a51d14; font-size: 12px; font-weight: 800; box-shadow: 0 3px 12px #00000012; }
 .restaurant-card .closed-badge::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #d92d20; }
 .restaurant-card.restaurant-closed h3 { background: #f2f2f2; color: #8a8a8a; }
+
+/* "Autres services" rayon tab: blue gradient with an icon, like the mobile app. */
+.home-departments .department-visual.services-visual { display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #2f5bd3, #1d44b8 55%, #072e86); color: #fff; }
