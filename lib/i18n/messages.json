@@ -1863,6 +1863,14 @@
     "ar": "هل يوجد طلب يحتاج موصّلاً؟",
     "en": "A delivery to assign?"
   },
+  "5 commandes livrées : 5 DT offerts": {
+    "ar": "5 طلبات مُسلَّمة: 5 دنانير هدية",
+    "en": "5 delivered orders: 5 DT free"
+  },
+  "10 commandes livrées : 10 DT offerts": {
+    "ar": "10 طلبات مُسلَّمة: 10 دنانير هدية",
+    "en": "10 delivered orders: 10 DT free"
+  },
   "Voir les livraisons →": {
     "ar": "عرض التوصيلات ←",
     "en": "View deliveries →"

@@ -16,7 +16,7 @@ export function LoyaltyBanner({loyalty}:{loyalty:LoyaltySummary}){
   <ProgressTrack remaining={loyalty.remaining}/>
   <p className="loyalty-pass-count">{t(`${loyalty.completedOrders} / ${loyalty.nextTarget} commandes livrées`)}</p>
   {loyalty.availableDt>0&&<p className="loyalty-pass-balance"><Sparkles size={16}/>{t(`${money(loyalty.availableDt)} disponibles dans votre panier`)}</p>}
-  <div className="loyalty-pass-footer"><span>{t("5 livrées → 5 DT")}</span><span aria-hidden="true"> · </span><span>{t("10 → 10 DT")}</span></div>
+  <div className="loyalty-pass-footer"><span>{t("5 commandes livrées : 5 DT offerts")}</span><span>{t("10 commandes livrées : 10 DT offerts")}</span></div>
  </section>;
 }
 export function LoyaltyProfileSection({loyalty}:{loyalty:LoyaltySummary}){
