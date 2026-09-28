@@ -678,3 +678,57 @@ html[dir=rtl] .profile{text-align:right}html[dir=rtl] .nav-count,html[dir=rtl] .
 .od-hero.od-hero-delivered{background:#effaf3;border-color:#bfe6cd}
 .primary-button.success-button{background:#1f9d55;border-color:#1f9d55;color:#fff}.primary-button.success-button:hover:not(:disabled){background:#188046;border-color:#188046}
 .od-step.delivered{background:#1f9d55;color:#fff;box-shadow:0 4px 12px rgb(31 157 85 / .3)}
+
+/* Customer mobile layout: keep these overrides after the legacy theme layers. */
+.customer-app .hd-hero-content,
+.customer-app .menu-layout > *,
+.customer-app .checkout-layout > * { min-width: 0; }
+.customer-app .customer-search input { min-width: 0; width: 100%; }
+@media (max-width: 800px) {
+  .customer-header { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; padding: 12px 16px; }
+  .customer-header .brand { min-width: 0; }
+  .customer-header .brand img { width: min(112px, 100%); height: 42px; animation: none; }
+  .customer-header nav { grid-column: 2; grid-row: 1; margin: 0; gap: 8px; }
+  .customer-header nav .account-button { max-width: 112px; padding: 8px; font-size: 12px; line-height: 1.4; }
+  .customer-header .header-location-orders { grid-column: 1 / -1; grid-row: 2; width: 100%; min-width: 0; gap: 10px; }
+  .customer-header .header-location-orders > * { flex: 1 1 0; min-width: 0; }
+  .customer-header .header-orders-card span { display: inline; }
+  .customer-header .header-orders-card { padding: 10px; font-size: 12px; }
+  .customer-header .header-orders-card svg { flex: none; }
+  .customer-header .delivery-location b { max-width: 100%; }
+  .customer-app .storefront { padding-inline: 16px; }
+  .customer-app .menu-layout, .customer-app .checkout-layout { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .customer-app .mini-cart { position: static; }
+  .customer-app .hd-hero { grid-template-columns: minmax(0, 1fr); padding: 24px 16px; }
+  .customer-app .hd-hero .section-kicker { max-width: 100%; font-size: 10px; letter-spacing: .08em; padding: 8px 10px; white-space: normal; }
+  .customer-app .hd-hero h1 { font-size: clamp(28px, 6vw, 42px); overflow-wrap: anywhere; }
+  .customer-app .hd-search { min-width: 0; max-width: 100%; }
+  .customer-app .restaurant-grid, .customer-app .department-products { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .customer-app .menu-categories { max-width: 100%; }
+  .customer-app .profile-details > div, .customer-app .account-timeline span { flex-wrap: wrap; }
+  .customer-app .profile-details b { overflow-wrap: anywhere; }
+}
+@media (max-width: 480px) {
+  .customer-app .home-departments .department-tabs [data-slot="tabs-list"] { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .customer-app .home-departments .department-tabs [data-slot="tabs-trigger"] { min-width: 0; width: 100%; }
+  .customer-app .department-name { overflow-wrap: anywhere; }
+  .customer-app .department-product-info { padding: 12px; }
+  .customer-app .department-product-info > div { flex-wrap: wrap; gap: 8px; }
+  .customer-app .department-product-info h3, .customer-app .restaurant-card h3 { font-size: 15px; }
+  .customer-app .product-grid { grid-template-columns: minmax(0, 1fr); }
+  .customer-app .checkout-panel { padding: 16px; min-width: 0; }
+  .customer-app .basket-line { flex-wrap: wrap; }
+  .customer-app .basket-line > div:first-child { flex-basis: 100%; min-width: 0; overflow-wrap: anywhere; }
+  .customer-app .customer-order-top, .customer-app .customer-order-bottom { flex-wrap: wrap; gap: 12px; }
+  .customer-app .phone-input { flex-wrap: nowrap; }
+  .customer-app .phone-input input { min-width: 0; }
+  .customer-app input, .customer-app textarea, .customer-auth-dialog input { font-size: 16px !important; }
+}
+
+/* Closed restaurants stay visible but greyed out, marked by a red dot. */
+.restaurant-card.restaurant-closed { border-color: #d6d6d6 !important; background: #f2f2f2 !important; cursor: not-allowed; transform: none !important; }
+.restaurant-card.restaurant-closed .restaurant-image img { filter: grayscale(1); opacity: .6; }
+.restaurant-card.restaurant-closed .restaurant-image::after { content: ''; position: absolute; top: 14px; right: 14px; z-index: 2; width: 14px; height: 14px; border: 2px solid #fff; border-radius: 50%; background: #d92d20; box-shadow: 0 0 0 4px rgb(217 45 32 / .18); }
+.restaurant-card .closed-badge { position: absolute; inset: 12px auto auto 12px; z-index: 2; display: inline-flex; align-items: center; gap: 7px; padding: 7px 11px; border: 1px solid #f4c7c3; border-radius: 999px; background: #fff5f4; color: #a51d14; font-size: 12px; font-weight: 800; box-shadow: 0 3px 12px #00000012; }
+.restaurant-card .closed-badge::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #d92d20; }
+.restaurant-card.restaurant-closed h3 { background: #f2f2f2; color: #8a8a8a; }

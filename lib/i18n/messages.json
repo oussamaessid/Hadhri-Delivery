@@ -2015,9 +2015,9 @@
     "ar": "منصتك في لمحة",
     "en": "YOUR PLATFORM AT A GLANCE"
   },
-  "Clients, livreurs et administrateur": {
-    "ar": "العملاء والموصّلون والمسؤول",
-    "en": "Customers, drivers and administrator"
+  "Clients et livreurs": {
+    "ar": "العملاء والموصّلون",
+    "en": "Customers and drivers"
   },
   "Email ou mot de passe incorrect.": {
     "ar": "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
@@ -2246,5 +2246,45 @@
   "Annuler la commande": {
     "ar": "إلغاء الطلب",
     "en": "Cancel order"
+  },
+  "Mot de passe Admin": {
+    "ar": "كلمة مرور المسؤول",
+    "en": "Admin password"
+  },
+  "Mot de passe actuel": {
+    "ar": "كلمة المرور الحالية",
+    "en": "Current password"
+  },
+  "Nouveau mot de passe": {
+    "ar": "كلمة المرور الجديدة",
+    "en": "New password"
+  },
+  "Confirmer le nouveau mot de passe": {
+    "ar": "تأكيد كلمة المرور الجديدة",
+    "en": "Confirm new password"
+  },
+  "12 caractères minimum. Les autres appareils connectés à l’Admin seront déconnectés.": {
+    "ar": "12 حرفًا على الأقل. سيتم تسجيل خروج الأجهزة الأخرى المتصلة بلوحة الإدارة.",
+    "en": "At least 12 characters. Other devices signed in to the Admin will be signed out."
+  },
+  "Les deux nouveaux mots de passe ne correspondent pas.": {
+    "ar": "كلمتا المرور الجديدتان غير متطابقتين.",
+    "en": "The two new passwords do not match."
+  },
+  "Modification…": {
+    "ar": "جارٍ التعديل…",
+    "en": "Updating…"
+  },
+  "Changer le mot de passe": {
+    "ar": "تغيير كلمة المرور",
+    "en": "Change password"
+  },
+  "Mot de passe modifié.": {
+    "ar": "تم تغيير كلمة المرور.",
+    "en": "Password changed."
+  },
+  "Mot de passe actuel incorrect": {
+    "ar": "كلمة المرور الحالية غير صحيحة",
+    "en": "Current password is incorrect"
   }
 }
