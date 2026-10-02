@@ -1,4 +1,5 @@
-# Single VPS (OVH, Contabo…): same image as Render, behind Caddy for automatic HTTPS.
+# Single VPS (OVH, Contabo…): same image as Render, behind Caddy for automatic HTTPS, with its own MySQL.
+# A new database starts empty: no products, rayons, restaurants or drivers; the admin password is set on first visit.
 # Usage: docker compose -f docker-compose.vps.yml --env-file .env.vps up -d --build
 services:
   app:
@@ -11,10 +12,29 @@ services:
       NODE_ENV: production
       COOKIE_SECURE: "true"
       APP_ORIGIN: https://${APP_DOMAIN:?Set APP_DOMAIN in .env.vps}
-      DATABASE_SSL_CA_FILE: /run/secrets/db-ca.pem
+      DATABASE_URL: mysql://hadhri:${MYSQL_PASSWORD:?Set MYSQL_PASSWORD in .env.vps}@database:3306/hadhri
+      DATABASE_SSL: "false"
+      DATABASE_AUTO_CREATE: "false"
     volumes:
       - app_data:/app/.data
-      - ./db-ca.pem:/run/secrets/db-ca.pem:ro
+    depends_on:
+      database:
+        condition: service_healthy
+  database:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: hadhri
+      MYSQL_USER: hadhri
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?Set MYSQL_PASSWORD in .env.vps}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Set MYSQL_ROOT_PASSWORD in .env.vps}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "MYSQL_PWD=$$MYSQL_PASSWORD mysql -h 127.0.0.1 -uhadhri -D hadhri -e 'SELECT 1'"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
   gateway:
     image: caddy:2-alpine
     restart: unless-stopped
@@ -32,5 +52,6 @@ services:
       - app
 volumes:
   app_data:
+  mysql_data:
   caddy_data:
   caddy_config:

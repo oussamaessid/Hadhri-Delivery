@@ -23,7 +23,7 @@ const customerAuth=createCustomerAuth(verifyToken);
 const db=await connectDatabase({database});
 await db.query('INSERT IGNORE INTO app_state(id,data) VALUES(1,$1)',[JSON.stringify(bootstrapState(initialState,seedDemo))]);
 await migrateStorage(db);
-await seedShopping(db);
+if(process.env.SEED_DEPARTMENTS!=='false')await seedShopping(db);
 if(process.env.SEED_EXAMPLE_CATALOG==='true')await seedExampleCatalog(db);
 if(seedDemo)await seedRestaurantLogos(db);
 await configureCustomers(db);
