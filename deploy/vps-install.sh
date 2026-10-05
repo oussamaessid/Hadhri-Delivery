@@ -1,6 +1,6 @@
 #!/bin/sh
 # First install on a fresh Ubuntu VPS. Run as root: sh vps-install.sh
-# Asks for the Firebase settings once, then starts the site on its own empty MySQL database (admin account only).
+# Asks for the Firebase settings once, then starts the site on its own MySQL database with only the default rayons.
 set -eu
 REPO=https://github.com/oussamaessid/Hadhri-Delivery.git
 DIR=/opt/hadhri-delivery
@@ -42,7 +42,7 @@ if [ ! -f .env.vps ]; then
 APP_DOMAIN=$domain
 ACME_EMAIL=$email
 SEED_DEMO_DATA=false
-SEED_DEPARTMENTS=false
+SEED_DEPARTMENTS=true
 MYSQL_PASSWORD=$(openssl rand -hex 24)
 MYSQL_ROOT_PASSWORD=$(openssl rand -hex 24)
 BACKUP_ENCRYPTION_KEY=$(openssl rand -hex 32)
