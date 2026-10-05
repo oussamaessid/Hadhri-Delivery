@@ -2,14 +2,14 @@
 import {useEffect,useRef} from 'react';
 import {subscribeSnapshots} from '../../customer/services/local-store';
 import {createOrderTracker} from '@/lib/order-changes';
-import {notifyNewOrder,notificationPermission,enablePush,unlockOrderSound} from './order-alerts';
+import {notifyNewOrder,preparePush,unlockOrderSound} from './order-alerts';
 export type IncomingOrder={id:string;customer:string;merchant:string;total:number;items:{name:string;quantity:number}[]};
 export function useOrderStream(onOrder?:(order:IncomingOrder)=>void){
  const handler=useRef(onOrder);
  useEffect(()=>{handler.current=onOrder},[onOrder]);
  useEffect(()=>{
   // Prépare le service worker et renouvelle l’abonnement push dès l’ouverture de l’Admin.
-  if(notificationPermission()==='granted')void enablePush();
+  void preparePush();
   unlockOrderSound();
   const track=createOrderTracker<IncomingOrder>();
   return subscribeSnapshots(state=>{

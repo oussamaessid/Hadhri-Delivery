@@ -6,7 +6,7 @@ export const notificationIcon='/images/hadhri-notification-icon.png';
 export function isSoundEnabled(){try{return localStorage.getItem(SOUND_KEY)!=='off'}catch{return true}}
 export function setSoundEnabled(on:boolean){try{localStorage.setItem(SOUND_KEY,on?'on':'off')}catch{}}
 export function notificationPermission():NotificationPermission|'unsupported'{return typeof Notification==='undefined'?'unsupported':Notification.permission}
-export async function requestNotificationPermission(){if(typeof Notification==='undefined')return 'unsupported' as const;const result=await Notification.requestPermission();if(result==='granted')void enablePush();return result}
+export async function requestNotificationPermission(){if(typeof Notification==='undefined')return 'unsupported' as const;const result=await Notification.requestPermission();return result}
 // Notifications exigent HTTPS : en http:// (ex. accès par adresse IP) le navigateur les désactive.
 export const notificationsNeedHttps=()=>typeof window!=='undefined'&&!window.isSecureContext;
 let worker:Promise<ServiceWorkerRegistration|undefined>|undefined;
@@ -39,16 +39,24 @@ export function playOrderSound(){
  }catch{}
 }
 const keyBytes=(key:string)=>Uint8Array.from(atob(key.replace(/-/g,'+').replace(/_/g,'/')+'='.repeat((4-key.length%4)%4)),c=>c.charCodeAt(0));
-// Web Push : ce navigateur est abonné côté serveur et reçoit les nouvelles commandes même Admin fermé.
-export async function enablePush(){
+const savePush=(subscription:PushSubscription)=>requestJson('/api/v1/admin/push',{method:'POST',body:JSON.stringify(subscription)});
+let pushReady:{registration:ServiceWorkerRegistration;key:Uint8Array<ArrayBuffer>}|undefined;
+// Web Push : prépare le service worker et la clé à l’ouverture de l’Admin, puis renvoie au serveur l’abonnement existant de ce navigateur.
+export async function preparePush(){
  const registration=await notificationWorker();
- if(!registration||!('PushManager' in window)||notificationPermission()!=='granted')return false;
+ if(!registration||!('PushManager' in window))return false;
  try{
-  const {publicKey}=await requestJson<{publicKey:string}>('/api/v1/admin/push');
-  const subscription=await registration.pushManager.getSubscription()||await registration.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:keyBytes(publicKey)});
-  await requestJson('/api/v1/admin/push',{method:'POST',body:JSON.stringify(subscription)});
-  return true;
- }catch{return false}
+  if(!pushReady){const {publicKey}=await requestJson<{publicKey:string}>('/api/v1/admin/push');pushReady={registration,key:keyBytes(publicKey)}}
+  const existing=await registration.pushManager.getSubscription();
+  if(existing&&notificationPermission()==='granted'){await savePush(existing);return true}
+ }catch{}
+ return false;
+}
+// Safari n’accepte l’abonnement que pendant un clic : appeler directement depuis le bouton, la clé étant déjà chargée.
+export async function enablePush(){
+ if(!pushReady)await preparePush();
+ if(!pushReady)return false;
+ try{await savePush(await pushReady.registration.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:pushReady.key}));return true}catch{return false}
 }
 export function notifyNewOrder(order:{id:string;customer:string;merchant:string}){
  if(isSoundEnabled())playOrderSound();
