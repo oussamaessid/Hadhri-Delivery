@@ -60,7 +60,8 @@ export default defineConfig(async () => {
     },
     plugins: [
       vinext(),
-      sites({ mockAuth: !managedLinux }),
+      // Sites hosting only: it packages .openai/hosting.json, which is not in git, so CI and Contabo builds skip it.
+      ...(existsSync(hostingPath) ? [sites({ mockAuth: !managedLinux })] : []),
       cloudflare({
         viteEnvironment: { name: "rsc", childEnvironments: ["ssr"] },
         inspectorPort: false,
