@@ -44,6 +44,7 @@ services:
       - "443:443/udp"
     environment:
       APP_DOMAIN: ${APP_DOMAIN:?Set APP_DOMAIN in .env.vps}
+      ACME_EMAIL: ${ACME_EMAIL:?Set ACME_EMAIL in .env.vps}
     volumes:
       - ./deploy/Caddyfile.vps:/etc/caddy/Caddyfile:ro
       - caddy_data:/data

@@ -32,6 +32,7 @@ if [ ! -f .env.vps ]; then
  echo "=== Configuration Hadhri Delivery (IP du serveur : $ip) ==="
  domain=$(ask "Nom de domaine (ex: hadhri-delivery.tn). Laissez vide pour tester sans domaine :")
  [ -n "$domain" ] || domain="$(echo "$ip" | tr . -).sslip.io"
+ email=$(ask "E-mail pour le certificat HTTPS :")
  firebase_project=$(ask "FIREBASE_PROJECT_ID :")
  firebase_key=$(ask "FIREBASE_API_KEY :")
  firebase_domain=$(ask "FIREBASE_AUTH_DOMAIN :")
@@ -39,6 +40,7 @@ if [ ! -f .env.vps ]; then
  umask 077
  cat > .env.vps <<ENV
 APP_DOMAIN=$domain
+ACME_EMAIL=$email
 SEED_DEMO_DATA=false
 SEED_DEPARTMENTS=false
 MYSQL_PASSWORD=$(openssl rand -hex 24)
