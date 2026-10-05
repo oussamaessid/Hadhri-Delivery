@@ -28,7 +28,7 @@ export function HomeCatalog({loyalty,state,query,setQuery,openMerchant,add,reduc
  const selectDepartment=(value:string)=>{scrollToResults.current=true;setDepartment(value)};
  const matches=(text:string)=>text.toLocaleLowerCase().includes(query.trim().toLocaleLowerCase());
  // A merchant is a shop (not a restaurant) when seeded as shop-* or when every one of its categories belongs to a rayon.
- const isRestaurant=(m:Entity)=>{if(m.id.startsWith('shop-'))return false;const own=state.catalog.categories.filter(c=>c.merchantId===m.id);return !own.length||own.some(c=>!c.department)};
+ const isRestaurant=(m:Entity)=>{if(m.id.startsWith('shop-'))return false;const own=state.catalog.categories.filter(c=>c.merchantId===m.id);return !own.length||own.some(c=>!c.department||c.department==='restaurants')};
  const restaurantIds=new Set(state.catalog.restaurants.filter(isRestaurant).map(m=>m.id));
  const restaurants=state.catalog.restaurants.filter(isRestaurant).filter(m=>matches([m.name,...state.catalog.products.filter(p=>p.merchantId===m.id).map(p=>p.name)].join(' ')));
  const merchants=state.catalog.restaurants;
