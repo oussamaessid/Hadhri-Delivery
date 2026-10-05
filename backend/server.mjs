@@ -49,8 +49,11 @@ const entity=z.object({translations:z.object({ar:translation.optional(),en:trans
 const hash=s=>createHash('sha256').update(s).digest('hex');
 const fail=(message,status=400)=>{throw Object.assign(new Error(message),{status})};
 async function readBody(req){let raw='';for await(const chunk of req){raw+=chunk;if(raw.length>2e6)fail('Requête trop volumineuse',413)}try{return JSON.parse(raw||'{}')}catch{fail('JSON invalide')}}
+// Live updates: each open page keeps one Server-Sent Events stream that only carries the new revision; the page then reloads its own state.
+const streams=new Set();const heartbeat=setInterval(()=>{for(const res of streams)res.write(': ping\n\n')},25000);
+const broadcast=revision=>{for(const res of streams)res.write(`data: ${revision}\n\n`)};
 // Under the row lock, the cached state is reused when its revision is current; only changed rows are written, then the cache is updated after commit.
-async function transaction(fn){let committed;const value=await db.transaction(async tx=>{const revision=(await tx.query('SELECT revision FROM app_state WHERE id=1 FOR UPDATE')).rows[0].revision;const before=cachedAt(revision)?.data||(await snapshot(tx)).data;const result=await fn(structuredClone(before),revision);await saveSnapshot(tx,result.state,before);await recordAccountEvents(tx,before,result.state);await tx.query('UPDATE app_state SET revision=revision+1 WHERE id=1');committed={revision:revision+1,state:result.state};return result.value});rememberSnapshot(committed.revision,committed.state);return value}
+async function transaction(fn){let committed;const value=await db.transaction(async tx=>{const revision=(await tx.query('SELECT revision FROM app_state WHERE id=1 FOR UPDATE')).rows[0].revision;const before=cachedAt(revision)?.data||(await snapshot(tx)).data;const result=await fn(structuredClone(before),revision);await saveSnapshot(tx,result.state,before);await recordAccountEvents(tx,before,result.state);await tx.query('UPDATE app_state SET revision=revision+1 WHERE id=1');committed={revision:revision+1,state:result.state};return result.value});rememberSnapshot(committed.revision,committed.state);broadcast(committed.revision);return value}
 function validateCatalog(state){const imageBytes=Object.values(state.catalog).flat().reduce((n,p)=>n+(p.image?.startsWith('data:')?Buffer.byteLength(p.image):0),0);if(imageBytes>20*1024*1024)fail('Quota des images atteint (20 Mo). Utilisez des URLs HTTPS pour les nouvelles images.',413);for(const kind of ['products','categories'])for(const p of state.catalog[kind]){if(!p.merchantId)fail('Sélectionnez un commerce');const m=state.catalog.restaurants.find(m=>m.id===p.merchantId);if(!m)fail('Ce commerce contient encore des catégories ou produits.');p.merchant=m.name;p.detail=m.name;if(kind==='products'){p.detail=m.name;const c=state.catalog.categories.find(c=>c.id===p.categoryId&&c.merchantId===p.merchantId);if(!c)fail('Choisissez une catégorie de ce commerce.');p.category=c.name}}}
 await db.exec('CREATE TABLE IF NOT EXISTS admin_login_limits (id VARCHAR(100) PRIMARY KEY, attempts INT NOT NULL, started_at BIGINT NOT NULL)');
 async function consumeLoginAttempt(key){
@@ -70,6 +73,7 @@ const server=createServer(async(req,res)=>{
  try{
  const url=new URL(req.url,'http://localhost');const path=url.pathname.replace(/^\/api\/v1/,'');const language=resolveLocale(url.searchParams.get('lang'));
  if(req.method==='GET'&&path==='/health'){await db.query('SELECT 1');return json({status:'ok',database:'MySQL',persistent:true})}
+ if(req.method==='GET'&&path==='/events'){if(streams.size>=5000)fail('Trop de connexions',503);const {revision}=(await db.query('SELECT revision FROM app_state WHERE id=1')).rows[0];res.writeHead(200,{'Content-Type':'text/event-stream','Cache-Control':'no-store, no-transform','X-Accel-Buffering':'no','X-Content-Type-Options':'nosniff'});res.write(`retry: 5000\ndata: ${revision}\n\n`);streams.add(res);req.on('close',()=>streams.delete(res));return}
  if(!['GET','HEAD'].includes(req.method)&&req.headers.origin){const origin=new URL(req.headers.origin);if(origin.host!==req.headers.host&&!['http://localhost:5173','http://127.0.0.1:5173',process.env.APP_ORIGIN].includes(origin.origin))fail('Origine refusée',403)}
  const cookies=Object.fromEntries((req.headers.cookie||'').split(';').map(s=>{const i=s.indexOf('=');return i<0?['','']:[s.slice(0,i).trim(),s.slice(i+1).trim()]}));
  let token=cookies.hadhri_session;
@@ -114,7 +118,7 @@ const server=createServer(async(req,res)=>{
 });
 await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(port,process.env.API_HOST||'127.0.0.1',resolve)});
 console.log('Hadhri API ready on port '+server.address().port);
-return {server,db,close:()=>new Promise((resolve,reject)=>{clearInterval(backupTimer);server.close(async()=>{try{await db.close();resolve()}catch(e){reject(e)}});server.closeIdleConnections()})};
+return {server,db,close:()=>new Promise((resolve,reject)=>{clearInterval(backupTimer);clearInterval(heartbeat);for(const res of streams)res.end();server.close(async()=>{try{await db.close();resolve()}catch(e){reject(e)}});server.closeIdleConnections()})};
 }
 if(process.argv[1]&&resolve(process.argv[1])===decodeURIComponent(new URL(import.meta.url).pathname)){
  const app=await startServer();

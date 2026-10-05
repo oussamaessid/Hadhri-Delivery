@@ -29,7 +29,7 @@ function client() {
   return call;
 }
 
-test('suivi HTTP : le client retrouve le nouveau statut et les autres comptes sont isolés', async () => {
+test('suivi temps réel : le client est prévenu et retrouve le nouveau statut et les autres comptes sont isolés', async () => {
   app = await startServer({dataDir: directory, port: 0, verifyToken, database});
   try {
   base = 'http://127.0.0.1:' + app.server.address().port + '/api/v1';
@@ -47,11 +47,21 @@ test('suivi HTTP : le client retrouve le nouveau statut et les autres comptes so
   assert.equal(created.status, 201);
   const orderId = created.data[0].id;
 
+  // Temps réel : une page ouverte apprend la nouvelle révision dès que le statut est enregistré.
+  const events = await fetch(base + '/events');
+  assert.equal(events.headers.get('content-type'), 'text/event-stream');
+  const reader = events.body.getReader(), decoder = new TextDecoder();
+  let pending = '';
+  const nextRevision = async () => { while (!/data: \d+\n\n/.test(pending)) pending += decoder.decode((await reader.read()).value); const [, value] = pending.match(/data: (\d+)\n\n/); pending = pending.slice(pending.indexOf('\n\n', pending.indexOf('data: ')) + 2); return Number(value); };
+  const initial = await nextRevision();
+
   const snapshot = await admin('/admin/state');
   const record = snapshot.data.state.orders.find((o) => o.id === orderId);
   assert.ok(record, 'commande visible côté admin');
   const patched = await admin('/admin/state', 'PATCH', {revision: snapshot.data.revision, changes: [{kind: 'orders', id: orderId, value: {...record, status: 'CONFIRMED'}}]});
   assert.equal(patched.status, 200);
+  assert.equal(await nextRevision(), initial + 1, 'le flux signale le changement de statut');
+  await reader.cancel();
 
   const after = await customer('/state');
   const guest=client();
