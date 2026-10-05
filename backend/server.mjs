@@ -12,11 +12,12 @@ import {seedRestaurantLogos} from './seed-restaurant-logos.mjs';
 import {seedExampleCatalog} from './seed-catalog.mjs';
 import {seedShopping} from './seed-shopping.mjs';
 import {configureCustomers,createCustomerAuth,currentCustomer} from './customer-auth.mjs';
+import {configurePush,pushSubscription} from './push.mjs';
 import {connectDatabase} from './database.mjs';
 import {configureAccountEvents,recordAccountEvents,accountHistory,loyaltyStates} from './account-events.mjs';
 import {initialState} from '../features/admin/data/demo.ts';
 import {createCustomerOrders} from '../features/customer/services/checkout.ts';
-export async function startServer({dataDir=process.env.DATA_DIR||'.data/mysql',port=Number(process.env.API_PORT||3001),verifyToken,database}={}){
+export async function startServer({dataDir=process.env.DATA_DIR||'.data/mysql',port=Number(process.env.API_PORT||3001),verifyToken,database,push:makePush=configurePush}={}){
 if(process.env.NODE_ENV==='production'&&!/^[a-f0-9]{64}$/i.test(process.env.BACKUP_ENCRYPTION_KEY||''))throw new Error('BACKUP_ENCRYPTION_KEY requis en production');
 const seedDemo=process.env.SEED_DEMO_DATA==='true'||(process.env.SEED_DEMO_DATA===undefined&&process.env.NODE_ENV!=='production');
 const customerAuth=createCustomerAuth(verifyToken);
@@ -28,6 +29,7 @@ if(process.env.SEED_EXAMPLE_CATALOG==='true')await seedExampleCatalog(db);
 if(seedDemo)await seedRestaurantLogos(db);
 await configureCustomers(db);
 await configureAccountEvents(db);
+const push=await makePush(db);
 await db.transaction(async tx=>{const {data}=await snapshot(tx);for(const key of ['restaurants','departments','categories','products'])data.catalog[key]=data.catalog[key].map(seedEntityTranslations);await saveSnapshot(tx,data)});
 const backupsDir=join(resolve(dataDir),'..','backups');
 async function backupSnapshot(){
@@ -92,6 +94,9 @@ const server=createServer(async(req,res)=>{
  }
  if(path==='/auth/logout'&&req.method==='POST'){await db.query('DELETE FROM sessions WHERE token=$1',[hash(token)]);await cookie('guest');return json({ok:true})}
  if(path.startsWith('/admin')&&session.role!=='admin')fail('Connexion administrateur requise',401);
+ if(path==='/admin/push'&&req.method==='GET')return json({publicKey:push.publicKey});
+ if(path==='/admin/push'&&req.method==='POST'){await push.subscribe(pushSubscription.parse(await readBody(req)));return json({ok:true},201)}
+ if(path==='/admin/push'&&req.method==='DELETE'){await push.unsubscribe(z.object({endpoint:z.string().max(1000)}).parse(await readBody(req)).endpoint);return json({ok:true})}
  if(path==='/admin/password'&&req.method==='POST'){
   if(!await consumeLoginAttempt('admin'))fail('Réessayez dans dix minutes',429);
   const {currentPassword,newPassword}=z.object({currentPassword:z.string().min(1).max(200),newPassword:z.string().min(12).max(200)}).parse(await readBody(req));const account=(await db.query('SELECT * FROM admin_account')).rows[0];
@@ -107,7 +112,10 @@ const server=createServer(async(req,res)=>{
  if(path==='/orders'&&req.method==='POST'){
   if(!customerAccount)fail('Connectez-vous ou créez un compte pour confirmer votre commande.',401);
   const input=z.object({requestId:z.string().uuid(),lines:z.array(z.object({productId:identifier,quantity:z.number().int().min(1).max(10000),variantId:identifier.optional()})).min(1).max(100),customer:z.object({name:text,phone:text,address:text,notes:z.string().max(500)}),useLoyaltyDiscount:z.boolean().optional()}).parse(await readBody(req));
-  const orders=await transaction(state=>{if(state.catalog.customers.find(c=>c.id===customerAccount.id)?.status!=='ACTIVE')fail('Votre compte ne peut pas passer de commande.',403);let result;try{result=createCustomerOrders(state,{...input,clientSessionId:customerAccount.id,customerAccountId:customerAccount.id})}catch(e){fail(e.message)}return {state:result.state,value:result.orders}});return json(orders,201);
+  const {orders,fresh}=await transaction(state=>{if(state.catalog.customers.find(c=>c.id===customerAccount.id)?.status!=='ACTIVE')fail('Votre compte ne peut pas passer de commande.',403);const known=new Set(state.orders.map(o=>o.id));let result;try{result=createCustomerOrders(state,{...input,clientSessionId:customerAccount.id,customerAccountId:customerAccount.id})}catch(e){fail(e.message)}return {state:result.state,value:{orders:result.orders,fresh:result.orders.filter(o=>!known.has(o.id))}}});
+  // A replayed request (same requestId) returns the same orders without alerting the Admin twice.
+  for(const order of fresh)void push.notify({title:'Nouvelle commande '+order.id,body:order.customer+' · '+order.merchant,tag:order.id,url:'/admin'}).catch(e=>console.error('Push',e.message));
+  return json(orders,201);
  }
  if(path==='/admin/state'&&req.method==='PATCH'){
   const body=z.object({revision:z.number().int(),changes:z.array(z.object({kind:z.enum(['restaurants','products','categories','departments','customers','drivers','orders','notifications','settings']),id:identifier.optional(),value:z.unknown().nullable()})).max(100)}).parse(await readBody(req));

@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {startServer} from '../backend/server.mjs';
 import {dropDatabase} from '../backend/database.mjs';
+import {configurePush} from '../backend/push.mjs';
 import {mkdtemp,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join,basename} from 'node:path';
@@ -30,11 +31,17 @@ function client() {
 }
 
 test('suivi temps réel : le client est prévenu et retrouve le nouveau statut et les autres comptes sont isolés', async () => {
-  app = await startServer({dataDir: directory, port: 0, verifyToken, database});
+  const pushed = [];
+  app = await startServer({dataDir: directory, port: 0, verifyToken, database, push: async (db) => ({...await configurePush(db), notify: async (payload) => { pushed.push(payload); }})});
   try {
   base = 'http://127.0.0.1:' + app.server.address().port + '/api/v1';
   const admin = client(), customer = client();
   assert.equal((await admin('/auth/setup', 'POST', {password: 'integration-test-password'})).status, 200);
+  // Push Admin : seule une session administrateur obtient la clé et abonne son navigateur.
+  assert.equal((await client()('/admin/push')).status, 401);
+  assert.ok((await admin('/admin/push')).data.publicKey.length > 80);
+  assert.equal((await admin('/admin/push', 'POST', {endpoint: 'https://push.example.test/abc', keys: {p256dh: 'BKey', auth: 'secret'}})).status, 201);
+  assert.equal((await admin('/admin/push', 'POST', {endpoint: 'http://insecure.test/x', keys: {p256dh: 'BKey', auth: 'secret'}})).status, 400);
   assert.equal((await customer('/customer/firebase-session', 'POST', {idToken: 'valid-suivi', phone: '20000111'})).status, 200);
   assert.ok(customer.jar.hadhri_customer, 'session client créée');
 
@@ -46,6 +53,9 @@ test('suivi temps réel : le client est prévenu et retrouve le nouveau statut e
   const created = await customer('/orders', 'POST', orderInput);
   assert.equal(created.status, 201);
   const orderId = created.data[0].id;
+  assert.deepEqual(pushed.map((p) => p.tag), [orderId], 'une notification push par nouvelle commande');
+  assert.equal((await customer('/orders', 'POST', orderInput)).status, 201);
+  assert.equal(pushed.length, 1, 'une requête rejouée ne renvoie pas de notification');
 
   // Temps réel : une page ouverte apprend la nouvelle révision dès que le statut est enregistré.
   const events = await fetch(base + '/events');
