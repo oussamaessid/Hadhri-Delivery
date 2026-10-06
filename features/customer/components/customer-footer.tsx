@@ -14,11 +14,11 @@ const CONTACT={
 };
 const displayPhone=(n:string)=>n.replace(/^\+216(\d{2})(\d{3})(\d{3})$/,'+216 $1 $2 $3');
 
-export function CustomerFooter(){
+export function CustomerFooter({onHome}:{onHome?:()=>void}={}){
  return <footer className="customer-footer">
   <div className="footer-grid">
    <div className="footer-brand">
-    <Link className="brand" href="/"><img src="/images/hadhri-logo-transparent.png" alt=""/>{t('Hadhri Delivery')}</Link>
+    <Link className="brand" href="/" onClick={onHome&&(e=>{e.preventDefault();onHome()})}><img src="/images/hadhri-logo-transparent.png" alt=""/>{t('Hadhri Delivery')}</Link>
     <p>{t('Un peu plus proche de ce que vous aimez.')}</p>
     <a className="footer-cta" href={`https://wa.me/${CONTACT.whatsapp.replace('+','')}`} target="_blank" rel="noopener noreferrer"><MessageCircle size={18}/>{t('Commander sur WhatsApp')}</a>
    </div>
