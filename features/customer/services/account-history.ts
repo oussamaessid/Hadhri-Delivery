@@ -7,7 +7,7 @@ export type AccountEvent={accountId:string;type:AccountEventType;date:string;tit
 export type LoyaltyState={accountId:string;completedOrders:number;earnedDt:number;usedDt:number;availableDt:number;updatedAt:string};
 type Customer=DemoState['catalog'][string][number];
 const tracked:[keyof Customer,string][]=[['name','Nom'],['phone','Téléphone'],['detail','Adresse'],['status','Statut']];
-const dt=(n:number)=>`${Number(n.toFixed(3))} DT`;
+const dt=(n:number)=>`${n.toFixed(3)} DT`;
 const label=(status:string)=>labels[status]||status;
 
 // orderDates : dater les événements de commande avec la date de la commande (reconstitution de l’historique).
@@ -43,14 +43,14 @@ export function backfillAccountEvents(state:DemoState,now=new Date()):AccountEve
 }
 // Applique les événements à l’état fidélité enregistré de chaque compte.
 export function applyLoyaltyEvents(states:Map<string,LoyaltyState>,events:AccountEvent[]){
- const cents=(n:number)=>Math.round(n*100);
+ const millimes=(n:number)=>Math.round(n*1000);
  for(const e of events){
   if(!e.type.startsWith('LOYALTY_'))continue;
   const s=states.get(e.accountId)||{accountId:e.accountId,completedOrders:0,earnedDt:0,usedDt:0,availableDt:0,updatedAt:e.date};
   if(e.type==='LOYALTY_PROGRESS')s.completedOrders=Math.max(s.completedOrders,e.completedOrders||0);
-  if(e.type==='LOYALTY_UNLOCKED')s.earnedDt=(cents(s.earnedDt)+cents(e.amountDt||0))/100;
-  if(e.type==='LOYALTY_USED')s.usedDt=(cents(s.usedDt)+cents(e.amountDt||0))/100;
-  s.availableDt=Math.max(0,(cents(s.earnedDt)-cents(s.usedDt))/100);
+  if(e.type==='LOYALTY_UNLOCKED')s.earnedDt=(millimes(s.earnedDt)+millimes(e.amountDt||0))/1000;
+  if(e.type==='LOYALTY_USED')s.usedDt=(millimes(s.usedDt)+millimes(e.amountDt||0))/1000;
+  s.availableDt=Math.max(0,(millimes(s.earnedDt)-millimes(s.usedDt))/1000);
   if(e.date>s.updatedAt)s.updatedAt=e.date;
   states.set(e.accountId,s);
  }

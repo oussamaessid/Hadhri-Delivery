@@ -6,11 +6,11 @@ import {t} from '@/lib/i18n/react';
 
 // Public contact details shown in the footer. Phone numbers use the international format without spaces.
 const CONTACT={
- phone:'+21600000000',
- whatsapp:'+21600000000',
+ phones:['+21655596753','+21655040084'],
+ whatsapp:'+21655596753',
  email:'contact@hadhri-delivery.tn',
  area:'Monastir',
- hours:'Tous les jours, 9h – 23h',
+ hours:'Tous les jours, 11h – 1h',
 };
 const displayPhone=(n:string)=>n.replace(/^\+216(\d{2})(\d{3})(\d{3})$/,'+216 $1 $2 $3');
 
@@ -24,7 +24,7 @@ export function CustomerFooter({onHome}:{onHome?:()=>void}={}){
    </div>
    <div className="footer-col">
     <h2>{t('Contact')}</h2>
-    <a href={`tel:${CONTACT.phone}`}><Phone size={17}/>{displayPhone(CONTACT.phone)}</a>
+    {CONTACT.phones.map(n=><a key={n} href={`tel:${n}`}><Phone size={17}/>{displayPhone(n)}</a>)}
     <a href={`mailto:${CONTACT.email}`}><Mail size={17}/>{CONTACT.email}</a>
    </div>
    <div className="footer-col">

@@ -5,7 +5,7 @@ import {isTunisianPhone,normalizeTunisianPhone,TUNISIAN_PHONE_ERROR} from './pho
 export type CartLine={productId:string;quantity:number;variantId?:string};
 export type CustomerDetails={name:string;phone:string;address:string;notes:string};
 export type CheckoutInput={customerAccountId?:string;lines:CartLine[];customer:CustomerDetails;requestId:string;clientSessionId:string;useLoyaltyDiscount?:boolean};
-const cents=(n:number)=>Math.round(n*100);
+const millimes=(n:number)=>Math.round(n*1000);
 // Livraison = 1ère position (restaurant ou commerce d’un rayon) + chaque position supplémentaire.
 export function deliveryFees(settings:DemoState['settings']){
  const firstFee=settings.fee;const extraFee=settings.extraFee??1;
@@ -25,12 +25,12 @@ export function calculateCart(state:DemoState,lines:CartLine[]){
   const commerce=state.catalog.restaurants.find(m=>merchantId?m.id===merchantId:m.name===merchant);
   if(!commerce||commerce.status!=='ACTIVE')throw new Error(`${merchant} n’accepte pas de commandes pour le moment.`);
   if(isOpenNow(commerce)===false)throw new Error(`${merchant} est fermé actuellement (${scheduleLabel(commerce)}).`);
-  const subtotalCents=group.reduce((sum,p)=>sum+cents(p.product.value)*p.quantity,0);
+  const subtotalMillimes=group.reduce((sum,p)=>sum+millimes(p.product.value)*p.quantity,0);
   // Livraison gratuite (activée par l’admin) : aucun frais, la position suivante reste la 1ère payante.
   const fee=commerce.freeDelivery?0:paidPositions++===0?firstFee:extraFee;
-  return {merchantId:merchantId||merchant,merchant,products:group,subtotal:subtotalCents/100,fee,total:(subtotalCents+cents(fee))/100};
+  return {merchantId:merchantId||merchant,merchant,products:group,subtotal:subtotalMillimes/1000,fee,total:(subtotalMillimes+millimes(fee))/1000};
  });
- return {baskets,subtotal:baskets.reduce((s,b)=>s+cents(b.subtotal),0)/100,fee:baskets.reduce((s,b)=>s+cents(b.fee),0)/100,total:baskets.reduce((s,b)=>s+cents(b.total),0)/100};
+ return {baskets,subtotal:baskets.reduce((s,b)=>s+millimes(b.subtotal),0)/1000,fee:baskets.reduce((s,b)=>s+millimes(b.fee),0)/1000,total:baskets.reduce((s,b)=>s+millimes(b.total),0)/1000};
 }
 export function createCustomerOrders(state:DemoState,input:CheckoutInput,now=new Date()):{state:DemoState;orders:Order[]}{
  const existing=state.orders.filter(o=>o.requestId===input.requestId||o.requestId?.startsWith(input.requestId+':'));
@@ -45,7 +45,7 @@ export function createCustomerOrders(state:DemoState,input:CheckoutInput,now=new
  const cart=calculateCart(state,input.lines);
  const orders:Order[]=[{customerAccountId:input.customerAccountId,id:'CMD-'+input.requestId.toUpperCase(),requestId:input.requestId,clientSessionId:input.clientSessionId,customer:name,phone,merchant:cart.baskets.map(b=>b.merchant).join(' · '),total:cart.total,deliveryFee:cart.fee,status:'PENDING',date:now.toISOString(),driver:'',address,notes:input.customer.notes.trim(),items:cart.baskets.flatMap(basket=>basket.products.map(p=>({productId:p.product.id,merchantId:basket.merchantId,merchant:basket.merchant,name:p.product.name,quantity:p.quantity,price:p.product.value})))}];
  let discountLeft=input.useLoyaltyDiscount&&input.customerAccountId&&state.settings.loyaltyEnabled!==false?Math.min(loyaltySummary(state.orders,input.customerAccountId).availableDt,orders.reduce((sum,o)=>sum+o.total,0)):0;
- const finalOrders=orders.map(o=>{const applied=Number(Math.min(discountLeft,o.total).toFixed(2));discountLeft=Number((discountLeft-applied).toFixed(2));return {...o,loyaltyDiscountDt:applied,total:Number((o.total-applied).toFixed(2))};});
+ const finalOrders=orders.map(o=>{const applied=Number(Math.min(discountLeft,o.total).toFixed(3));discountLeft=Number((discountLeft-applied).toFixed(3));return {...o,loyaltyDiscountDt:applied,total:Number((o.total-applied).toFixed(3))};});
  let customers=state.catalog.customers;
  const existingCustomer=customers.find(c=>input.customerAccountId?c.id===input.customerAccountId:normalizeTunisianPhone(c.phone||'')===phone);
  customers=existingCustomer?customers.map(c=>c.id===existingCustomer.id?{...c,value:c.value+1}:c):[{id:input.customerAccountId||'U-'+input.requestId,name,phone,status:'ACTIVE',detail:address,value:1},...customers];

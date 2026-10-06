@@ -15,7 +15,7 @@ export function loyaltySummary(orders:Order[],customerAccountId:string|undefined
   return {tier,orderCount:tier*5,rewardDt,usedDt,fullyRedeemed:usedDt===rewardDt};
  });
  const earned=history.reduce((sum,h)=>sum+h.rewardDt,0);
- const availableDt=Math.max(0,Number((earned-redeemedTotal).toFixed(2)));
+ const availableDt=Math.max(0,Number((earned-redeemedTotal).toFixed(3)));
  const nextTarget=completedOrders-(completedOrders%5)+5;
  const remaining=nextTarget-completedOrders;
  const nextRewardDt=tierRewardDt(nextTarget/5);

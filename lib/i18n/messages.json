@@ -2111,10 +2111,6 @@
     "ar": "اتصل بنا",
     "en": "Contact"
   },
-  "Tous les jours, 9h – 23h": {
-    "ar": "كل يوم، 9 صباحًا – 11 ليلًا",
-    "en": "Every day, 9am – 11pm"
-  },
   "Tous droits réservés.": {
     "ar": "جميع الحقوق محفوظة.",
     "en": "All rights reserved."
@@ -2306,5 +2302,29 @@
   "Mot de passe actuel incorrect": {
     "ar": "كلمة المرور الحالية غير صحيحة",
     "en": "Current password is incorrect"
+  },
+  "Ajout rapide par rayon": {
+    "ar": "إضافة سريعة حسب القسم",
+    "en": "Quick add by aisle"
+  },
+  "Choisissez un commerce puis un rayon pour y ajouter un produit.": {
+    "ar": "اختر متجراً ثم قسماً لإضافة منتج إليه.",
+    "en": "Pick a store, then an aisle to add a product to it."
+  },
+  " produits": {
+    "ar": " منتجات",
+    "en": " products"
+  },
+  "Aucun rayon pour ce commerce. Créez-en un dans Catégories.": {
+    "ar": "لا توجد أقسام لهذا المتجر. أنشئ واحداً في الفئات.",
+    "en": "No aisles for this store. Create one in Categories."
+  },
+  "Commerce / Rayon": {
+    "ar": "المتجر / القسم",
+    "en": "Store / Aisle"
+  },
+  "Tous les jours, 11h – 1h": {
+    "ar": "كل يوم، من 11:00 إلى 01:00",
+    "en": "Every day, 11am – 1am"
   }
 }
