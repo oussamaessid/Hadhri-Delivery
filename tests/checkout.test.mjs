@@ -51,3 +51,4 @@ test('a closed restaurant cannot receive an order',()=>{
  merchant.scheduleDays=undefined;
  assert.doesNotThrow(()=>calculateCart(s,[{productId:'P6',quantity:1}]));
 });
+test('checkout requires a real 8-digit Tunisian phone number',()=>{const s=initialState();for(const phone of ['','1234567','123456789','12345678','60000111','80000111','+21610000111'])assert.throws(()=>createCustomerOrders(s,{...input,customer:{...input.customer,phone}}),undefined,phone);for(const phone of ['20000111','+216 50 000 111','0021698765432','71234567','41234567','31234567'])assert.equal(createCustomerOrders(s,{...input,requestId:'phone-'+phone.replace(/\D/g,''),customer:{...input.customer,phone}}).orders[0].phone.length,8)});

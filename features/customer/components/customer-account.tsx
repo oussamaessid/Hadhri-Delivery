@@ -32,7 +32,7 @@ export function CustomerAccountDialog({open,onOpenChange,onSignedIn}:{open:boole
     if(mode==='reset'){await resetPassword(input.email);setNotice('Si cette adresse possède un compte, vous recevrez un lien de réinitialisation.');return}
     if(mode==='register'){const user=await registerWithEmail({email:input.email,password:input.password,name:input.name,phone:input.phone.replace(/[\s.-]/g,'')});setVerification(user);await send(user)}else await finish(await emailSignIn(input.email,input.password));
    },mode==='reset'?'Envoi du lien…':mode==='register'?'Création de votre compte…':'Connexion en cours…')}}>
-    {t(mode==='register'&&<><label>{t("Nom complet")}<input name="name" autoComplete="name" minLength={2} maxLength={100} required/></label><label>{t("Téléphone")}<input name="phone" type="tel" autoComplete="tel" pattern="(\+216)?[0-9]{8}" placeholder={t("Votre numéro tunisien")} required/></label></>)}
+    {t(mode==='register'&&<><label>{t("Nom complet")}<input name="name" autoComplete="name" minLength={2} maxLength={100} required/></label><label>{t("Téléphone")}<input name="phone" type="tel" autoComplete="tel" pattern="(\+216)?[234579][0-9]{7}" placeholder={t("Votre numéro tunisien")} required/></label></>)}
     <label>{t("Email")}<input name="email" type="email" autoComplete="email" required maxLength={254}/></label>
     {t(mode!=='reset'&&<label>{t("Mot de passe")}<input name="password" type="password" autoComplete={mode==='register'?'new-password':'current-password'} minLength={8} maxLength={200} required/></label>)}
     {t(mode==='register'&&<small>{t("8 caractères minimum. Confirmez ensuite votre adresse grâce au lien reçu par email.")}</small>)}

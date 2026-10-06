@@ -735,3 +735,4 @@ html[dir=rtl] .profile{text-align:right}html[dir=rtl] .nav-count,html[dir=rtl] .
 
 /* "Autres services" rayon tab: blue gradient with an icon, like the mobile app. */
 .home-departments .department-visual.services-visual { display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #2f5bd3, #1d44b8 55%, #072e86); color: #fff; }
+.required-mark{color:#c0392b;font-weight:700}.phone-required-hint{display:block;margin-top:6px;font-size:12.5px;font-weight:500;color:#6e735f}.phone-required-hint-error{color:#c0392b}.phone-input.phone-input-invalid{border-color:#c0392b}

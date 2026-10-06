@@ -4,9 +4,10 @@ import {z} from 'zod';
 import {snapshot,saveSnapshot} from './storage.mjs';
 import {recordAccountEvents} from './account-events.mjs';
 import {firebaseConfig,verifyFirebaseToken} from './firebase.mjs';
+import {isTunisianPhone,normalizeTunisianPhone,TUNISIAN_PHONE_ERROR} from '../features/customer/services/phone.ts';
 const hash=value=>createHash('sha256').update(value).digest('hex');
 const profile=a=>({id:a.id,name:a.name,email:a.email,phone:a.phone});
-const phone=z.string().transform(s=>s.replace(/[\s.-]/g,'')).refine(s=>/^(\+216)?[0-9]{8}$/.test(s),'Numéro tunisien invalide');
+const phone=z.string().transform(normalizeTunisianPhone).refine(isTunisianPhone,TUNISIAN_PHONE_ERROR);
 export async function configureCustomers(db){
  for(const migration of ['003_customer_accounts.sql','008_firebase_customers.sql'])await db.exec(await readFile(new URL('./migrations/'+migration,import.meta.url),'utf8'));
 }

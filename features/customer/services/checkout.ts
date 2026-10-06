@@ -1,6 +1,7 @@
 import type {DemoState, Order} from '../../admin/data/demo';
 import {loyaltySummary} from './loyalty.ts';
 import {isOpenNow,scheduleLabel} from '../../admin/data/demo.ts';
+import {isTunisianPhone,normalizeTunisianPhone,TUNISIAN_PHONE_ERROR} from './phone.ts';
 export type CartLine={productId:string;quantity:number;variantId?:string};
 export type CustomerDetails={name:string;phone:string;address:string;notes:string};
 export type CheckoutInput={customerAccountId?:string;lines:CartLine[];customer:CustomerDetails;requestId:string;clientSessionId:string;useLoyaltyDiscount?:boolean};
@@ -35,9 +36,10 @@ export function createCustomerOrders(state:DemoState,input:CheckoutInput,now=new
  const existing=state.orders.filter(o=>o.requestId===input.requestId||o.requestId?.startsWith(input.requestId+':'));
  if(existing.length){if(existing.some(o=>o.clientSessionId!==input.clientSessionId))throw new Error('Identifiant de commande invalide.');return {state,orders:existing};}
  if(!input.requestId||!input.clientSessionId)throw new Error('Veuillez recharger la page.');
- const name=input.customer.name.trim();const phone=input.customer.phone.replace(/[\s.-]/g,'');const address=input.customer.address.trim();
+ const name=input.customer.name.trim();const phone=normalizeTunisianPhone(input.customer.phone);const address=input.customer.address.trim();
  if(name.length<2||name.length>100)throw new Error('Indiquez un nom valide.');
- if(!/^(\+216)?[0-9]{8}$/.test(phone))throw new Error('Indiquez un numéro tunisien à 8 chiffres, avec ou sans +216.');
+ if(!phone)throw new Error('Le numéro de téléphone est obligatoire pour confirmer votre commande.');
+ if(!isTunisianPhone(phone))throw new Error(TUNISIAN_PHONE_ERROR);
  if(address.length<10||address.length>300)throw new Error('Précisez une adresse complète (10 à 300 caractères).');
  if(input.customer.notes.length>500)throw new Error('Les instructions doivent rester sous 500 caractères.');
  const cart=calculateCart(state,input.lines);
@@ -45,7 +47,7 @@ export function createCustomerOrders(state:DemoState,input:CheckoutInput,now=new
  let discountLeft=input.useLoyaltyDiscount&&input.customerAccountId&&state.settings.loyaltyEnabled!==false?Math.min(loyaltySummary(state.orders,input.customerAccountId).availableDt,orders.reduce((sum,o)=>sum+o.total,0)):0;
  const finalOrders=orders.map(o=>{const applied=Number(Math.min(discountLeft,o.total).toFixed(2));discountLeft=Number((discountLeft-applied).toFixed(2));return {...o,loyaltyDiscountDt:applied,total:Number((o.total-applied).toFixed(2))};});
  let customers=state.catalog.customers;
- const existingCustomer=customers.find(c=>input.customerAccountId?c.id===input.customerAccountId:c.phone?.replace(/[\s.-]/g,'')===phone);
+ const existingCustomer=customers.find(c=>input.customerAccountId?c.id===input.customerAccountId:normalizeTunisianPhone(c.phone||'')===phone);
  customers=existingCustomer?customers.map(c=>c.id===existingCustomer.id?{...c,value:c.value+1}:c):[{id:input.customerAccountId||'U-'+input.requestId,name,phone,status:'ACTIVE',detail:address,value:1},...customers];
  const notifications=finalOrders.map(order=>({id:'N-'+order.requestId,orderId:order.id,date:now.toISOString(),title:`Nouvelle commande ${order.id}`,detail:`${name} · ${order.merchant} · Paiement à la livraison`,type:'Commandes',read:false}));
  const next:DemoState={...state,catalog:{...state.catalog,customers,},orders:[...finalOrders,...state.orders],notifications:[...notifications,...state.notifications]};
