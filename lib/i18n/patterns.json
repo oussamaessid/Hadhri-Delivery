@@ -1,4 +1,5 @@
 [
+ ["^Rayon (.+)$","القسم: $1","Aisle: $1"],
  ["^(.+) ajouté au panier$","تمت إضافة $1 إلى السلة","$1 added to cart"],
  ["^([0-9]+) disponibles$","متوفر: $1","$1 available"],
  ["^([0-9]+) articles?$","عدد المنتجات: $1","$1 items"],
