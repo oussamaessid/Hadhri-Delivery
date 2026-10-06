@@ -1,6 +1,6 @@
 # Déploiement sur un VPS OVH (VPS-1)
 
-Même application que sur Render (`deploy/Dockerfile.render`), derrière Caddy qui gère le HTTPS automatiquement
+Seul hébergement de l'application (image `deploy/Dockerfile.render`), derrière Caddy qui gère le HTTPS automatiquement
 (`domaine` et `www.domaine`). Le serveur ne s'endort jamais : plus d'écran d'attente.
 
 ## 1. Payer
@@ -10,7 +10,7 @@ Même application que sur Render (`deploy/Dockerfile.render`), derrière Caddy q
   Dans sa zone DNS, créer deux enregistrements `A` : `hadhri-delivery.tn` et `www.hadhri-delivery.tn` → IP du VPS.
 
 ## 2. Préparer les valeurs
-Ouvrir Render > hadhri-delivery > **Environment** et garder la page ouverte : le script demande
+Préparer les valeurs (anciennement dans Render > hadhri-delivery > **Environment**) : le script demande
 `DATABASE_URL`, `BACKUP_ENCRYPTION_KEY`, les 4 `FIREBASE_*` et `DATABASE_SSL_CA` (s'il existe).
 Si la base MySQL filtre les adresses IP, autoriser l'IP du VPS chez l'hébergeur de la base.
 

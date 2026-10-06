@@ -1,4 +1,4 @@
-# Single VPS (OVH, Contabo…): same image as Render, behind Caddy for automatic HTTPS, with its own MySQL.
+# Single VPS (OVH, Contabo…): the only hosting, behind Caddy for automatic HTTPS, with its own MySQL.
 # A new database starts with the default rayons only (the client lists restaurants in the "restaurants" rayon);
 # no products, restaurants or drivers. The admin password is set on first visit.
 # Usage: docker compose -f docker-compose.vps.yml --env-file .env.vps up -d --build
