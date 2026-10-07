@@ -18,3 +18,12 @@ Deployment configuration:
 - User confirmed this Contabo origin. iOS source updated to match Android.
 - Visible startup feedback and first catalogue loading/error/retry state prevent showing an empty catalogue before the first response.
 - Deployment and live measurements are recorded after validation.
+
+Verified Contabo deployment (2026-10-07):
+- Production image built on VPS; five focused tests passed against isolated MySQL (reviews ownership/status/concurrency/persistence, media URLs, patched Google HTTP client).
+- Existing app replaced; production MySQL and its volume preserved. Previous image retained as `hadhri-delivery-app:before-20261007`.
+- `/api/v1/state`: HTTP 200, 0.665 s, 32,121 decoded bytes, 4,883 transferred bytes with compression. Images excluded from these sizes/timing.
+- Public counts preserved: 11 commerces, 41 products, 13 categories, 2 stored departments.
+- Health, home, admin page and one versioned restaurant image returned HTTP 200. Browser confirmed visible loading then restaurant list.
+- Temporary isolated MySQL container/network removed after successful tests.
+- Render dashboard requires sign-in; its old service was not deleted. Web API uses same-origin Contabo and iOS source now targets Contabo. Mobile binaries must be rebuilt/reinstalled for source changes.
