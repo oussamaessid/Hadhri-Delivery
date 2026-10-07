@@ -39,8 +39,8 @@ test('reviews: ownership, delivered status, concurrent duplicates and persistenc
  await other('/customer/firebase-session','POST',{idToken:'other',phone:'20000112'});
  const s=(await admin('/admin/state')).data.state;
  const product=s.catalog.products.find(p=>p.status==='ACTIVE'&&p.stock>=5&&s.catalog.restaurants.some(m=>m.id===p.merchantId&&m.status==='ACTIVE'));
- const created=await customer('/orders','POST',{requestId:randomUUID(),lines:[{productId:product.id,quantity:1}],customer:{name:'Review Test',phone:'20000111',address:'Monastir',notes:''}});
- assert.equal(created.status,201);
+ const created=await customer('/orders','POST',{requestId:randomUUID(),lines:[{productId:product.id,quantity:1}],customer:{name:'Review Test',phone:'20000111',address:'12 avenue Habib Bourguiba, Monastir',notes:''}});
+ assert.equal(created.status,201,JSON.stringify(created.data));
  const id=created.data[0].id,path='/orders/'+id+'/review';
  assert.equal((await guest(path,'POST',{rating:5})).status,401);
  assert.equal((await other(path,'POST',{rating:5})).status,404);
