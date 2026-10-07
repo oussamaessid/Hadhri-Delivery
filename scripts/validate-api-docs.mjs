@@ -10,5 +10,5 @@ for(const methods of Object.values(doc.paths))for(const operation of Object.valu
  assert.ok(operation.responses['400']);assert.ok(operation.responses['409']);
 }
 assert.deepEqual(JSON.parse(await readFile('public/openapi.json','utf8')),doc);
-assert.equal(total,23);
+assert.equal(total,24);
 console.log(`OpenAPI valide : ${total} opérations, ${Object.keys(doc.components.schemas).length} schémas.`);

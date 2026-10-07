@@ -22,7 +22,7 @@ export function isOpenNow(m:Entity,now=new Date()):boolean|null{
  const previous=weekdays[(weekdays.indexOf(day)+6)%7];
  return (m.scheduleDays.includes(day)&&minutes>=open)||(m.scheduleDays.includes(previous)&&minutes<close);
 }
-export type Order = {customerAccountId?:string;requestId?:string;clientSessionId?:string;phone?:string;notes?:string;deliveryFee?:number;loyaltyDiscountDt?:number;id:string; customer:string; merchant:string; total:number; status:string; date:string; driver:string; address:string; items:{productId?:string;merchantId?:string;merchant?:string;name:string;quantity:number;price:number}[]};
+export type Order = {review?:{rating:number;comment:string;createdAt:string};customerAccountId?:string;requestId?:string;clientSessionId?:string;phone?:string;notes?:string;deliveryFee?:number;loyaltyDiscountDt?:number;id:string; customer:string; merchant:string; total:number; status:string; date:string; driver:string; address:string; items:{productId?:string;merchantId?:string;merchant?:string;name:string;quantity:number;price:number}[]};
 export const statuses = ['PENDING','CONFIRMED','PREPARING','READY_FOR_PICKUP','DRIVER_ASSIGNED','PICKED_UP','ON_THE_WAY','DELIVERED','CANCELLED'];
 export const labels: Record<string,string> = {PENDING:'En attente',CONFIRMED:'Confirmée',PREPARING:'En préparation',READY_FOR_PICKUP:'Prête',DRIVER_ASSIGNED:'Livreur assigné',PICKED_UP:'Récupérée',ON_THE_WAY:'En livraison',DELIVERED:'Livrée',CANCELLED:'Annulée',ACTIVE:'Actif',INACTIVE:'Inactif',AVAILABLE:'Disponible',BUSY:'En course',OFFLINE:'Hors ligne',SUSPENDED:'Suspendu'};
 export const money = (n:number) => new Intl.NumberFormat('fr-TN',{minimumFractionDigits:3,maximumFractionDigits:3}).format(n)+' DT';

@@ -12,6 +12,7 @@ export function StartupGate({children}:{children:ReactNode}) {
   waitForService(controller.signal).then(()=>{if(!controller.signal.aborted)setReady(true)}).catch(e=>{if(!controller.signal.aborted)setError(e.message)});
   return()=>controller.abort();
  },[attempt]);
- if(!ready)return <LoadingScreen error={error} onRetry={()=>{setError('');setAttempt(value=>value+1)}}/>;
- return children;
+ // Mount the app immediately so catalogue and session requests run alongside health.
+ // Keep it hidden until the service is ready, without remounting it afterwards.
+ return <>{!ready&&<LoadingScreen error={error} onRetry={()=>{setError('');setAttempt(value=>value+1)}}/>}<div hidden={!ready}>{children}</div></>;
 }

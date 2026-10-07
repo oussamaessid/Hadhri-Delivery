@@ -1,7 +1,9 @@
 FROM node:24-alpine
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci --ignore-scripts
+RUN npm ci --omit=dev --ignore-scripts
+# Runtime starts with node directly; keep the package manager out of production.
+RUN rm -rf /usr/local/lib/node_modules/npm /usr/local/bin/npm /usr/local/bin/npx /root/.npm
 COPY backend ./backend
 COPY features ./features
 COPY lib ./lib

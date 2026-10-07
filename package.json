@@ -37,7 +37,7 @@
     "leaflet": "^1.9.4",
     "lucide-react": "^1.31.0",
     "mysql2": "^3.24.4",
-    "next": "^16.3.5",
+    "next": "^16.3.8",
     "next-themes": "^0.4.6",
     "radix-ui": "^1.6.7",
     "react": "^19.3.0",
@@ -65,7 +65,7 @@
     "@vitejs/plugin-rsc": "^0.5.35",
     "drizzle-kit": "0.31.10",
     "eslint": "9.39.4",
-    "eslint-config-next": "^16.3.5",
+    "eslint-config-next": "^16.3.8",
     "react-server-dom-webpack": "^19.3.0",
     "swagger-ui-dist": "^5.32.15",
     "tailwindcss": "4.2.1",
@@ -75,5 +75,16 @@
     "vite": "^8.3.0",
     "wrangler": "^4.135.0"
   },
-  "type": "module"
+  "type": "module",
+  "overrides": {
+    "@firebase/firestore": {
+      "@grpc/grpc-js": "1.14.5"
+    },
+    "satori": {
+      "fflate": "0.7.5"
+    },
+    "gaxios@6.7.1": {
+      "uuid": "11.1.1"
+    }
+  }
 }

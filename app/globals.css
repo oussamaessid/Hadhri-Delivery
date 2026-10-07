@@ -736,3 +736,17 @@ html[dir=rtl] .profile{text-align:right}html[dir=rtl] .nav-count,html[dir=rtl] .
 /* "Autres services" rayon tab: blue gradient with an icon, like the mobile app. */
 .home-departments .department-visual.services-visual { display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #2f5bd3, #1d44b8 55%, #072e86); color: #fff; }
 .required-mark{color:#c0392b;font-weight:700}.phone-required-hint{display:block;margin-top:6px;font-size:12.5px;font-weight:500;color:#6e735f}.phone-required-hint-error{color:#c0392b}.phone-input.phone-input-invalid{border-color:#c0392b}
+
+/* Customer feedback is available only after a delivered order. */
+.order-review{margin-top:18px;padding:18px;border:1px solid #dbe4f0;border-radius:16px;background:#f7faff;display:grid;gap:12px;min-width:0}
+.order-review>span,.order-review legend{font-size:13px;color:#58677d}
+.order-review fieldset{padding:0;border:0;min-width:0}
+.review-stars{display:flex;gap:8px;margin-top:8px;color:#e7a117}
+.review-stars label{position:relative;display:grid;place-items:center;width:44px;height:44px;cursor:pointer;border-radius:10px;background:white}
+.review-stars input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;margin:0}
+.review-stars label:focus-within{outline:2px solid #0750d8;outline-offset:2px}
+.order-review>label{display:grid;gap:8px;font-size:14px}
+.order-review textarea{width:100%;min-width:0;box-sizing:border-box;border:1px solid #b8c6d9;border-radius:10px;padding:12px;background:white;font:inherit;resize:vertical}
+.order-review>p[aria-label]{display:flex;gap:4px;color:#e7a117;margin:0}
+.order-review blockquote{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;color:#334155}
+.order-review .customer-primary{justify-self:start;max-width:100%}

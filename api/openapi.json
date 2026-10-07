@@ -982,6 +982,69 @@
           }
         ]
       }
+    },
+    "/orders/{id}/review": {
+      "post": {
+        "summary": "Donner un avis unique sur sa commande livrée",
+        "operationId": "post_order_review",
+        "x-implementation-status": "implemented",
+        "tags": [
+          "Client"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "description": "Session client hadhri_customer requise. Avis privé visible par son auteur et les administrateurs.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "rating"
+                ],
+                "properties": {
+                  "rating": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 5
+                  },
+                  "comment": {
+                    "type": "string",
+                    "maxLength": 1000
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Avis enregistré"
+          },
+          "400": {
+            "description": "Note ou commentaire invalide"
+          },
+          "401": {
+            "description": "Connexion client requise"
+          },
+          "404": {
+            "description": "Commande introuvable ou appartenant à un autre client"
+          },
+          "409": {
+            "description": "Commande non livrée ou déjà évaluée"
+          }
+        }
+      }
     }
   },
   "components": {

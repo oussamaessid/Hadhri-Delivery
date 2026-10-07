@@ -2,21 +2,22 @@ import {BusyLayer} from '@/components/app/busy-layer';
 import {StartupGate} from '@/components/app/startup-gate';
 import { LanguageInitializer } from "@/lib/i18n/react";
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Plus_Jakarta_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import "leaflet/dist/leaflet.css";
 
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+const jakarta = localFont({
+  src: "./fonts/jakarta.ttf",
+  weight: "200 800",
   variable: "--font-hadhri-sans",
   display: "swap",
 });
 
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  weight: ["600", "700", "800"],
-  style: ["normal", "italic"],
+const fraunces = localFont({
+  src: [
+    {path: "./fonts/fraunces.ttf", weight: "100 900", style: "normal"},
+    {path: "./fonts/fraunces-italic.ttf", weight: "100 900", style: "italic"},
+  ],
   variable: "--font-hadhri-display",
   display: "swap",
 });
