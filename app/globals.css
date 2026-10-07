@@ -784,3 +784,25 @@ html[dir=rtl] .profile{text-align:right}html[dir=rtl] .nav-count,html[dir=rtl] .
   .customer-app .header-orders-card span { font-size: 11px; white-space: nowrap; }
   .customer-app .checkout-heading h1 { font-size: 28px; }
 }
+
+/* Phone product cards: compact menu rows (text left, square photo right) and floating add buttons on grid photos. */
+@media (max-width: 600px) {
+  .customer-app .product-grid { gap: 12px; }
+  .customer-app .shop-product { display: grid; grid-template-columns: minmax(0,1fr) 116px; grid-template-areas: "info photo"; align-items: start; column-gap: 14px; padding: 12px; min-height: 148px; border-radius: 20px !important; }
+  .customer-app .shop-product:has(.add-product-stepper) { min-height: 172px; border-color: var(--hd-border-strong) !important; }
+  .customer-app .shop-product .product-image { grid-area: photo; width: 116px; height: 116px; aspect-ratio: 1; border-radius: 16px; box-shadow: 0 6px 16px rgb(60 35 5 / .14); }
+  .customer-app .shop-product > div:not(.add-product-stepper) { grid-area: info; display: flex; flex-direction: column; gap: 6px; min-height: 124px; padding: 2px 0 0; }
+  .customer-app .shop-product :is(h3,.product-description) { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; margin: 0; max-width: none; }
+  .customer-app .shop-product h3 { font-size: 16px; line-height: 1.3; }
+  .customer-app .shop-product .product-description { font-size: 13px; line-height: 1.45; }
+  .customer-app .shop-product strong { margin-top: auto; width: fit-content; font-size: 15px; padding: 5px 12px; border-radius: 99px; background: #fff1cf; }
+  .customer-app .shop-product .add-product { top: 96px; bottom: auto; inset-inline-end: 4px; border: 3px solid #fff !important; }
+  .customer-app .shop-product .add-product-stepper { top: 104px; bottom: auto; inset-inline-start: auto; inset-inline-end: 6px; width: max-content; }
+
+  .customer-app .department-product { position: relative; container-type: inline-size; }
+  .customer-app .department-product-info { padding: 10px 12px 12px; gap: 6px; }
+  .customer-app .department-product-info h3 { font-size: 14.5px; line-height: 1.3; min-height: 2.6em; margin: 0; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+  .customer-app .department-product-info strong { font-size: 15px; }
+  .customer-app .department-product-info .add-product { position: absolute; top: calc(75cqw - 26px); inset-inline-end: 8px; width: 44px; height: 44px; border-radius: 50%; border: 3px solid #fff !important; }
+  .customer-app .department-product-info .add-product-stepper { position: absolute; top: calc(75cqw - 60px); inset-inline: 8px; justify-content: space-between; padding: 3px; background: rgb(255 253 247 / .94); backdrop-filter: blur(6px); }
+}
