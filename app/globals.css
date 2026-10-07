@@ -750,3 +750,37 @@ html[dir=rtl] .profile{text-align:right}html[dir=rtl] .nav-count,html[dir=rtl] .
 .order-review>p[aria-label]{display:flex;gap:4px;color:#e7a117;margin:0}
 .order-review blockquote{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;color:#334155}
 .order-review .customer-primary{justify-self:start;max-width:100%}
+
+/* Phone checkout and feedback: fit the content instead of hiding overflow. */
+@media (max-width: 800px) {
+  .customer-app { padding-bottom: env(safe-area-inset-bottom); }
+  .customer-app .customer-header { padding-top: max(12px, env(safe-area-inset-top)); }
+  .customer-app :is(.restaurant-card,.department-product,.shop-product,.customer-orders article,.basket-line,.customer-order-top > div) { min-width: 0; }
+  .customer-app :is(.restaurant-card h3,.department-product h3,.shop-product h3,.customer-order-top h2,.basket-line h3,.customer-order-bottom span,.confirmation-card) { overflow-wrap: anywhere; }
+  .customer-app :is(.quantity-control button,.add-product) { min-width: 44px; min-height: 44px; }
+  .customer-app .quantity-control { gap: 4px; padding: 2px; }
+  .customer-app .menu-categories button { min-height: 44px; flex-shrink: 0; }
+  .customer-app :is(input,select,textarea), .customer-auth-dialog :is(input,select,textarea) { font-size: 16px !important; }
+  .customer-auth-dialog { max-height: calc(100dvh - 24px); overscroll-behavior: contain; }
+  .customer-auth-dialog [data-slot=dialog-close] { min-width: 44px; min-height: 44px; display: grid; place-items: center; top: 4px; right: 4px; }
+  .customer-app .order-review { padding: 12px; }
+  .customer-app .review-stars { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 4px; }
+  .customer-app .review-stars label { width: 100%; min-width: 0; min-height: 44px; }
+  .customer-app .order-review .customer-primary { width: 100%; white-space: normal; }
+}
+@media (max-width: 480px) {
+  .customer-app .customer-orders article { padding: 14px; }
+  .customer-app .customer-order-top { align-items: flex-start; }
+  .customer-app .customer-order-bottom span { min-width: 0; }
+  .customer-app .customer-order-bottom svg { flex-shrink: 0; }
+  .customer-app .profile-actions { flex-wrap: wrap; }
+  .firebase-auth-dialog { padding: 20px; gap: 12px; }
+  .firebase-auth-dialog .auth-brand-mark img { width: 136px; }
+  .firebase-auth-dialog [data-slot=dialog-title] { font-size: 22px; }
+  .firebase-auth-dialog .customer-form { gap: 12px; }
+  .firebase-auth-dialog .customer-form label { gap: 6px; }
+  .customer-app .delivery-location small { font-size: 10px; white-space: nowrap; }
+  .customer-app .header-orders-card { gap: 6px; }
+  .customer-app .header-orders-card span { font-size: 11px; white-space: nowrap; }
+  .customer-app .checkout-heading h1 { font-size: 28px; }
+}
