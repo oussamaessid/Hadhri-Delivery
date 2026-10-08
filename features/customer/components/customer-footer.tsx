@@ -8,7 +8,7 @@ import {t} from '@/lib/i18n/react';
 const CONTACT={
  phones:['+21655596753','+21655040084'],
  whatsapp:'+21655596753',
- email:'contact@hadhri-delivery.tn',
+ email:'hadhridelivery840@gmail.com',
  area:'Monastir',
  hours:'Tous les jours, 11h – 1h',
 };
