@@ -39,3 +39,11 @@ test('intentional cancellation is preserved', async t => {
   t.mock.method(globalThis, 'fetch', async () => {throw controller.signal.reason});
   await assert.rejects(requestJson('/api', {signal:controller.signal}), {name:'AbortError'});
 });
+test('slow requests time out without retrying a potentially committed mutation',async t=>{
+ t.mock.timers.enable({apis:['setTimeout']});
+ let requests=0;
+ t.mock.method(globalThis,'fetch',async (_url,{signal})=>{requests++;return new Promise((_,reject)=>signal.addEventListener('abort',()=>reject(signal.reason),{once:true}))});
+ const pending=assert.rejects(requestJson('/api',{method:'PATCH'}),/vérifier si votre action a été enregistrée/);
+ t.mock.timers.tick(30001);
+ await pending;assert.equal(requests,1);
+});
