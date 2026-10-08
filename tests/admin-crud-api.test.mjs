@@ -5,7 +5,6 @@ import {dropDatabase} from '../backend/database.mjs';
 import {mkdtemp,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join,basename} from 'node:path';
-import {randomUUID} from 'node:crypto';
 
 process.env.SEED_DEMO_DATA = 'false';
 process.env.SEED_DEPARTMENTS = 'false';
