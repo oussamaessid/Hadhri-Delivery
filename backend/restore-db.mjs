@@ -1,3 +1,4 @@
+import {restoreMediaFiles} from './image-store.mjs';
 import {decodeBackup} from './backup-crypto.mjs';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
@@ -11,6 +12,8 @@ if (!file) {
 }
 
 const data = decodeBackup(await readFile(resolve(file), 'utf8'),process.env.BACKUP_ENCRYPTION_KEY);
+await restoreMediaFiles(process.env.MEDIA_DIR||resolve(process.env.DATA_DIR||'.data/mysql','media'),data.__mediaFiles);
+delete data.__mediaFiles;
 const db = await connectDatabase();
 await db.query('INSERT IGNORE INTO app_state(id,data) VALUES(1,$1)',[JSON.stringify(data)]);
 await migrateStorage(db);

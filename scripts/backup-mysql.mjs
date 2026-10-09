@@ -1,3 +1,5 @@
+import {createImageStore} from '../backend/image-store.mjs';
+import {resolve} from 'node:path';
 // Export a consistent logical snapshot using the application's MySQL driver.
 // Contains accounts and sessions: keep the encrypted file outside public/ and Git.
 import {mkdir,writeFile} from 'node:fs/promises';
@@ -14,6 +16,9 @@ try{
   for(const table of tables)result.tables[table]=(await tx.query(`SELECT * FROM ${table}`)).rows;
   return result;
  });
+ const catalog=Object.fromEntries(['products','categories','departments'].map(kind=>[kind,backup.tables[kind].map(r=>r.data)]));
+ catalog.restaurants=backup.tables.merchants.map(r=>r.data);
+ backup.mediaFiles=await createImageStore(process.env.MEDIA_DIR||resolve(process.env.DATA_DIR||'.data/mysql','media')).backup({catalog});
  await mkdir('.data/sql-backups',{recursive:true});
  const file='.data/sql-backups/mysql-'+Date.now()+'.encrypted.json';
  await writeFile(file,encodeBackup(backup,process.env.BACKUP_ENCRYPTION_KEY),{mode:0o600,flag:'wx'});

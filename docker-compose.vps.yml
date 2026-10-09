@@ -10,6 +10,7 @@ services:
     restart: unless-stopped
     env_file: .env.vps
     environment:
+      MEDIA_DIR: /app/.data/media
       NODE_ENV: production
       COOKIE_SECURE: "true"
       APP_ORIGIN: https://${APP_DOMAIN:?Set APP_DOMAIN in .env.vps}
