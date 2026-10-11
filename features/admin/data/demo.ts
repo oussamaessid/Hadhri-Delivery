@@ -1,7 +1,7 @@
 export const weekdays=['mon','tue','wed','thu','fri','sat','sun'] as const;
 export type Weekday=typeof weekdays[number];
 export const weekdayLabels:Record<Weekday,string>={mon:'Lundi',tue:'Mardi',wed:'Mercredi',thu:'Jeudi',fri:'Vendredi',sat:'Samedi',sun:'Dimanche'};
-export type Entity = { translations?:Partial<Record<"fr",{name?:string;description?:string;detail?:string}>>; department?:string; merchantId?:string;categoryId?:string;description?:string;image?:string;icon?:string;variants?:{id:string;name:string;price:number}[]; id: string; name: string; status: string; detail: string; value: number; phone?: string; stock?: number; category?: string; merchant?: string; vehicle?: string; zone?: string; scheduleDays?:Weekday[]; scheduleOpen?:string; scheduleClose?:string; freeDelivery?:boolean };
+export type Entity = { translations?:Partial<Record<"fr",{name?:string;description?:string;detail?:string}>>; department?:string; merchantId?:string;categoryId?:string;description?:string;image?:string;icon?:string;variants?:{id:string;name:string;price:number}[]; id: string; name: string; status: string; detail: string; value: number; phone?: string; stock?: number; category?: string; merchant?: string; vehicle?: string; zone?: string; scheduleDays?:Weekday[]; scheduleOpen?:string; scheduleClose?:string; ordersBlocked?:boolean; freeDelivery?:boolean };
 export function scheduleLabel(m:Entity):string{
  const days=m.scheduleDays;
  if(!days||!days.length)return '';
