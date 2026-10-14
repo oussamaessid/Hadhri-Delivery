@@ -817,3 +817,12 @@ html[dir=rtl] .profile{text-align:right}html[dir=rtl] .nav-count,html[dir=rtl] .
 .entity-form .customer-order-permission input{width:20px;height:20px;min-height:20px;flex:0 0 20px;accent-color:#b42318}
 .customer-order-permission p{font-size:13px;line-height:1.6;color:#526176;margin-top:10px}
 @media(max-width:480px){.restaurant-card .free-delivery-ribbon{width:94px;height:94px}.restaurant-card .free-delivery-ribbon>span{width:135px;right:-33px;top:16px;font-size:10px;line-height:12px}}
+
+/* Compact +/- stepper: smaller rounded-square buttons instead of large circles. */
+.customer-app .quantity-control{gap:6px;padding:4px;border-radius:12px}
+.customer-app .quantity-control button{width:30px;height:30px;min-width:30px;min-height:30px;border-radius:8px;background:var(--hd-surface-2);color:var(--hd-primary-strong)}
+.customer-app .quantity-control button:last-of-type:not(:disabled){background:var(--hd-primary);color:var(--hd-primary-ink)}
+.customer-app .quantity-control button:hover:not(:disabled){transform:scale(1.06)}
+.customer-app .quantity-control button:disabled{opacity:.45}
+.customer-app .quantity-control b{min-width:22px;font-size:14px}
+.customer-app .department-product-info .add-product-stepper{padding:4px;border-radius:12px}
